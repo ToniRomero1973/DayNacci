@@ -138,7 +138,7 @@ td:first-child,th:first-child{text-align:left}
     <div class="row"><span>Volum de la música</span><input type="range" min="0" max="100" step="5" data-key="musicVol"></div>
     <div class="row"><span>Efectes de so</span><div class="seg" data-key="sound"><button data-v="true">Sí</button><button data-v="false">No</button></div></div>
     <div class="row"><span>Veu del narrador</span><div class="seg" data-key="voice"><button data-v="yes">Sí</button><button data-v="big">Grans</button><button data-v="no">No</button></div></div>
-    <p class="small">«Grans»: la veu només diu l'elogi a les combinacions de 8 o més. Els elogis no surten a la pantalla: només se senten (veu greu i lenta, amb un acord greu a sota).</p>
+    <p class="small">«Grans» (recomanat): la veu només diu l'elogi a les combinacions de més de 8 (13, 21, 34…). Els elogis no surten a la pantalla: només se senten (veu greu i lenta, amb un acord greu a sota).</p>
     <div class="row"><span>Mira l'efecte del número</span><span><select id="fxPick"></select> <button id="btnFx">▶</button></span></div>
 
     <h3>Partides de prova</h3>
@@ -168,7 +168,7 @@ td:first-child,th:first-child{text-align:left}
 <script>
 "use strict";
 /* Versió 0.X.Y (vegeu CHANGELOG.md): 0 fins al llançament · X canvi important · Y retoc */
-const VERSION='0.2.2';
+const VERSION='0.2.3';
 /* ================= MOTOR (sense DOM) ================= */
 const SERIES=[1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368,75025,121393,196418,317811,514229];
 const IDX=new Map(SERIES.map((v,i)=>[v,i]));
@@ -242,7 +242,7 @@ function makeBag(size,rnd){
 }
 
 /* ================= ESTAT I AJUSTOS ================= */
-const DEFAULTS={allow11:true,size:'4x4',threshold:34,odds:20,below:4,bag:6,sound:true,music:true,musicVol:50,voice:'yes'};
+const DEFAULTS={allow11:true,size:'4x4',threshold:34,odds:20,below:4,bag:6,sound:true,music:true,musicVol:50,voice:'big'};
 const AUDIO_KEYS=['sound','music','musicVol','voice'];
 const store={
   get(k,d){try{const s=localStorage.getItem('fib.'+k);return s==null?d:JSON.parse(s);}catch(e){return d;}},
@@ -250,6 +250,7 @@ const store={
 };
 let S=Object.assign({},DEFAULTS,store.get('settings',{}));
 if(!/^\d+x\d+$/.test(S.size)) S.size=S.n===5?'5x5':'4x4'; delete S.n;
+if(store.get('voiceV',0)<1){ S.voice='big'; store.set('voiceV',1); store.set('settings',S); }
 const dims=size=>{const[c,r]=size.split('x').map(Number);return {cols:c,rows:r};}; // «4x5» = 4 d'ample, 5 d'alt
 let G=null; // partida
 
@@ -605,7 +606,7 @@ function speak(p){
   }catch(e){}
 }
 function praise(v,delay){
-  if(!(S.voice==='yes'||(S.voice==='big'&&v>=8))) return;
+  if(!(S.voice==='yes'||(S.voice==='big'&&v>8))) return; // «Grans»: només 13 o més
   let i; do{ i=Math.floor(Math.random()*PRAISE.length); }while(i===lastPraise);
   lastPraise=i; const p=PRAISE[i];
   delay?setTimeout(()=>speak(p),delay):speak(p);
