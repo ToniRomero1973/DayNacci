@@ -9,7 +9,7 @@
 :root{
   --soil:#2a2822; --board:#38352c; --slot:#433f35; --ink:#efe6d2; --muted:#b4a98f;
   --gold:#e8c35a; --panel:#34312a; --line:#4d483d; --ok:#9db37a; --bad:#d97a5f;
-  --cell:80px; --gap:10px; --n:4;
+  --cell:80px; --gap:10px; --cols:4; --rows:4;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;background:var(--soil);color:var(--ink);
@@ -46,15 +46,10 @@ button:active{transform:scale(.96)}
 #game{touch-action:none;display:flex;flex-direction:column;align-items:center;gap:10px}
 #boardWrap{position:relative}
 #board{position:relative;background:var(--board);border-radius:22px;padding:var(--gap);
-  width:calc(var(--n)*var(--cell) + (var(--n) + 1)*var(--gap));height:calc(var(--n)*var(--cell) + (var(--n) + 1)*var(--gap))}
+  width:calc(var(--cols)*var(--cell) + (var(--cols) + 1)*var(--gap));height:calc(var(--rows)*var(--cell) + (var(--rows) + 1)*var(--gap))}
 #board.shake{animation:shake .25s}
 @keyframes shake{0%,100%{translate:0}25%{translate:-6px}75%{translate:6px}}
 #fx{position:absolute;left:0;top:0;pointer-events:none;z-index:5}
-#praise{position:absolute;left:0;right:0;top:9%;display:flex;justify-content:center;pointer-events:none;z-index:6}
-.say{font-size:clamp(30px,10vw,44px);font-weight:800;font-style:italic;color:#fff4cf;white-space:nowrap;
-  text-shadow:0 2px 0 rgba(0,0,0,.45),0 0 18px rgba(232,195,90,.8);animation:say 1.4s ease-out forwards}
-@keyframes say{0%{opacity:0;transform:scale(.6) translateY(10px)}15%{opacity:1;transform:scale(1.08)}30%{transform:scale(1)}
-  75%{opacity:1}100%{opacity:0;transform:translateY(-24px)}}
 .slot{position:absolute;width:var(--cell);height:var(--cell);border-radius:50%;background:var(--slot)}
 .tile{position:absolute;left:0;top:0;width:var(--cell);height:var(--cell);
   transition:transform .12s cubic-bezier(.3,1.4,.6,1),opacity .12s}
@@ -111,7 +106,7 @@ td:first-child,th:first-child{text-align:left}
     <div class="next"><div class="lab">Següent</div><div id="nextTile"></div></div>
   </div>
   <div id="game">
-    <div id="boardWrap"><div id="board"></div><canvas id="fx"></canvas><div id="praise"></div></div>
+    <div id="boardWrap"><div id="board"></div><canvas id="fx"></canvas></div>
     <div class="stats">
       <div>mov.<b id="stMoves">0</b></div>
       <div>temps<b id="stTime">0:00</b></div>
@@ -126,7 +121,7 @@ td:first-child,th:first-child{text-align:left}
   <div class="card">
     <h2>Ajustos de prova</h2>
     <div class="row"><span>1 + 1 = 2</span><div class="seg" data-key="allow11"><button data-v="true">Sí</button><button data-v="false">No</button></div></div>
-    <div class="row"><span>Tauler</span><div class="seg" data-key="n"><button data-v="4">4x4</button><button data-v="5">5x5</button></div></div>
+    <div class="row"><span>Tauler</span><div class="seg" data-key="size"><button data-v="4x4">4×4</button><button data-v="4x5">4×5 alt</button><button data-v="5x5">5×5</button></div></div>
     <div class="row"><span>Fitxa alta a partir de</span><select data-key="threshold">
       <option value="21">21</option><option value="34">34</option><option value="55">55</option><option value="89">89</option><option value="0">mai</option></select></div>
     <div class="row"><span>Probabilitat fitxa alta</span><select data-key="odds">
@@ -143,7 +138,7 @@ td:first-child,th:first-child{text-align:left}
     <div class="row"><span>Volum de la música</span><input type="range" min="0" max="100" step="5" data-key="musicVol"></div>
     <div class="row"><span>Efectes de so</span><div class="seg" data-key="sound"><button data-v="true">Sí</button><button data-v="false">No</button></div></div>
     <div class="row"><span>Veu del narrador</span><div class="seg" data-key="voice"><button data-v="yes">Sí</button><button data-v="big">Grans</button><button data-v="no">No</button></div></div>
-    <p class="small">«Grans»: la veu només diu l'elogi a les combinacions de 8 o més; a les petites només surt la paraula.</p>
+    <p class="small">«Grans»: la veu només diu l'elogi a les combinacions de 8 o més. Els elogis no surten a la pantalla: només se senten (veu greu i lenta, amb un acord greu a sota).</p>
     <div class="row"><span>Mira l'efecte del número</span><span><select id="fxPick"></select> <button id="btnFx">▶</button></span></div>
 
     <h3>Partides de prova</h3>
@@ -203,15 +198,15 @@ function slideLine(cells,allow11){
 }
 
 /* Coordenades [r,c] de cada línia, des de la vora cap a dins. */
-function lines(n,dir){
-  const L=[];
-  for(let k=0;k<n;k++){
+function lines(R,C,dir){ // R files, C columnes
+  const L=[], horiz=dir==='left'||dir==='right', count=horiz?R:C, len=horiz?C:R;
+  for(let k=0;k<count;k++){
     const l=[];
-    for(let i=0;i<n;i++){
+    for(let i=0;i<len;i++){
       if(dir==='left') l.push([k,i]);
-      else if(dir==='right') l.push([k,n-1-i]);
+      else if(dir==='right') l.push([k,C-1-i]);
       else if(dir==='up') l.push([i,k]);
-      else l.push([n-1-i,k]);
+      else l.push([R-1-i,k]);
     }
     L.push(l);
   }
@@ -219,7 +214,7 @@ function lines(n,dir){
 }
 
 function applyMove(grid,dir,allow11){
-  const n=grid.length, out=grid.map(r=>r.slice()), ls=lines(n,dir);
+  const out=grid.map(r=>r.slice()), ls=lines(grid.length,grid[0].length,dir);
   const moved=[], merges=[]; let points=0;
   ls.forEach((coords,k)=>{
     const res=slideLine(coords.map(([r,c])=>grid[r][c]),allow11);
@@ -245,13 +240,15 @@ function makeBag(size,rnd){
 }
 
 /* ================= ESTAT I AJUSTOS ================= */
-const DEFAULTS={allow11:true,n:4,threshold:34,odds:20,below:4,bag:6,sound:true,music:true,musicVol:50,voice:'yes'};
+const DEFAULTS={allow11:true,size:'4x4',threshold:34,odds:20,below:4,bag:6,sound:true,music:true,musicVol:50,voice:'yes'};
 const AUDIO_KEYS=['sound','music','musicVol','voice'];
 const store={
   get(k,d){try{const s=localStorage.getItem('fib.'+k);return s==null?d:JSON.parse(s);}catch(e){return d;}},
   set(k,v){try{localStorage.setItem('fib.'+k,JSON.stringify(v));}catch(e){}}
 };
 let S=Object.assign({},DEFAULTS,store.get('settings',{}));
+if(!/^\d+x\d+$/.test(S.size)) S.size=S.n===5?'5x5':'4x4'; delete S.n;
+const dims=size=>{const[c,r]=size.split('x').map(Number);return {cols:c,rows:r};}; // «4x5» = 4 d'ample, 5 d'alt
 let G=null; // partida
 
 function drawLow(){ if(!G.bag.length) G.bag=makeBag(S.bag,Math.random); return G.bag.pop(); }
@@ -264,26 +261,26 @@ function genNext(){
   return {v:drawLow(),high:false};
 }
 function newGame(){
-  const n=S.n;
-  G={n,grid:Array.from({length:n},()=>Array(n).fill(null)),bag:[],score:0,moves:0,elapsed:0,last:0,over:false,
+  const {rows,cols}=dims(S.size);
+  G={size:S.size,rows,cols,grid:Array.from({length:rows},()=>Array(cols).fill(null)),bag:[],score:0,moves:0,elapsed:0,last:0,over:false,
      peak:2,settings:summary()};
-  const count=Math.round(n*n*9/16); // 9 al 4x4
+  const count=Math.round(rows*cols*9/16); // 9 al 4x4
   const vals=[3]; while(vals.length<count) vals.push(drawLow());
-  const cells=[]; for(let r=0;r<n;r++)for(let c=0;c<n;c++)cells.push([r,c]);
+  const cells=[]; for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)cells.push([r,c]);
   for(let i=cells.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cells[i],cells[j]]=[cells[j],cells[i]];}
   vals.forEach((v,i)=>{const[r,c]=cells[i];G.grid[r][c]=mk(v);});
   G.next=genNext();
   layout(true); save();
 }
-function summary(){return `${S.n}x${S.n} · 1+1 ${S.allow11?'sí':'no'} · alta ${S.threshold||'mai'}${S.threshold?` 1/${S.odds} -${S.below}`:''} · bossa ${S.bag}`;}
+function summary(){return `${S.size} · 1+1 ${S.allow11?'sí':'no'} · alta ${S.threshold||'mai'}${S.threshold?` 1/${S.odds} -${S.below}`:''} · bossa ${S.bag}`;}
 function save(){
   if(!G) return;
-  store.set('game',{n:G.n,grid:G.grid.map(r=>r.map(t=>t?t.v:0)),bag:G.bag,score:G.score,moves:G.moves,
+  store.set('game',{size:G.size,rows:G.rows,cols:G.cols,grid:G.grid.map(r=>r.map(t=>t?t.v:0)),bag:G.bag,score:G.score,moves:G.moves,
     elapsed:G.elapsed,over:G.over,next:G.next,peak:G.peak,settings:G.settings});
 }
 function load(){
   const g=store.get('game',null);
-  if(!g||g.over||g.n!==S.n) return false;
+  if(!g||g.over||g.size!==S.size) return false;
   G=Object.assign({},g,{last:0,grid:g.grid.map(r=>r.map(v=>v?mk(v):null))});
   if(!G.peak) G.peak=maxOf(G.grid);
   return true;
@@ -300,7 +297,7 @@ function move(dir){
   G.last=now; G.moves++;
   // fitxa nova: vora oposada, a l'atzar entre les línies que s'han mogut
   const k=res.moved[Math.floor(Math.random()*res.moved.length)];
-  const [r,c]=res.lines[k][G.n-1];
+  const line=res.lines[k], [r,c]=line[line.length-1];
   const t=mk(G.next.v); t.spawnFrom=dir; res.grid[r][c]=t;
   G.grid=res.grid; G.score+=res.points;
   G.next=genNext();
@@ -370,23 +367,22 @@ const els=new Map(); // id -> element
 const px=(r,c)=>[gapPx+c*(cellPx+gapPx),gapPx+r*(cellPx+gapPx)];
 const pos=(r,c)=>{const[x,y]=px(r,c);return `translate(${x}px,${y}px)`;};
 function tileCenter(id){
-  for(let r=0;r<G.n;r++)for(let c=0;c<G.n;c++) if(G.grid[r][c]&&G.grid[r][c].id===id){const[x,y]=px(r,c);return[x+cellPx/2,y+cellPx/2];}
+  for(let r=0;r<G.rows;r++)for(let c=0;c<G.cols;c++) if(G.grid[r][c]&&G.grid[r][c].id===id){const[x,y]=px(r,c);return[x+cellPx/2,y+cellPx/2];}
   return [fxW/2,fxH/2];
 }
 
 function layout(full){
   const w=Math.min(window.innerWidth-32,428), h=window.innerHeight-300;
-  const side=Math.max(220,Math.min(w,h));
-  gapPx=G.n===5?8:10;
-  cellPx=Math.floor((side-(G.n+1)*gapPx)/G.n);
+    const big=Math.max(G.rows,G.cols)>=5; gapPx=big?8:10;
+  cellPx=Math.max(40,Math.floor(Math.min((w-(G.cols+1)*gapPx)/G.cols,(Math.max(h,240)-(G.rows+1)*gapPx)/G.rows)));
   const b=$('#board');
-  b.style.setProperty('--n',G.n); b.style.setProperty('--cell',cellPx+'px'); b.style.setProperty('--gap',gapPx+'px');
-  const bw=G.n*cellPx+(G.n+1)*gapPx; fxResize(bw,bw);
+  b.style.setProperty('--cols',G.cols); b.style.setProperty('--rows',G.rows); b.style.setProperty('--cell',cellPx+'px'); b.style.setProperty('--gap',gapPx+'px');
+  fxResize(G.cols*cellPx+(G.cols+1)*gapPx,G.rows*cellPx+(G.rows+1)*gapPx);
   if(full){
     b.innerHTML=''; els.clear();
-    for(let r=0;r<G.n;r++)for(let c=0;c<G.n;c++){const s=document.createElement('div');s.className='slot';s.style.transform=pos(r,c);b.appendChild(s);}
+    for(let r=0;r<G.rows;r++)for(let c=0;c<G.cols;c++){const s=document.createElement('div');s.className='slot';s.style.transform=pos(r,c);b.appendChild(s);}
   }else{
-    b.querySelectorAll('.slot').forEach((s,i)=>s.style.transform=pos(Math.floor(i/G.n),i%G.n));
+    b.querySelectorAll('.slot').forEach((s,i)=>s.style.transform=pos(Math.floor(i/G.cols),i%G.cols));
     els.forEach(e=>e.remove()); els.clear();
   }
   render([]);
@@ -469,7 +465,7 @@ function ensureAudio(){
 function applyVolumes(){
   if(!AU.ctx) return;
   const t=AU.ctx.currentTime;
-  AU.music.gain.setTargetAtTime(S.music?Math.pow(S.musicVol/100,1.5)*.9*AU.duck:0,t,.25);
+  AU.music.gain.setTargetAtTime(S.music?Math.pow(S.musicVol/100,1.3)*1.8*AU.duck:0,t,.25); // més fort: als altaveus del mòbil quedava massa fluix
   AU.sfx.gain.setTargetAtTime(S.sound?.9:0,t,.05);
 }
 function tone(t,f,type,peak,att,decay,lp,dest){
@@ -565,43 +561,52 @@ function chime(v){ // so propi de cada número nou: més notes i més brillant c
   if(lvl>=7) for(let k=0;k<8;k++) tone(tEnd+Math.random()*1.1,mtof(PENT(18+Math.floor(Math.random()*6))),'sine',.025,.005,.5,0,AU.sfx);
 }
 
-/* ================= ELOGIS DEL NARRADOR ================= */
+/* ================= ELOGIS DEL NARRADOR =================
+   No surten a la pantalla: només se senten. Veu de narrador greu, lenta i suau (estil cantautor de veu fonda),
+   amb un acord greu i càlid a sota. La música baixa una mica mentre parla, però no s'atura. */
 const PRAISE=[
-  {w:'Fantastic',say:'Fantastic!',lang:'en',rate:.95},
-  {w:'Guauuuu',say:'Guaaaau!',lang:'ca',rate:.75,pitch:1.15},
-  {w:'Exceptional',say:'Exceptional!',lang:'en',rate:.95},
-  {w:'Increïble',say:'Increïble!',lang:'ca',rate:.95},
-  {w:'Bravo',say:'Bravo!',lang:'it',rate:.9},
+  {say:'Fantastic...',lang:'en'},
+  {say:'Guaaau...',lang:'ca'},
+  {say:'Exceptional...',lang:'en'},
+  {say:'Increïble...',lang:'ca'},
+  {say:'Bravo...',lang:'it'},
 ];
+const MALE=/male|home|hombre|david|mark|guy|ryan|daniel|george|james|thomas|fred|alex|aaron|arthur|oliver|jorge|diego|pablo|enric|jordi|pau|luca|cosimo|giorgio|reed|rocko|grandpa|eddy/i;
+const FEMALE=/female|dona|mujer|zira|hazel|susan|samantha|karen|moira|tessa|helena|laura|monica|paulina|montse|alice|elsa|victoria|fiona|serena|sabina|catherine/i;
 let lastPraise=-1, VOICES=[], speakStart=0;
 function loadVoices(){try{VOICES=speechSynthesis.getVoices()||[];}catch(e){}}
 if('speechSynthesis' in window){ loadVoices(); try{speechSynthesis.onvoiceschanged=loadVoices;}catch(e){} }
 function pickVoice(lang){
-  const f=p=>VOICES.find(v=>v.lang&&v.lang.toLowerCase().replace('_','-').startsWith(p));
-  return f(lang)||(lang!=='en'?f('es'):null);
+  const norm=v=>(v.lang||'').toLowerCase().replace('_','-');
+  const order=[lang,'es','en',''];
+  for(const l of order){
+    const vs=VOICES.filter(v=>norm(v).startsWith(l)); if(!vs.length) continue;
+    return vs.find(v=>MALE.test(v.name))||vs.find(v=>!FEMALE.test(v.name))||vs[0];
+  }
+  return null;
+}
+function hum(){ // acord greu i càlid, com un violoncel llunyà, sota la veu
+  if(!S.sound||!ensureAudio()) return;
+  const t=AU.ctx.currentTime+.02;
+  [38,45,50].forEach((m,i)=>{ tone(t+i*.04,mtof(m),'triangle',.07,.35,2.2,420,AU.sfx); tone(t,mtof(m),'sine',.05,.4,2.4,0,AU.sfx); });
 }
 function speak(p){
   try{
     const ss=window.speechSynthesis; if(!ss) return;
-    if(ss.speaking||ss.pending){ if(Date.now()-speakStart>4000) ss.cancel(); else return; }
+    if(ss.speaking||ss.pending){ if(Date.now()-speakStart>5000) ss.cancel(); else return; }
     const u=new SpeechSynthesisUtterance(p.say), v=pickVoice(p.lang);
     if(v){u.voice=v;u.lang=v.lang;} else u.lang=p.lang;
-    u.rate=p.rate||1; u.pitch=p.pitch||1;
-    u.onstart=()=>{AU.duck=.5;applyVolumes();};           // la música baixa una mica, no s'atura
+    u.rate=.72; u.pitch=.35; u.volume=1;                       // greu i lent
+    u.onstart=()=>{AU.duck=.45;applyVolumes();};
     u.onend=u.onerror=()=>{AU.duck=1;applyVolumes();};
-    speakStart=Date.now(); ss.speak(u);
+    speakStart=Date.now(); ss.speak(u); hum();
   }catch(e){}
 }
 function praise(v,delay){
+  if(!(S.voice==='yes'||(S.voice==='big'&&v>=8))) return;
   let i; do{ i=Math.floor(Math.random()*PRAISE.length); }while(i===lastPraise);
   lastPraise=i; const p=PRAISE[i];
-  const go=()=>{
-    const box=$('#praise'); box.innerHTML='';
-    const s=document.createElement('div'); s.className='say'; s.textContent='«'+p.w+'!»'; box.appendChild(s);
-    setTimeout(()=>s.remove(),1450);
-    if(S.voice==='yes'||(S.voice==='big'&&v>=8)) speak(p);
-  };
-  delay?setTimeout(go,delay):go();
+  delay?setTimeout(()=>speak(p),delay):speak(p);
 }
 
 /* ================= EFECTES DE NÚMERO NOU (canvas sobre el tauler) ================= */
@@ -752,13 +757,20 @@ document.addEventListener('keydown',e=>{
   if(document.querySelector('.overlay.on')) { if(e.key==='Escape') closePanels(); return; }
   const d=KEYS[e.key]; if(d){e.preventDefault();move(d);}
 });
-// el navegador només deixa sonar l'àudio després del primer toc
-let unlocked=false;
+// El navegador només deixa sonar l'àudio després d'un gest de l'usuari. Al mòbil, el «pointerdown» del dit
+// NO compta com a gest: compten «touchend», «pointerup», «click» i «keydown». Per això ho escoltem tot.
+let speechUnlocked=false;
 function unlock(){
-  ensureAudio(); startMusic();
-  if(!unlocked){ unlocked=true; try{ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); }catch(e){} }
+  try{ if(navigator.audioSession) navigator.audioSession.type='playback'; }catch(e){} // iPhone: que soni encara que estigui en silenci
+  const ctx=ensureAudio(); if(!ctx) return;
+  if(ctx.state!=='running'){
+    ctx.resume();
+    try{ const b=ctx.createBuffer(1,1,22050), s=ctx.createBufferSource(); s.buffer=b; s.connect(ctx.destination); s.start(0); }catch(e){}
+  }
+  startMusic();
+  if(!speechUnlocked){ speechUnlocked=true; try{ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); }catch(e){} }
 }
-document.addEventListener('pointerdown',unlock,true); document.addEventListener('keydown',unlock,true);
+['touchend','pointerup','click','keydown'].forEach(ev=>document.addEventListener(ev,unlock,true));
 
 let sx=null,sy=null;
 const gameEl=$('#game');
@@ -788,7 +800,7 @@ function syncSettingsUI(){
   $('#btnMusic').classList.toggle('off',!S.music);
 }
 function setSetting(k,v){
-  const restart=(k==='n'||k==='bag')&&S[k]!==v;
+  const restart=(k==='size'||k==='bag')&&S[k]!==v;
   S[k]=v; store.set('settings',S); syncSettingsUI();
   if(k==='music'){ if(v) startMusic(); else stopMusic(); }
   applyVolumes();
@@ -801,7 +813,7 @@ document.querySelectorAll('.seg').forEach(seg=>seg.addEventListener('click',e=>{
 document.querySelectorAll('select[data-key]').forEach(s=>s.addEventListener('change',()=>setSetting(s.dataset.key,Number(s.value))));
 document.querySelectorAll('input[data-key]').forEach(s=>s.addEventListener('input',()=>setSetting(s.dataset.key,Number(s.value))));
 $('#btnDefaults').onclick=()=>{
-  const restart=S.n!==DEFAULTS.n||S.bag!==DEFAULTS.bag, keep={};
+  const restart=S.size!==DEFAULTS.size||S.bag!==DEFAULTS.bag, keep={};
   AUDIO_KEYS.forEach(k=>keep[k]=S[k]);
   S=Object.assign({},DEFAULTS,keep); store.set('settings',S); syncSettingsUI(); if(restart) newGame();
 };
