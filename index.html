@@ -329,7 +329,7 @@ details.proto>summary{cursor:pointer;font-weight:700;color:var(--muted);padding:
 <script>
 "use strict";
 /* Versió 0.X.Y (vegeu CHANGELOG.md): 0 fins al llançament · X canvi important · Y retoc */
-const VERSION='0.5.1';
+const VERSION='0.5.2';
 /* ================= MOTOR (sense DOM) ================= */
 const SERIES=[1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368,75025,121393,196418,317811,514229];
 const IDX=new Map(SERIES.map((v,i)=>[v,i]));
@@ -1711,16 +1711,63 @@ function unlock(){
 }
 ['touchend','pointerup','click','keydown'].forEach(ev=>document.addEventListener(ev,unlock,true));
 
-let sx=null,sy=null;
+/* Arrossegar amb previsualització: si llisques a poc a poc, les fitxes avancen amb el dit i les combinacions
+   es van fent. Si deixes anar abans de mitja casella, tot torna al seu lloc. Un lliscament ràpid juga de seguida. */
+const DRAG={on:false,x:0,y:0,t:0,dir:null,p:0,plan:null,id:null};
+function dragPlan(dir){
+  const res=applyMove(G.grid,dir,rule('allow11')); if(!res.moved.length) return null;
+  const where=new Map(); res.grid.forEach((row,r)=>row.forEach((t,c)=>{ if(t) where.set(t,[r,c]); }));
+  const items=[];
+  G.grid.forEach((row,r)=>row.forEach((t,c)=>{
+    if(!t) return; const e=els.get(t.id); if(!e) return;
+    let to=where.get(t), merge=null;
+    if(!to){ const m=res.merges.find(m=>m.parts.includes(t)); if(m){ to=where.get(m.tile); merge=m; } }
+    if(!to) to=[r,c];
+    const moving=to[0]!==r||to[1]!==c;
+    items.push({e,r,c,tr:to[0],tc:to[1],moving,merge,target:!!merge&&!moving});
+  }));
+  return items;
+}
+function dragShow(p){
+  if(!DRAG.plan) return;
+  const e2=1-Math.pow(1-p,2); // una mica de resistència al final, com si la fitxa s'encaixés
+  DRAG.plan.forEach(it=>{
+    it.e.style.transition='none';
+    it.e.style.transform=pos(it.r+(it.tr-it.r)*e2,it.c+(it.tc-it.c)*e2);
+    if(it.merge){ it.e.style.zIndex=it.moving?3:2; const d=it.e.firstChild;
+      if(d){ d.style.transition='none'; d.style.transform=it.target?`scale(${(1+.1*p).toFixed(3)})`:`scale(${(1-.08*p).toFixed(3)}) rotate(${Math.round(-40*p)}deg)`; } }
+  });
+}
+function dragClear(back){ // back: tornar al lloc (animat); si no, només treure els estils i deixar que render() acabi el moviment
+  if(!DRAG.plan) return;
+  DRAG.plan.forEach(it=>{ it.e.style.transition=''; if(back) it.e.style.transform=pos(it.r,it.c); it.e.style.zIndex=2;
+    const d=it.e.firstChild; if(d){ d.style.transition='transform .12s'; d.style.transform=''; } });
+  DRAG.plan=null;
+}
 const gameEl=$('#game');
-gameEl.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;});
-gameEl.addEventListener('pointerup',e=>{
-  if(sx==null) return;
-  const dx=e.clientX-sx, dy=e.clientY-sy; sx=sy=null;
-  if(Math.max(Math.abs(dx),Math.abs(dy))<24) return;
-  move(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));
+gameEl.addEventListener('pointerdown',e=>{
+  if(e.button>0||!G||G.over||document.querySelector('.overlay.on')) return;
+  Object.assign(DRAG,{on:true,x:e.clientX,y:e.clientY,t:performance.now(),dir:null,p:0,plan:null,id:e.pointerId});
+  try{ gameEl.setPointerCapture(e.pointerId); }catch(_){}
 });
-gameEl.addEventListener('pointercancel',()=>{sx=sy=null;});
+gameEl.addEventListener('pointermove',e=>{
+  if(!DRAG.on||e.pointerId!==DRAG.id) return;
+  const dx=e.clientX-DRAG.x, dy=e.clientY-DRAG.y, ax=Math.abs(dx), ay=Math.abs(dy);
+  if(Math.max(ax,ay)<8){ DRAG.p=0; dragShow(0); return; }
+  const dir=ax>ay?(dx>0?'right':'left'):(dy>0?'down':'up');
+  if(dir!==DRAG.dir){ dragClear(true); DRAG.dir=dir; DRAG.plan=(G.counted||canPlay())?dragPlan(dir):null; }
+  DRAG.p=Math.max(0,Math.min(1,((dir==='left'||dir==='right'?ax:ay)-8)/(cellPx+gapPx)));
+  dragShow(DRAG.p);
+});
+function dragEnd(e,cancel){
+  if(!DRAG.on||e.pointerId!==DRAG.id) return; DRAG.on=false;
+  const dist=Math.max(Math.abs(e.clientX-DRAG.x),Math.abs(e.clientY-DRAG.y)), dt=Math.max(1,performance.now()-DRAG.t);
+  const flick=dist>=24&&dist/dt>.35, dir=DRAG.dir;
+  if(!cancel&&dir&&(DRAG.p>=.45||flick||(!DRAG.plan&&dist>=24))){ dragClear(false); move(dir); }
+  else dragClear(true);
+}
+gameEl.addEventListener('pointerup',e=>dragEnd(e,false));
+gameEl.addEventListener('pointercancel',e=>dragEnd(e,true));
 document.addEventListener('touchmove',e=>{if(DRAGGING||!e.target.closest('.card'))e.preventDefault();},{passive:false});
 window.addEventListener('resize',()=>G&&layout(false));
 
