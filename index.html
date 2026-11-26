@@ -7,9 +7,15 @@
 <title>DayNacci · prototip</title>
 <style>
 :root{
-  --soil:#2a2822; --board:#38352c; --slot:#433f35; --ink:#efe6d2; --muted:#b4a98f;
-  --gold:#e8c35a; --panel:#34312a; --line:#4d483d; --ok:#9db37a; --bad:#d97a5f;
+  --soil:#f3ead8; --board:#dccaa6; --slot:#cdb98f; --ink:#2b2820; --muted:#7a6e58;
+  --gold:#e8c35a; --goldT:#9a6a10; --panel:#fbf5e9; --line:#dbcdb0; --ok:#9db37a; --bad:#c0563a;
+  --hi:#fff0c8; --card2:#fffdf7; --jade:#3a9a7a; --jade2:#3a9a7a;
   --cell:80px; --gap:10px; --cols:4; --rows:4;
+}
+:root[data-theme="nit"]{
+  --soil:#2a2822; --board:#38352c; --slot:#433f35; --ink:#efe6d2; --muted:#b4a98f;
+  --gold:#e8c35a; --goldT:#e8c35a; --panel:#34312a; --line:#4d483d; --ok:#9db37a; --bad:#d97a5f;
+  --hi:#4a4230; --card2:#2f2c25; --jade:#7cc4a6;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;background:var(--soil);color:var(--ink);
@@ -33,7 +39,7 @@ button:active{transform:scale(.96)}
 .score .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
 .score .val{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
 .score.main{grid-column:1/3}
-.score.main .val{font-size:30px;color:var(--gold);line-height:1.1}
+.score.main .val{font-size:30px;color:var(--goldT);line-height:1.1}
 .next{grid-column:3;grid-row:1/3;background:var(--panel);border:2px solid var(--line);border-radius:18px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:6px}
 .next .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
@@ -42,7 +48,7 @@ button:active{transform:scale(.96)}
   background:radial-gradient(circle at 35% 30%,#fff3bf,#e8c35a 45%,#a9791d);box-shadow:0 0 14px rgba(232,195,90,.75);
   animation:glow 1.6s ease-in-out infinite alternate}
 @keyframes glow{to{box-shadow:0 0 22px rgba(232,195,90,1)}}
-.plus{position:absolute;left:50%;top:4px;transform:translateX(-50%);font-weight:700;color:var(--gold);
+.plus{position:absolute;left:50%;top:4px;transform:translateX(-50%);font-weight:700;color:var(--goldT);
   pointer-events:none;animation:plus .8s ease-out forwards}
 @keyframes plus{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,-26px)}}
 #game{touch-action:none;display:flex;flex-direction:column;align-items:center;gap:10px}
@@ -68,7 +74,7 @@ button:active{transform:scale(.96)}
 .stats b{display:block;color:var(--ink);font-size:17px;font-variant-numeric:tabular-nums}
 .hint{font-size:12px;color:var(--muted);text-align:center}
 /* overlays */
-.overlay{position:fixed;inset:0;background:rgba(20,19,15,.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.overlay{position:fixed;inset:0;background:rgba(20,19,15,.6);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
 .overlay.on{display:flex}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;width:100%;max-width:420px;
   max-height:92vh;overflow:auto}
@@ -92,7 +98,6 @@ td:first-child,th:first-child{text-align:left}
 .over-tile{width:72px;height:72px;margin:8px auto}
 .center{text-align:center}
 /* ===== Estadístiques, classificació i Plus ===== */
-:root{--jade:#7cc4a6;--jade2:#3a9a7a;--hi:#4a4230;--card2:#2f2c25}
 .hub{align-items:stretch;padding:0}
 .hubcard{max-width:520px;max-height:none;height:100%;border-radius:0;border:0;padding:0;display:flex;flex-direction:column;margin:0 auto}
 .hubhead{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
@@ -136,7 +141,7 @@ table.kt{font-size:13px} table.kt td,table.kt th{padding:6px 3px}
 .rec:last-child{border-bottom:0} .rec b{font-variant-numeric:tabular-nums}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .chips button{padding:6px 11px;font-size:14px}
-.chips button.on{background:var(--hi);border-color:var(--gold);font-weight:700}
+.chips button.on{background:var(--hi);border-color:var(--goldT);font-weight:700}
 .podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:8px 0 4px}
 .podium>div{flex:1;max-width:110px;text-align:center;font-size:12px}
 .podium .nm{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -151,7 +156,7 @@ table.kt{font-size:13px} table.kt td,table.kt th{padding:6px 3px}
 .offer.best{background:var(--hi);border:2px solid var(--gold)}
 .offer .pr{font-weight:800;font-size:17px;white-space:nowrap}
 .offer small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
-.offer .tag{color:var(--gold);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
+.offer .tag{color:var(--goldT);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
 .feat{list-style:none;padding:0;margin:6px 0}
 .feat li{padding:5px 0;display:flex;gap:8px;align-items:center}
 .sheetwrap{align-items:flex-end;padding:0;z-index:20}
@@ -162,9 +167,9 @@ table.kt{font-size:13px} table.kt td,table.kt th{padding:6px 3px}
 .tgrid button span{font-size:24px}
 .ord{list-style:none;padding:0;margin:8px 0}
 .ord li{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 8px;margin:6px 0;position:relative}
-.ord li.drag{z-index:2;box-shadow:0 6px 16px rgba(0,0,0,.5);border-color:var(--gold)}
+.ord li.drag{z-index:2;box-shadow:0 6px 16px rgba(0,0,0,.5);border-color:var(--goldT)}
 .ord .hd{touch-action:none;cursor:grab;padding:6px 4px;font-size:18px;color:var(--muted);user-select:none}
-.ord .nm{flex:1} .ord .nm small{display:block;color:var(--gold);font-size:11px}
+.ord .nm{flex:1} .ord .nm small{display:block;color:var(--goldT);font-size:11px}
 .ord button{padding:4px 9px}
 .duel{display:flex;justify-content:center;align-items:center;gap:14px;margin:10px 0}
 .av{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#1e2414}
@@ -173,71 +178,115 @@ table.kt{font-size:13px} table.kt td,table.kt th{padding:6px 3px}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#efe6d2;color:#2a2822;padding:10px 16px;border-radius:12px;
   font-size:14px;z-index:40;opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center}
 #toast.on{opacity:1}
+details.proto{margin-top:18px;border-top:1px solid var(--line);padding-top:8px}
+details.proto>summary{cursor:pointer;font-weight:700;color:var(--muted);padding:6px 0}
+.seg button:disabled{opacity:.4}
+.chips button.drag,.ord li.drag{opacity:.95;box-shadow:0 8px 20px rgba(0,0,0,.35);border-color:var(--gold);z-index:5;position:relative}
+.chips [data-l]{touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.ord li{touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.ord .hd{display:flex;align-items:center;touch-action:none;padding:8px 6px}
+/* portada */
+#splash{position:fixed;inset:0;z-index:60;background:#1d2a24;display:none;overflow:hidden;transition:opacity .6s ease}
+#splash.on{display:block} #splash.out{opacity:0}
+#spBg{position:absolute;inset:0;perspective:900px}
+.spsq{position:absolute;box-sizing:border-box;border:2px solid #1d2a24;border-radius:6px;display:grid;place-items:center;
+  color:rgba(0,0,0,.28);font-weight:900;opacity:0;transform:rotateY(90deg) scale(.6);transition:transform .65s cubic-bezier(.3,1.35,.6,1),opacity .65s}
+#splash.go .spsq{opacity:.9;transform:none}
+#spSpiral{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 6px rgba(243,210,122,.7))}
+#spMedal{position:absolute;left:50%;top:44%;width:258px;height:258px;margin:-129px 0 0 -129px;border-radius:50%;background:#fbf6ec;
+  box-shadow:0 0 0 10px rgba(251,246,236,.55),0 24px 60px rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.4);transition:transform .8s cubic-bezier(.3,1.5,.6,1) 1.05s,opacity .8s 1.05s;text-align:center}
+#splash.go #spMedal{opacity:1;transform:none}
+.spIcon{width:76px;height:76px;border-radius:50%;background:#1d2a24;display:grid;place-items:center}
+#spName{font-family:Georgia,'Times New Roman',serif;font-size:44px;font-weight:700;color:#1d2a24;line-height:1.1;margin-top:6px}
+#spSub{color:#6b6158;font-size:15px;max-width:200px;margin-top:4px}
+#spBottom{position:absolute;left:24px;right:24px;bottom:max(28px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;transform:translateY(24px);transition:transform .6s cubic-bezier(.2,.9,.3,1.1) 1s,opacity .6s 1s}
+#splash.go #spBottom{opacity:1;transform:none}
+#spVer{background:#1f2328;color:#f6e7c1;font-size:13px;font-weight:700;letter-spacing:1px;padding:6px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#spPlay{width:100%;max-width:420px;height:58px;border:0;border-radius:999px;background:#c0563a;color:#fff;font-size:19px;font-weight:700;
+  box-shadow:0 5px 0 #8e3a24,0 10px 24px rgba(0,0,0,.25);transition:transform .08s,box-shadow .08s}
+#spPlay:active{transform:translateY(3px);box-shadow:0 2px 0 #8e3a24,0 10px 24px rgba(0,0,0,.25)}
+@media (prefers-reduced-motion: reduce){ .spsq,#spMedal,#spBottom{transition:none!important} }
+
 </style>
 </head>
 <body>
 <div id="app">
   <header>
-    <h1>DayNacci<small>prototip <span class="ver"></span></small></h1>
-    <button class="icon" id="btnHub" title="Estadístiques i classificació" aria-label="Estadístiques i classificació">🏆</button>
-    <button class="icon" id="btnMusic" title="Música" aria-label="Música">♪</button>
-    <button class="icon" id="btnNew" title="Partida nova" aria-label="Partida nova">↻</button>
-    <button class="icon" id="btnSet" title="Ajustos de prova" aria-label="Ajustos de prova">⚙</button>
+    <h1>DayNacci<small data-i18n="prototip">prototip <span class="ver"></span></small></h1>
+    <button class="icon" id="btnStats" title="Estadístiques" data-i18n-title="Estadístiques" aria-label="Estadístiques" data-i18n-aria="Estadístiques">📊</button>
+    <button class="icon" id="btnHub" title="Classificació" data-i18n-title="Classificació" aria-label="Classificació" data-i18n-aria="Classificació">🏆</button>
+    <button class="icon" id="btnNew" title="Partida nova" data-i18n-title="Partida nova" aria-label="Partida nova" data-i18n-aria="Partida nova">↻</button>
+    <button class="icon" id="btnSet" title="Configuració" data-i18n-title="Configuració" aria-label="Configuració" data-i18n-aria="Configuració">⚙</button>
   </header>
   <div class="top">
-    <div class="score main"><div class="lab">Punts</div><div class="val" id="score">0</div></div>
-    <div class="score"><div class="lab">Millor</div><div class="val" id="best">0</div></div>
-    <div class="score"><div class="lab">Fitxa rècord</div><div class="val" id="bestTile">–</div></div>
-    <div class="next"><div class="lab">Següent</div><div id="nextTile"></div></div>
+    <div class="score main"><div class="lab" data-i18n="Punts">Punts</div><div class="val" id="score">0</div></div>
+    <div class="score"><div class="lab" data-i18n="Millor">Millor</div><div class="val" id="best">0</div></div>
+    <div class="score"><div class="lab" data-i18n="Fitxa rècord">Fitxa rècord</div><div class="val" id="bestTile">–</div></div>
+    <div class="next"><div class="lab" data-i18n="Següent">Següent</div><div id="nextTile"></div></div>
   </div>
   <div id="game">
     <div id="boardWrap"><div id="board"></div><canvas id="fx"></canvas></div>
     <div class="stats">
-      <div>mov.<b id="stMoves">0</b></div>
-      <div>temps<b id="stTime">0:00</b></div>
-      <div>màx.<b id="stMax">–</b></div>
+      <div data-i18n="mov.">mov.<b id="stMoves">0</b></div>
+      <div data-i18n="temps">temps<b id="stTime">0:00</b></div>
+      <div data-i18n="màx.">màx.<b id="stMax">–</b></div>
     </div>
     <div class="hint" id="quota"></div>
-    <div class="hint">Llisca amb el dit, o fletxes / WASD</div>
+    <div class="hint" data-i18n="Llisca amb el dit, o fletxes / WASD">Llisca amb el dit, o fletxes / WASD</div>
   </div>
 </div>
 
-<!-- Ajustos de prova -->
+<!-- Configuració -->
 <div class="overlay" id="setPanel">
   <div class="card">
-    <h2>Ajustos de prova</h2>
-    <div class="row"><span>1 + 1 = 2</span><div class="seg" data-key="allow11"><button data-v="true">Sí</button><button data-v="false">No</button></div></div>
-    <div class="row"><span>Tauler</span><div class="seg" data-key="size"><button data-v="4x4">4×4</button><button data-v="4x5">4×5 alt</button><button data-v="5x5">5×5</button></div></div>
-    <div class="row"><span>Fitxa alta a partir de</span><select data-key="threshold">
-      <option value="21">21</option><option value="34">34</option><option value="55">55</option><option value="89">89</option><option value="0">mai</option></select></div>
-    <div class="row"><span>Probabilitat fitxa alta</span><select data-key="odds">
-      <option value="10">1 de 10</option><option value="20">1 de 20</option><option value="30">1 de 30</option><option value="50">1 de 50</option></select></div>
-    <div class="row"><span>Fitxa alta: fins a … llocs per sota</span><select data-key="below">
+    <h2 data-i18n="⚙ Configuració">⚙ Configuració</h2>
+    <h3 data-i18n="👁 Vista">👁 Vista</h3>
+    <div class="row"><span data-i18n="Mode nit">Mode nit</span><div class="seg" data-key="night"><button data-v="true" data-i18n="Sí">Sí</button><button data-v="false" data-i18n="No">No</button></div></div>
+    <h3 data-i18n="🔊 So">🔊 So</h3>
+    <div class="row"><span data-i18n="Música">Música</span><div class="seg" data-key="music"><button data-v="true" data-i18n="Sí">Sí</button><button data-v="false" data-i18n="No">No</button></div></div>
+    <div class="row"><span data-i18n="Volum de la música">Volum de la música</span><input type="range" min="0" max="100" step="5" data-key="musicVol"></div>
+    <div class="row"><span data-i18n="Efectes de so">Efectes de so</span><div class="seg" data-key="sound"><button data-v="true" data-i18n="Sí">Sí</button><button data-v="false" data-i18n="No">No</button></div></div>
+    <div class="row"><span data-i18n="Veu del narrador">Veu del narrador</span><div class="seg" data-key="voice"><button data-v="yes" data-i18n="Sí">Sí</button><button data-v="big" data-i18n="Grans">Grans</button><button data-v="no" data-i18n="No">No</button></div></div>
+    <p class="small" data-i18n="«Grans» (recomanat): la veu només diu l'elogi a les combinacions de més de 8 (13, 21, 34…).">«Grans» (recomanat): la veu només diu l'elogi a les combinacions de més de 8 (13, 21, 34…).</p>
+    <div class="row" style="border:0;padding-bottom:0"><span data-i18n="So ambient">So ambient</span></div>
+    <div class="chips" id="ambChips"></div>
+    <div class="row"><span data-i18n="Volum de l'ambient">Volum de l'ambient</span><input type="range" min="0" max="100" step="5" data-key="ambVol"></div>
+    <h3 data-i18n="🌻 Partida">🌻 Partida</h3>
+    <div class="row"><span data-i18n="Fitxa alta al començar">Fitxa alta al començar<small class="small" id="shNote" style="display:block"></small></span><div class="seg" data-key="startHigh"><button data-v="true" data-i18n="Sí">Sí</button><button data-v="false" data-i18n="No">No</button></div></div>
+    <h3 data-i18n="🌐 Idioma">🌐 Idioma</h3>
+    <div class="seg" data-key="lang" style="display:flex;flex-wrap:wrap"><button data-v="auto" data-i18n="Automàtic">Automàtic</button><button data-v="ca">Català</button><button data-v="es">Español</button><button data-v="en">English</button></div>
+
+    <details class="proto"><summary data-i18n="🧪 Ajustos de prova (prototip)">🧪 Ajustos de prova (prototip)</summary>
+    <div class="row"><span>1 + 1 = 2</span><div class="seg" data-key="allow11"><button data-v="true" data-i18n="Sí">Sí</button><button data-v="false" data-i18n="No">No</button></div></div>
+    <div class="row"><span data-i18n="Tauler">Tauler</span><div class="seg" data-key="size"><button data-v="4x4">4×4</button><button data-v="4x5" data-i18n="4×5 alt">4×5 alt</button><button data-v="5x5">5×5</button></div></div>
+    <div class="row"><span data-i18n="Fitxa alta a partir de">Fitxa alta a partir de</span><select data-key="threshold">
+      <option value="21">21</option><option value="34">34</option><option value="55">55</option><option value="89">89</option><option value="0" data-i18n="mai">mai</option></select></div>
+    <div class="row"><span data-i18n="Probabilitat fitxa alta">Probabilitat fitxa alta</span><select data-key="odds">
+      <option value="10" data-i18n="1 de 10">1 de 10</option><option value="20" data-i18n="1 de 20">1 de 20</option><option value="30" data-i18n="1 de 30">1 de 30</option><option value="50" data-i18n="1 de 50">1 de 50</option></select></div>
+    <div class="row"><span data-i18n="Fitxa alta: fins a … llocs per sota">Fitxa alta: fins a … llocs per sota</span><select data-key="below">
       <option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
-    <div class="row"><span>Mida de la bossa (meitat 1, meitat 2)</span><select data-key="bag">
+    <div class="row"><span data-i18n="Mida de la bossa (meitat 1, meitat 2)">Mida de la bossa (meitat 1, meitat 2)</span><select data-key="bag">
       <option value="2">2</option><option value="4">4</option><option value="6">6</option><option value="8">8</option><option value="12">12</option></select></div>
-    <p class="small">El tauler i la bossa comencen una partida nova. La resta s'aplica de seguida. Valors del document: 1+1 sí, 4x4, 34, 1 de 20, 4 llocs, bossa de 6.</p>
-    <div class="btns"><button id="btnDefaults">Valors del document</button><button id="btnResetDay">Prototip: reiniciar les partides d'avui</button></div>
+    <p class="small" data-i18n="El tauler i la bossa comencen una partida nova. La resta s'aplica de seguida. Valors del document: 1+1 sí, 4x4, 34, 1 de 20, 4 llocs, bossa de 6.">El tauler i la bossa comencen una partida nova. La resta s'aplica de seguida. Valors del document: 1+1 sí, 4x4, 34, 1 de 20, 4 llocs, bossa de 6.</p>
+    <div class="btns"><button id="btnDefaults" data-i18n="Valors del document">Valors del document</button><button id="btnResetDay" data-i18n="Prototip: reiniciar les partides d'avui">Prototip: reiniciar les partides d'avui</button></div>
 
-    <h3>So i veu</h3>
-    <div class="row"><span>Música</span><div class="seg" data-key="music"><button data-v="true">Sí</button><button data-v="false">No</button></div></div>
-    <div class="row"><span>Volum de la música</span><input type="range" min="0" max="100" step="5" data-key="musicVol"></div>
-    <div class="row"><span>Efectes de so</span><div class="seg" data-key="sound"><button data-v="true">Sí</button><button data-v="false">No</button></div></div>
-    <div class="row"><span>Veu del narrador</span><div class="seg" data-key="voice"><button data-v="yes">Sí</button><button data-v="big">Grans</button><button data-v="no">No</button></div></div>
-    <p class="small">«Grans» (recomanat): la veu només diu l'elogi a les combinacions de més de 8 (13, 21, 34…). Els elogis no surten a la pantalla: només se senten (veu greu i lenta, amb un acord greu a sota).</p>
-    <div class="row"><span>Mira l'efecte del número</span><span><select id="fxPick"></select> <button id="btnFx">▶</button></span></div>
+    <div class="row"><span data-i18n="Mira l'efecte del número">Mira l'efecte del número</span><span><select id="fxPick"></select> <button id="btnFx">▶</button></span></div>
 
-    <h3>Partides de prova</h3>
+    <h3 data-i18n="Partides de prova">Partides de prova</h3>
     <div id="histSummary" class="small"></div>
     <div id="histTable"></div>
-    <div class="btns"><button id="btnCopy">Copia resultats</button><button id="btnClear">Esborra</button></div>
+    <div class="btns"><button id="btnCopy" data-i18n="Copia resultats">Copia resultats</button><button id="btnClear" data-i18n="Esborra">Esborra</button></div>
 
-    <h3>Comprova les regles</h3>
-    <p class="small">Exemples A–G de l'apartat 1.7 del document i algunes proves més.</p>
-    <div class="btns"><button id="btnTests">Executa les proves</button></div>
+    <h3 data-i18n="Comprova les regles">Comprova les regles</h3>
+    <p class="small" data-i18n="Exemples A–G de l'apartat 1.7 del document i algunes proves més.">Exemples A–G de l'apartat 1.7 del document i algunes proves més.</p>
+    <div class="btns"><button id="btnTests" data-i18n="Executa les proves">Executa les proves</button></div>
     <div id="testOut"></div>
 
-    <div class="btns" style="justify-content:space-between;align-items:center"><span class="small">Versió <span class="ver"></span></span><button id="btnClose">Tanca</button></div>
+    </details>
+
+    <div class="btns" style="justify-content:space-between;align-items:center"><span class="small" data-i18n="Versió">Versió <span class="ver"></span></span><button id="btnClose" data-i18n="Tanca">Tanca</button></div>
   </div>
 </div>
 
@@ -245,29 +294,38 @@ table.kt{font-size:13px} table.kt td,table.kt th{padding:6px 3px}
 <div class="overlay hub" id="hub">
   <div class="card hubcard">
     <div class="hubhead">
-      <div class="tabs"><button data-tab="stats">📊 Estadístiques</button><button data-tab="rank">🏆 Classificació</button><button data-tab="plus">⭐ Plus</button></div>
-      <button class="icon" id="hubClose" aria-label="Tanca">✕</button>
+      <div class="tabs"><button data-tab="stats" data-i18n="📊 Estadístiques">📊 Estadístiques</button><button data-tab="rank" data-i18n="🏆 Classificació">🏆 Classificació</button><button data-tab="plus" data-i18n="⭐ Plus">⭐ Plus</button></div>
+      <button class="icon" id="hubClose" aria-label="Tanca" data-i18n-aria="Tanca">✕</button>
     </div>
     <div id="hubBody"></div>
   </div>
 </div>
 <div class="overlay sheetwrap" id="sheet"><div class="card sheet" id="sheetBody"></div></div>
 <div id="toast"></div>
+<div id="splash" role="dialog" aria-label="Inici" data-i18n-aria="Inici">
+  <div id="spBg"></div><svg id="spSpiral" aria-hidden="true"></svg>
+  <div id="spMedal">
+    <div class="spIcon"><svg width="54" height="54" viewBox="-30 -30 60 60" aria-hidden="true"><path d="M0,0 A2,2 0 0 1 2,2 A3,3 0 0 1 -1,5 A5,5 0 0 1 -6,0 A8,8 0 0 1 2,-8 A13,13 0 0 1 15,5 A21,21 0 0 1 -6,26" fill="none" stroke="#f3d27a" stroke-width="3" stroke-linecap="round"/></svg></div>
+    <div id="spName"></div>
+    <div id="spSub" data-i18n="Fitxes que creixen en espiral">Fitxes que creixen en espiral</div>
+  </div>
+  <div id="spBottom"><div id="spVer"></div><button id="spPlay" data-i18n="Jugar">Jugar</button></div>
+</div>
 
 <!-- Final de partida -->
 <div class="overlay" id="overPanel">
   <div class="card center">
-    <h2>El jardí ja no té lloc</h2>
+    <h2 data-i18n="El jardí ja no té lloc">El jardí ja no té lloc</h2>
     <div class="over-tile" id="overTile"></div>
     <div id="overText"></div>
-    <div class="btns" style="justify-content:center"><button id="btnOverStats">🏆 Estadístiques</button><button id="btnChallenge">⚔️ Repta algú</button><button id="btnAgain">Torna a jugar</button></div>
+    <div class="btns" style="justify-content:center"><button id="btnOverStats" data-i18n="🏆 Estadístiques">🏆 Estadístiques</button><button id="btnChallenge" data-i18n="⚔️ Repta algú">⚔️ Repta algú</button><button id="btnAgain" data-i18n="Torna a jugar">Torna a jugar</button></div>
   </div>
 </div>
 
 <script>
 "use strict";
 /* Versió 0.X.Y (vegeu CHANGELOG.md): 0 fins al llançament · X canvi important · Y retoc */
-const VERSION='0.4.0';
+const VERSION='0.5.0';
 /* ================= MOTOR (sense DOM) ================= */
 const SERIES=[1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368,75025,121393,196418,317811,514229];
 const IDX=new Map(SERIES.map((v,i)=>[v,i]));
@@ -341,8 +399,8 @@ function makeBag(size,rnd){
 }
 
 /* ================= ESTAT I AJUSTOS ================= */
-const DEFAULTS={allow11:true,size:'4x4',threshold:34,odds:20,below:4,bag:6,sound:true,music:true,musicVol:50,voice:'big'};
-const AUDIO_KEYS=['sound','music','musicVol','voice'];
+const DEFAULTS={allow11:true,size:'4x4',threshold:34,odds:20,below:4,bag:6,sound:true,music:true,musicVol:50,voice:'big',night:false,amb:'cap',ambVol:50,startHigh:false,lang:'auto'};
+const AUDIO_KEYS=['sound','music','musicVol','voice','night','amb','ambVol','startHigh','lang'];
 const MEM={}; // si el navegador no deixa desar (mode privat), es guarda en memòria mentre la pàgina és oberta
 const store={
   get(k,d){try{const s=localStorage.getItem('fib.'+k);return s==null?d:JSON.parse(s);}catch(e){return k in MEM?JSON.parse(MEM[k]):d;}},
@@ -352,6 +410,22 @@ let S=Object.assign({},DEFAULTS,store.get('settings',{}));
 if(!/^\d+x\d+$/.test(S.size)) S.size=S.n===5?'5x5':'4x4'; delete S.n;
 if(store.get('voiceV',0)<1){ S.voice='big'; store.set('voiceV',1); store.set('settings',S); }
 const dims=size=>{const[c,r]=size.split('x').map(Number);return {cols:c,rows:r};}; // «4x5» = 4 d'ample, 5 d'alt
+/* ================= IDIOMES (ca · es · en) =================
+   Les claus són els textos en català; I18N[ca]=[es,en]. Si falta una traducció, surt el català. */
+const I18N={"prototip":["prototipo","prototype"],"Estadístiques":["Estadísticas","Statistics"],"Classificació":["Clasificación","Leaderboard"],"Partida nova":["Partida nueva","New game"],"Configuració":["Configuración","Settings"],"Punts":["Puntos","Score"],"Millor":["Mejor","Best"],"Fitxa rècord":["Ficha récord","Record tile"],"Següent":["Siguiente","Next"],"mov.":["mov.","moves"],"temps":["tiempo","time"],"màx.":["máx.","max"],"Llisca amb el dit, o fletxes / WASD":["Desliza con el dedo, o flechas / WASD","Swipe, or use the arrow keys / WASD"],"⚙ Configuració":["⚙ Configuración","⚙ Settings"],"👁 Vista":["👁 Vista","👁 Display"],"Mode nit":["Modo noche","Night mode"],"Sí":["Sí","Yes"],"No":["No","No"],"🔊 So":["🔊 Sonido","🔊 Sound"],"Música":["Música","Music"],"Volum de la música":["Volumen de la música","Music volume"],"Efectes de so":["Efectos de sonido","Sound effects"],"Veu del narrador":["Voz del narrador","Narrator voice"],"Grans":["Grandes","Big ones"],"«Grans» (recomanat): la veu només diu l'elogi a les combinacions de més de 8 (13, 21, 34…).":["«Grandes» (recomendado): la voz solo te elogia en las combinaciones de más de 8 (13, 21, 34…).","“Big ones” (recommended): the voice only praises merges above 8 (13, 21, 34…)."],"So ambient":["Sonido ambiente","Ambient sound"],"Volum de l'ambient":["Volumen del ambiente","Ambient volume"],"🌻 Partida":["🌻 Partida","🌻 Game"],"Fitxa alta al començar":["Ficha alta al empezar","Start with a high tile"],"🌐 Idioma":["🌐 Idioma","🌐 Language"],"Automàtic":["Automático","Automatic"],"🧪 Ajustos de prova (prototip)":["🧪 Ajustes de prueba (prototipo)","🧪 Test settings (prototype)"],"Tauler":["Tablero","Board"],"4×5 alt":["4×5 alto","4×5 tall"],"Fitxa alta a partir de":["Ficha alta a partir de","High tile from"],"mai":["nunca","never"],"Probabilitat fitxa alta":["Probabilidad de ficha alta","High tile odds"],"1 de 10":["1 de 10","1 in 10"],"1 de 20":["1 de 20","1 in 20"],"1 de 30":["1 de 30","1 in 30"],"1 de 50":["1 de 50","1 in 50"],"Fitxa alta: fins a … llocs per sota":["Ficha alta: hasta … puestos por debajo","High tile: up to … steps below"],"Mida de la bossa (meitat 1, meitat 2)":["Tamaño de la bolsa (mitad 1, mitad 2)","Bag size (half 1s, half 2s)"],"El tauler i la bossa comencen una partida nova. La resta s'aplica de seguida. Valors del document: 1+1 sí, 4x4, 34, 1 de 20, 4 llocs, bossa de 6.":["El tablero y la bolsa empiezan una partida nueva. El resto se aplica enseguida. Valores del documento: 1+1 sí, 4x4, 34, 1 de 20, 4 puestos, bolsa de 6.","Board and bag start a new game. Everything else applies straight away. Document values: 1+1 yes, 4x4, 34, 1 in 20, 4 steps, bag of 6."],"Valors del document":["Valores del documento","Document values"],"Prototip: reiniciar les partides d'avui":["Prototipo: reiniciar las partidas de hoy","Prototype: reset today's games"],"Mira l'efecte del número":["Mira el efecto del número","Preview a number's effect"],"Partides de prova":["Partidas de prueba","Test games"],"Copia resultats":["Copiar resultados","Copy results"],"Esborra":["Borrar","Clear"],"Comprova les regles":["Comprobar las reglas","Check the rules"],"Exemples A–G de l'apartat 1.7 del document i algunes proves més.":["Ejemplos A–G del apartado 1.7 del documento y algunas pruebas más.","Examples A–G from section 1.7 of the document, plus a few more tests."],"Executa les proves":["Ejecutar las pruebas","Run the tests"],"Versió":["Versión","Version"],"Tanca":["Cerrar","Close"],"📊 Estadístiques":["📊 Estadísticas","📊 Statistics"],"🏆 Classificació":["🏆 Clasificación","🏆 Leaderboard"],"⭐ Plus":["⭐ Plus","⭐ Plus"],"Inici":["Inicio","Home"],"Fitxes que creixen en espiral":["Fichas que crecen en espiral","Tiles that grow in a spiral"],"Jugar":["Jugar","Play"],"El jardí ja no té lloc":["El jardín ya no tiene sitio","The garden is full"],"🏆 Estadístiques":["🏆 Estadísticas","🏆 Statistics"],"⚔️ Repta algú":["⚔️ Reta a alguien","⚔️ Challenge someone"],"Torna a jugar":["Volver a jugar","Play again"],"Fitxa alta":["Ficha alta","High tile"],"punts":["puntos","points"],"rècord!":["¡récord!","record!"],"(rècord!)":["(¡récord!)","(record!)"],"Fitxa més alta: {0}":["Ficha más alta: {0}","Highest tile: {0}"],"{0} moviments":["{0} movimientos","{0} moves"],"⚔️ Torna-li el repte":["⚔️ Devuélvele el reto","⚔️ Challenge them back"],"Començar una partida nova?":["¿Empezar una partida nueva?","Start a new game?"],"ones":["ondas","ripples"],"pètals":["pétalos","petals"],"fulles que volen":["hojas al vuelo","flying leaves"],"espurnes":["chispas","sparks"],"llavors daurades":["semillas doradas","golden seeds"],"espiral daurada":["espiral dorada","golden spiral"],"gira-sol":["girasol","sunflower"],"pluja de pètals":["lluvia de pétalos","petal shower"],"aurora":["aurora","aurora"],"cuques de llum":["luciérnagas","fireflies"],"flors que s'obren":["flores que se abren","opening flowers"],"espiral de colors":["espiral de colores","colour spiral"],"focs":["fuegos artificiales","fireworks"],"arbre florit":["árbol en flor","tree in bloom"],"galàxia":["galaxia","galaxy"],"gira-sol daurat":["girasol dorado","golden sunflower"],"aurora i espiral":["aurora y espiral","aurora and spiral"],"tot el jardí":["todo el jardín","the whole garden"],"Enllaç copiat: enganxa'l al grup.":["Enlace copiado: pégalo en el grupo.","Link copied: paste it in the group chat."],"Copia aquest text:":["Copia este texto:","Copy this text:"],"Partides il·limitades, sense vídeos":["Partidas ilimitadas, sin vídeos","Unlimited games, no videos"],"Crear lligues per a la teva gent":["Crear ligas para tu gente","Create leagues for your people"],"Reptes: desafia algú amb la mateixa partida":["Retos: desafía a alguien con la misma partida","Challenges: take someone on with the same game"],"Estadístiques completes: més de 40 dades i gràfics":["Estadísticas completas: más de 40 datos y gráficos","Full statistics: over 40 figures and charts"],"Les estadístiques completes són de Plus":["Las estadísticas completas son de Plus","Full statistics are a Plus feature"],"Evolució de la puntuació, mapes de calor, fins on arribes, quan i com jugues, rècords i molt més.":["Evolución de la puntuación, mapas de calor, hasta dónde llegas, cuándo y cómo juegas, récords y mucho más.","Score trends, heat maps, how far you get, when and how you play, records and much more."],"Crear lligues és de {0} Plus":["Crear ligas es de {0} Plus","Creating leagues is part of {0} Plus"],"Amb Plus pots crear totes les lligues que vulguis i convidar-hi la teva gent. Els convidats hi entren gratis.":["Con Plus puedes crear todas las ligas que quieras e invitar a tu gente. Los invitados entran gratis.","With Plus you can create as many leagues as you like and invite your people. Guests join for free."],"Els reptes són de Plus":["Los retos son de Plus","Challenges are a Plus feature"],"Desafia algú amb la mateixa partida: les mateixes fitxes, en el mateix ordre. Qui faci més punts, guanya. Acceptar un repte és gratis.":["Desafía a alguien con la misma partida: las mismas fichas, en el mismo orden. Quien haga más puntos, gana. Aceptar un reto es gratis.","Challenge someone with the same game: the same tiles, in the same order. Highest score wins. Accepting a challenge is free."],"⭐ {0} Plus inclou":["⭐ {0} Plus incluye","⭐ {0} Plus includes"],"Activar Plus (prototip, gratis)":["Activar Plus (prototipo, gratis)","Activate Plus (prototype, free)"],"Veure preus":["Ver precios","See prices"],"Ara no":["Ahora no","Not now"],"Plus activat (simulat)":["Plus activado (simulado)","Plus activated (simulated)"],"Gratis: {0} partides al dia, i fins a {1} més mirant un vídeo. Preus amb IVA inclòs.":["Gratis: {0} partidas al día, y hasta {1} más viendo un vídeo. Precios con IVA incluido.","Free: {0} games a day, plus up to {1} more by watching a video. Prices include VAT."],"✓ Passi del dia actiu: jugues sense límit fins a les {0}.":["✓ Pase del día activo: juegas sin límite hasta las {0}.","✓ Day pass active: unlimited play until {0}."],"Passi del dia":["Pase del día","Day pass"],"Juga sense límit durant 24 hores · només partides · sense renovació":["Juega sin límite durante 24 horas · solo partidas · sin renovación","Unlimited play for 24 hours · games only · no renewal"],"0,99 €":["0,99 €","€0.99"],"29,99 €":["29,99 €","€29.99"],"4,99 €/mes":["4,99 €/mes","€4.99/month"],"Millor preu":["Mejor precio","Best value"],"Plus anual":["Plus anual","Annual Plus"],"Surt a 2,50 € al mes":["Sale a 2,50 € al mes","Works out at €2.50 a month"],"Veure més opcions":["Ver más opciones","See more options"],"Plus mensual":["Plus mensual","Monthly Plus"],"🎁 Regalar Plus a algú":["🎁 Regalar Plus a alguien","🎁 Give Plus as a gift"],"Un any sencer per a un familiar":["Un año entero para un familiar","A whole year for someone in your family"],"El Plus mensual i l’anual es renoven automàticament i es poden cancel·lar en qualsevol moment. El passi del dia no es renova.":["El Plus mensual y el anual se renuevan automáticamente y se pueden cancelar en cualquier momento. El pase del día no se renueva.","Monthly and annual Plus renew automatically and can be cancelled at any time. The day pass does not renew."],"Prototip: no es fa cap cobrament.":["Prototipo: no se cobra nada.","Prototype: no payment is taken."],"Restaurar compres":["Restaurar compras","Restore purchases"],"Passi del dia activat (simulat): jugues sense límit 24 hores":["Pase del día activado (simulado): juegas sin límite 24 horas","Day pass activated (simulated): unlimited play for 24 hours"],"Compres restaurades (simulat)":["Compras restauradas (simulado)","Purchases restored (simulated)"],"Plus de regal":["Plus de regalo","Gift Plus"],"La teva subscripció":["Tu suscripción","Your subscription"],"✓ Actiu":["✓ Activo","✓ Active"],"Pla":["Plan","Plan"],"Actiu fins al":["Activo hasta el","Active until"],"Propera renovació":["Próxima renovación","Next renewal"],"Inclou":["Incluye","Includes"],"És un regal: no es renova ni es cobra res.":["Es un regalo: no se renueva ni se cobra nada.","It's a gift: it doesn't renew and nothing is charged."],"Has cancel·lat el pla: no es renovarà. Fins al {0} continues tenint Plus.":["Has cancelado el plan: no se renovará. Hasta el {0} sigues teniendo Plus.","You've cancelled your plan: it won't renew. You keep Plus until {0}."],"Reactivar la renovació":["Reactivar la renovación","Turn renewal back on"],"Cancel·lar el pla":["Cancelar el plan","Cancel plan"],"Prototip: a l’app de veritat la cancel·lació es fa a l’App Store o a Google Play.":["Prototipo: en la app de verdad la cancelación se hace en la App Store o en Google Play.","Prototype: in the real app you cancel through the App Store or Google Play."],"Prototip: tornar a la versió gratuïta":["Prototipo: volver a la versión gratuita","Prototype: back to the free version"],"Renovació reactivada (simulat)":["Renovación reactivada (simulado)","Renewal turned back on (simulated)"],"Cancel·lar {0} Plus?":["¿Cancelar {0} Plus?","Cancel {0} Plus?"],"No es tornarà a cobrar. Continuaràs tenint Plus fins al {0}; després tornaràs a la versió gratuïta.":["No se volverá a cobrar. Seguirás teniendo Plus hasta el {0}; después volverás a la versión gratuita.","You won't be charged again. You'll keep Plus until {0}, then go back to the free version."],"No perds res: les partides, els rècords i les estadístiques es queden. Les lligues que has creat continuen, però no en podràs crear de noves.":["No pierdes nada: las partidas, los récords y las estadísticas se quedan. Las ligas que has creado siguen, pero no podrás crear nuevas.","You lose nothing: your games, records and statistics stay. Leagues you've created carry on, but you won't be able to create new ones."],"Mantenir Plus":["Mantener Plus","Keep Plus"],"Sí, cancel·lar el pla":["Sí, cancelar el plan","Yes, cancel plan"],"Pla cancel·lat (simulat). Tens Plus fins al {0}.":["Plan cancelado (simulado). Tienes Plus hasta el {0}.","Plan cancelled (simulated). You have Plus until {0}."],"Tornes a la versió gratuïta (prototip)":["Vuelves a la versión gratuita (prototipo)","Back to the free version (prototype)"],"🎁 Regala {0} Plus":["🎁 Regala {0} Plus","🎁 Give {0} Plus"],"Un any de Plus: lligues pròpies i estadístiques completes. Li enviaràs un enllaç i el regal quedarà activat al seu mòbil.":["Un año de Plus: ligas propias y estadísticas completas. Le enviarás un enlace y el regalo quedará activado en su móvil.","A year of Plus: their own leagues and full statistics. You'll send them a link and the gift will be activated on their phone."],"De part de":["De parte de","From"],"El teu nom":["Tu nombre","Your name"],"Missatge":["Mensaje","Message"],"Perquè juguis cada dia una estona. Una abraçada!":["Para que juegues un rato cada día. ¡Un abrazo!","So you can play a little every day. Big hug!"],"Pagar 29,99 € i enviar":["Pagar 29,99 € y enviar","Pay €29.99 and send"],"Regal pagat (simulat)":["Regalo pagado (simulado)","Gift paid (simulated)"],"T’he regalat un any de {0} Plus, un joc de fitxes que creixen en espiral. Obre l’enllaç per activar-lo: {1}":["Te he regalado un año de {0} Plus, un juego de fichas que crecen en espiral. Abre el enlace para activarlo: {1}","I've given you a year of {0} Plus, a game of tiles that grow in a spiral. Open the link to activate it: {1}"],"📊 Resum":["📊 Resumen","📊 Summary"],"Partides jugades":["Partidas jugadas","Games played"],"Fitxa més alta":["Ficha más alta","Highest tile"],"Puntuació màxima":["Puntuación máxima","Best score"],"Encara no has acabat cap partida. La fitxa més alta i la puntuació també compten la partida que jugues ara.":["Aún no has terminado ninguna partida. La ficha más alta y la puntuación también cuentan la partida que estás jugando.","You haven't finished a game yet. Highest tile and score also count the game you're playing now."],"Estadístiques completes":["Estadísticas completas","Full statistics"],"📈 Evolució de la puntuació, partida a partida":["📈 Evolución de la puntuación, partida a partida","📈 Score trend, game by game"],"🌻 Fins on arribes: el 89, el 144, el 233…":["🌻 Hasta dónde llegas: el 89, el 144, el 233…","🌻 How far you get: 89, 144, 233…"],"🔥 Mapes de calor: on fas les combinacions i per on entren les fitxes":["🔥 Mapas de calor: dónde haces las combinaciones y por dónde entran las fichas","🔥 Heat maps: where you merge and where new tiles come in"],"🧭 Cap on llisques més":["🧭 Hacia dónde deslizas más","🧭 Which way you swipe most"],"📅 Activitat de cada dia, ratxes i quan jugues":["📅 Actividad de cada día, rachas y cuándo juegas","📅 Daily activity, streaks and when you play"],"🏅 Rècords i molt més: més de 40 dades i gràfics":["🏅 Récords y mucho más: más de 40 datos y gráficos","🏅 Records and much more: over 40 figures and charts"],"Veure totes les estadístiques":["Ver todas las estadísticas","See all statistics"],"7 dies":["7 días","7 days"],"30 dies":["30 días","30 days"],"Sempre":["Siempre","All time"],"Dades d’exemple: quan hagis acabat 5 partides, hi sortiran les teves.":["Datos de ejemplo: cuando hayas terminado 5 partidas, aparecerán las tuyas.","Sample data: once you've finished 5 games, yours will show here."],"No hi ha partides en aquest període.":["No hay partidas en este periodo.","No games in this period."],"Les teves xifres":["Tus cifras","Your numbers"],"Partides":["Partidas","Games"],"Temps jugat":["Tiempo jugado","Time played"],"Punts totals":["Puntos totales","Total points"],"Mitjana de punts":["Media de puntos","Average score"],"Moviments per partida":["Movimientos por partida","Moves per game"],"Ratxa actual":["Racha actual","Current streak"],"{0} dies":["{0} días","{0} days"],"Millor: {0}":["Mejor: {0}","Best: {0}"],"Fas un {0}% més punts que a les teves 10 primeres partides.":["Haces un {0}% más de puntos que en tus 10 primeras partidas.","You score {0}% more than in your first 10 games."],"Les últimes partides t’han anat una mica pitjor que les primeres. Respira i torna-hi!":["Las últimas partidas te han ido un poco peor que las primeras. ¡Respira y vuelve a intentarlo!","Your latest games went a bit worse than your first ones. Take a breath and try again!"],"El dia que més jugues és el {0}.":["El día que más juegas es el {0}.","The day you play most is {0}."],"On fas més punts és {0}: {1} de mitjana.":["Donde haces más puntos es {0}: {1} de media.","You score most {0}: {1} on average."],"al matí":["por la mañana","in the morning"],"al migdia":["al mediodía","at midday"],"a la tarda":["por la tarde","in the afternoon"],"a la nit":["por la noche","at night"],"En el {0} de les partides arribes al {1}. El següent repte: el {2}.":["En el {0} de las partidas llegas al {1}. El siguiente reto: el {2}.","In {0} of your games you reach {1}. Next challenge: {2}."],"amunt":["hacia arriba","up"],"avall":["hacia abajo","down"],"a l’esquerra":["a la izquierda","left"],"a la dreta":["a la derecha","right"],"Llisques sobretot {0} ({1} dels moviments).":["Deslizas sobre todo {0} ({1} de los movimientos).","You mostly swipe {0} ({1} of moves)."],"💡 Coses que hem vist":["💡 Cosas que hemos visto","💡 Things we noticed"],"📈 Evolució de la puntuació":["📈 Evolución de la puntuación","📈 Score trend"],"Calen almenys 2 partides.":["Hacen falta al menos 2 partidas.","You need at least 2 games."],"més antiga":["más antigua","oldest"],"més recent":["más reciente","newest"],"Cada punt és una partida, del color de la seva fitxa més alta · línia: mitjana de 5":["Cada punto es una partida, del color de su ficha más alta · línea: media de 5","Each dot is a game, coloured by its highest tile · line: average of 5"],"Les últimes {0} partides. Mitjana al principi: {1} · ara: {2}.":["Las últimas {0} partidas. Media al principio: {1} · ahora: {2}.","Your last {0} games. Average at the start: {1} · now: {2}."],"📊 Quants punts fas":["📊 Cuántos puntos haces","📊 How many points you score"],"Histograma de punts per partida (trams de {0}).":["Histograma de puntos por partida (tramos de {0}).","Histogram of points per game (bands of {0})."],"🌻 Fitxa més alta de cada partida":["🌻 Ficha más alta de cada partida","🌻 Highest tile in each game"],"La més habitual: el {0}.":["La más habitual: el {0}.","Most common: {0}."],"🪜 Fins on arribes":["🪜 Hasta dónde llegas","🪜 How far you get"],"al {0}":["al {0}","{0}"],"mov. {0}":["mov. {0}","move {0}"],"Percentatge de partides que hi arriben · moviment mitjà en què hi arribes per primer cop.":["Porcentaje de partidas que llegan · movimiento medio en que llegas por primera vez.","Share of games that get there · average move when you first reach it."],"⏱ Quant duren les partides":["⏱ Cuánto duran las partidas","⏱ How long games last"],"Durada mitjana":["Duración media","Average length"],"Moviments / minut":["Movimientos / minuto","Moves / minute"],"Punts / minut":["Puntos / minuto","Points / minute"],"Minuts per partida. La més llarga: {0} ({1} moviments).":["Minutos por partida. La más larga: {0} ({1} movimientos).","Minutes per game. Longest: {0} ({1} moves)."],"🔥 Mapes de calor":["🔥 Mapas de calor","🔥 Heat maps"],"On fas les combinacions":["Dónde haces las combinaciones","Where you merge"],"Per on entren les fitxes noves":["Por dónde entran las fichas nuevas","Where new tiles come in"],"Tauler {0} ({1} partides). Com més intens, més vegades.":["Tablero {0} ({1} partidas). Cuanto más intenso, más veces.","{0} board ({1} games). The stronger the colour, the more often."],"🧭 Cap on llisques":["🧭 Hacia dónde deslizas","🧭 Which way you swipe"],"Molts jugadors deixen una vora quieta i fan créixer les fitxes en un racó.":["Muchos jugadores dejan un borde quieto y hacen crecer las fichas en una esquina.","Many players keep one edge still and grow their tiles in a corner."],"🔗 Combinacions per número":["🔗 Combinaciones por número","🔗 Merges by number"],"{0} combinacions en total · {1} per partida.":["{0} combinaciones en total · {1} por partida.","{0} merges in total · {1} per game."],"🎢 La partida, pas a pas":["🎢 La partida, paso a paso","🎢 The game, step by step"],"punts acumulats":["puntos acumulados","points so far"],"caselles lliures (fins a {0})":["casillas libres (hasta {0})","free squares (up to {0})"],"Mitjana de les partides cada 10 moviments. Quan la línia verda baixa, el tauler s’omple.":["Media de las partidas cada 10 movimientos. Cuando la línea verde baja, el tablero se llena.","Average across games every 10 moves. When the green line drops, the board is filling up."],"📅 Activitat":["📅 Actividad","📅 Activity"],"Menys":["Menos","Less"],"Més":["Más","More"],"Dies que has jugat":["Días que has jugado","Days played"],"Màxim en un dia":["Máximo en un día","Most in a day"],"Millor setmana":["Mejor semana","Best week"],"{0} part.":["{0} part.","{0} games"],"Les últimes 15 setmanes. Cada quadre és un dia.":["Las últimas 15 semanas. Cada cuadro es un día.","The last 15 weeks. Each square is a day."],"🕰 Quan jugues":["🕰 Cuándo juegas","🕰 When you play"],"Matí":["Mañana","Morning"],"Migdia":["Mediodía","Midday"],"Tarda":["Tarde","Afternoon"],"Nit":["Noche","Night"],"{0} · {1} p.":["{0} · {1} p.","{0} · {1} pts"],"A les franges: partides · punts de mitjana.":["En las franjas: partidas · puntos de media.","By time of day: games · average points."],"🧩 Com jugues":["🧩 Cómo juegas","🧩 How you play"],"Amb llavor daurada":["Con semilla dorada","With a golden seed"],"Dobles combinacions":["Combinaciones dobles","Double merges"],"{0} / part.":["{0} / part.","{0} / game"],"Combinacions / mov.":["Combinaciones / mov.","Merges / move"],"Llavors per partida":["Semillas por partida","Seeds per game"],"Moviments en fals":["Movimientos en falso","Dead moves"],"per partida":["por partida","per game"],"Punts / moviment":["Puntos / movimiento","Points / move"],"Dobles combinacions: moviments en què s’ajunten dues parelles o més. Moviments en fals: quan el tauler no es pot moure cap a on llisques.":["Combinaciones dobles: movimientos en que se juntan dos parejas o más. Movimientos en falso: cuando el tablero no se puede mover hacia donde deslizas.","Double merges: moves where two or more pairs join. Dead moves: when the board can't move the way you swipe."],"📐 Per mida de tauler":["📐 Por tamaño de tablero","📐 By board size"],"Mitjana":["Media","Average"],"Fitxa":["Ficha","Tile"],"🏅 Rècords":["🏅 Récords","🏅 Records"],"Millor puntuació":["Mejor puntuación","Best score"],"Més ràpid fins al 89":["Más rápido hasta el 89","Fastest to 89"],"{0} mov.":["{0} mov.","{0} moves"],"Partida més llarga":["Partida más larga","Longest game"],"Més temps en una partida":["Más tiempo en una partida","Most time in one game"],"Més combinacions en una partida":["Más combinaciones en una partida","Most merges in one game"],"Millor ratxa":["Mejor racha","Best streak"],"Més partides en un dia":["Más partidas en un día","Most games in a day"],"Comarca":["Comarca","Local area"],"Catalunya":["Cataluña","Catalonia"],"Espanya":["España","Spain"],"Global":["Global","Global"],"Família":["Familia","Family"],"Amics":["Amigos","Friends"],"Escola":["Escuela","School"],"Parella":["Pareja","Partner"],"Feina":["Trabajo","Work"],"Casal o club":["Centro o club","Club"],"Una altra":["Otra","Other"],"La meva família":["Mi familia","My family"],"Els amics":["Los amigos","My friends"],"Famílies de l’escola":["Familias del cole","School families"],"Tu i jo":["Tú y yo","You and me"],"Companys de feina":["Compañeros de trabajo","Workmates"],"El casal":["El centro","The club"],"La meva lliga":["Mi liga","My league"],"Família Puig":["Familia García","The Smith family"],"La colla del dijous":["La pandilla del jueves","The Thursday crew"],"Classe de 3r B":["Clase de 3.º B","Class 3B"],"L’equip del matí":["El equipo de la mañana","The morning team"],"Casal de la gent gran":["Centro de mayores","Seniors' club"],"Posa-li un nom":["Ponle un nombre","Give it a name"],"Millor puntuació d’avui. Dades d’exemple.":["Mejor puntuación de hoy. Datos de ejemplo.","Today's best score. Sample data."],"Millor puntuació d’aquesta setmana. Dades d’exemple.":["Mejor puntuación de esta semana. Datos de ejemplo.","This week's best score. Sample data."],"Millor puntuació d’aquest mes. Dades d’exemple.":["Mejor puntuación de este mes. Datos de ejemplo.","This month's best score. Sample data."],"Diari":["Diaria","Daily"],"Setmanal":["Semanal","Weekly"],"Mensual":["Mensual","Monthly"],"＋ Afegir":["＋ Añadir","＋ Add"],"⇅ Ordenar":["⇅ Ordenar","⇅ Reorder"],"Mantén premuda una lliga i arrossega-la per canviar-ne l’ordre.":["Mantén pulsada una liga y arrástrala para cambiar el orden.","Press and hold a league and drag it to reorder."],"🏆 Encara no tens cap lliga":["🏆 Aún no tienes ninguna liga","🏆 You don't have a league yet"],"Crea’n una per a la teva gent o afegeix una classificació oberta.":["Crea una para tu gente o añade una clasificación abierta.","Create one for your people or add an open leaderboard."],"＋ Afegir una lliga":["＋ Añadir una liga","＋ Add a league"],"Juga amb la teva gent":["Juega con tu gente","Play with your people"],"Crea una lliga i envia l’enllaç pel grup: família, amics, la parella…":["Crea una liga y envía el enlace por el grupo: familia, amigos, la pareja…","Create a league and share the link in your group chat: family, friends, your partner…"],"Ordre desat":["Orden guardado","Order saved"],"Tu":["Tú","You"],"Encara no has acabat cap partida en aquest període.":["Aún no has terminado ninguna partida en este periodo.","You haven't finished a game in this period yet."],"Encara no has jugat":["Aún no has jugado","Not played yet"],"Encara no ha jugat":["Aún no ha jugado","Not played yet"],"{0} membres":["{0} miembros","{0} members"],"Convidar a la lliga":["Invitar a la liga","Invite to the league"],"{0} ja ha jugat. Et toca!":["{0} ya ha jugado. ¡Te toca!","{0} has already played. Your turn!"],"Avui guanyes per {0} punts":["Hoy ganas por {0} puntos","You're winning today by {0} points"],"Avui guanya {0} per {1} punts":["Hoy gana {0} por {1} puntos","{0} is winning today by {1} points"],"Empat exacte!":["¡Empate exacto!","Exact tie!"],"Vas guanyant la setmana":["Vas ganando la semana","You're winning the week"],"Aquesta setmana va per davant {0}":["Esta semana va por delante {0}","{0} is ahead this week"],"Setmana empatada":["Semana empatada","Week tied"],"★ dies que guanyes · ● dies que guanya {0}":["★ días que ganas · ● días que gana {0}","★ days you win · ● days {0} wins"],"Vas guanyant el mes":["Vas ganando el mes","You're winning the month"],"Aquest mes va per davant {0}":["Este mes va por delante {0}","{0} is ahead this month"],"Mes empatat":["Mes empatado","Month tied"],"Duel diari":["Duelo diario","Daily duel"],"Dades d’exemple.":["Datos de ejemplo.","Sample data."],"Enviar-li l’enllaç":["Enviarle el enlace","Send them the link"],"Juguem cada dia a {0}? Guanya qui fa més punts. La nostra lliga: «{1}» {2}":["¿Jugamos cada día a {0}? Gana quien haga más puntos. Nuestra liga: «{1}» {2}","Shall we play {0} every day? Highest score wins. Our league: “{1}” {2}"],"Uneix-te a la lliga «{0}» de {1}: cada dia, a veure qui fa més punts. {2}":["Únete a la liga «{0}» de {1}: cada día, a ver quién hace más puntos. {2}","Join the “{0}” league on {1}: every day, let's see who scores most. {2}"],"Afegir una lliga":["Añadir una liga","Add a league"],"Pots estar a tantes lligues com vulguis i ordenar-les al teu gust.":["Puedes estar en tantas ligas como quieras y ordenarlas a tu gusto.","You can be in as many leagues as you like and order them however you want."],"Amb la teva gent":["Con tu gente","With your people"],"Crear una lliga és de Plus. Les lligues obertes i unir-te a una lliga on t’han convidat són gratis.":["Crear una liga es de Plus. Las ligas abiertas y unirte a una liga a la que te han invitado son gratis.","Creating a league is a Plus feature. Open leagues, and joining a league you've been invited to, are free."],"Obertes a tothom":["Abiertas a todos","Open to everyone"],"✓ Ja hi és":["✓ Ya está","✓ Added"],"Tancar":["Cerrar","Close"],"Nova lliga":["Nueva liga","New league"],"Un duel cada dia amb la mateixa persona: guanya qui fa més punts.":["Un duelo cada día con la misma persona: gana quien haga más puntos.","A duel every day with the same person: highest score wins."],"Cada dia, a veure qui fa més punts. Sense comptes ni contrasenyes: només un enllaç per al grup.":["Cada día, a ver quién hace más puntos. Sin cuentas ni contraseñas: solo un enlace para el grupo.","Every day, see who scores most. No accounts or passwords: just a link for the group."],"Nom de la lliga":["Nombre de la liga","League name"],"Crear i convidar":["Crear e invitar","Create and invite"],"Enrere":["Atrás","Back"],"Lliga creada: {0}":["Liga creada: {0}","League created: {0}"],"Les teves lligues":["Tus ligas","Your leagues"],"Arrossega-les amb el dit (des de ⋮⋮) o fes servir les fletxes. La primera és la que veuràs en obrir la classificació.":["Arrástralas con el dedo (desde ⋮⋮) o usa las flechas. La primera es la que verás al abrir la clasificación.","Drag them with your finger (from ⋮⋮) or use the arrows. The first one is what you'll see when you open the leaderboard."],"Principal":["Principal","Main"],"Pujar":["Subir","Move up"],"Baixar":["Bajar","Move down"],"Treure":["Quitar","Remove"],"Fet":["Hecho","Done"],"Has tret «{0}»":["Has quitado «{0}»","Removed “{0}”"],"T’has unit a la lliga «{0}»":["Te has unido a la liga «{0}»","You've joined the “{0}” league"],"🎁 Regal activat: un any de Plus":["🎁 Regalo activado: un año de Plus","🎁 Gift activated: a year of Plus"],"de part de {0}":["de parte de {0}","from {0}"],"⚔️ Repte de {0}: supera <b>{1}<\/b> punts":["⚔️ Reto de {0}: supera <b>{1}<\/b> puntos","⚔️ Challenge from {0}: beat <b>{1}<\/b> points"],"♾️ Partides il·limitades amb Plus":["♾️ Partidas ilimitadas con Plus","♾️ Unlimited games with Plus"],"♾️ Passi del dia: sense límit fins a les {0}":["♾️ Pase del día: sin límite hasta las {0}","♾️ Day pass: unlimited until {0}"],"Partides d’avui: <b>{0} de {1}<\/b>":["Partidas de hoy: <b>{0} de {1}<\/b>","Today's games: <b>{0} of {1}<\/b>"],"({0} amb vídeo)":["({0} con vídeo)","({0} with a video)"],"Ja has fet les partides d’avui":["Ya has jugado las partidas de hoy","You've played today's games"],"Cada dia tens {0} partides gratis. Demà en tindràs {0} més. Si vols continuar ara:":["Cada día tienes {0} partidas gratis. Mañana tendrás {0} más. Si quieres seguir ahora:","You get {0} free games every day. Tomorrow you'll get {0} more. To keep playing now:"],"▶ Mira un vídeo i juga’n una més":["▶ Mira un vídeo y juega una más","▶ Watch a video and play one more"],"Te’n queden {0} de {1} per avui":["Te quedan {0} de {1} para hoy","{0} of {1} left for today"],"Gratis":["Gratis","Free"],"Avui ja has mirat els {0} vídeos.":["Hoy ya has visto los {0} vídeos.","You've already watched all {0} videos today."],"Juga sense límit durant 24 hores · sense renovació":["Juega sin límite durante 24 horas · sin renovación","Unlimited play for 24 hours · no renewal"],"Partides il·limitades i molt més":["Partidas ilimitadas y mucho más","Unlimited games and much more"],"Lligues pròpies, reptes i estadístiques completes · des de 2,50 €/mes":["Ligas propias, retos y estadísticas completas · desde 2,50 €/mes","Your own leagues, challenges and full statistics · from €2.50/month"],"Ara no, torno demà":["Ahora no, vuelvo mañana","Not now, I'll be back tomorrow"],"Anunci (simulat)":["Anuncio (simulado)","Ad (simulated)"],"A l’app de veritat aquí hi hauria un vídeo d’uns 15–30 segons. Si el tanques abans d’hora, no compta.":["En la app de verdad aquí habría un vídeo de unos 15–30 segundos. Si lo cierras antes de tiempo, no cuenta.","In the real app there'd be a 15–30 second video here. If you close it early, it doesn't count."],"Tens una partida més":["Tienes una partida más","You've got one more game"],"Comptador d’avui a zero (prototip)":["Contador de hoy a cero (prototipo)","Today's counter reset (prototype)"],"⚔️ Has guanyat el repte de {0}! ({1})":["⚔️ ¡Has ganado el reto de {0}! ({1})","⚔️ You won {0}'s challenge! ({1})"],"⚔️ {0} guanya per {1} punts":["⚔️ {0} gana por {1} puntos","⚔️ {0} wins by {1} points"],"⚔️ Empat exacte!":["⚔️ ¡Empate exacto!","⚔️ Exact tie!"],"Acaba una partida per poder reptar amb ella.":["Termina una partida para poder retar con ella.","Finish a game so you can use it for a challenge."],"Repta algú":["Reta a alguien","Challenge someone"],"Li enviaràs aquesta mateixa partida: les mateixes fitxes, en el mateix ordre. Has fet <b>{0}<\/b> punts (fitxa {1}). Si et supera, guanya.":["Le enviarás esta misma partida: las mismas fichas, en el mismo orden. Has hecho <b>{0}<\/b> puntos (ficha {1}). Si te supera, gana.","You'll send them this exact game: the same tiles, in the same order. You scored <b>{0}<\/b> points (tile {1}). If they beat you, they win."],"Com et diuen?":["¿Cómo te llamas?","What's your name?"],"Enviar el repte":["Enviar el reto","Send the challenge"],"Algú":["Alguien","Someone"],"⚔️ Et repto a {0}! He fet {1} punts (fitxa {2}) amb aquesta partida. Tindràs les mateixes fitxes: a veure si em superes. {3}":["⚔️ ¡Te reto a {0}! He hecho {1} puntos (ficha {2}) con esta partida. Tendrás las mismas fichas: a ver si me superas. {3}","⚔️ I challenge you to {0}! I scored {1} points (tile {2}) in this game. You'll get the same tiles: let's see if you can beat me. {3}"],"⚔️ Repte de {0}: supera {1} punts":["⚔️ Reto de {0}: supera {1} puntos","⚔️ Challenge from {0}: beat {1} points"],"fa {0} min":["hace {0} min","{0} min ago"],"fa {0} h":["hace {0} h","{0} h ago"],"fa {0} dies":["hace {0} días","{0} days ago"],"Has reptat amb {0} punts":["Has retado con {0} puntos","You challenged with {0} points"],"De {0} · {1} punts":["De {0} · {1} puntos","From {0} · {1} points"],"Pendent de jugar":["Pendiente de jugar","Not played yet"],"Guanyat amb {0} ✓":["Ganado con {0} ✓","Won with {0} ✓"],"Perdut amb {0}":["Perdido con {0}","Lost with {0}"],"Empat":["Empate","Tie"],"Tornar-hi":["Repetir","Play again"],"Reptes":["Retos","Challenges"],"⚔️ Repta amb la teva última partida ({0})":["⚔️ Reta con tu última partida ({0})","⚔️ Challenge with your last game ({0})"],"⚔️ Acaba una partida per reptar algú":["⚔️ Termina una partida para retar a alguien","⚔️ Finish a game to challenge someone"],"Cap":["Ninguno","None"],"Mar":["Mar","Sea"],"Pluja":["Lluvia","Rain"],"Nit d’estiu":["Noche de verano","Summer night"],"Bosc":["Bosque","Forest"],"Comences amb un 144 al tauler.":["Empiezas con un 144 en el tablero.","You start with a 144 on the board."],"Es desbloqueja quan arribes al 377. Llavors pots començar amb un 144.":["Se desbloquea cuando llegas al 377. Entonces puedes empezar con un 144.","Unlocks when you reach 377. Then you can start with a 144."],"Encara no hi ha cap partida acabada.":["Aún no hay ninguna partida terminada.","No finished games yet."],"{0} partides · mitjana: <b>{1}<\/b> mov., <b>{2}<\/b>, {3} punts":["{0} partidas · media: <b>{1}<\/b> mov., <b>{2}<\/b>, {3} puntos","{0} games · average: <b>{1}<\/b> moves, <b>{2}<\/b>, {3} points"],"Data":["Fecha","Date"],"Mov.":["Mov.","Moves"],"Temps":["Tiempo","Time"],"Màx.":["Máx.","Max"],"Copiat ({0} partides).":["Copiado ({0} partidas).","Copied ({0} games)."],"Copia:":["Copia:","Copy:"],"Esborrar l'historial de partides de prova?":["¿Borrar el historial de partidas de prueba?","Clear the test game history?"],"{0}/{1} correctes":["{0}/{1} correctas","{0}/{1} passed"]};
+function curLang(){
+  if(S.lang&&S.lang!=='auto') return S.lang;
+  let ls=[]; try{ ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||'']; }catch(e){}
+  for(const l of ls){ const x=String(l||'').toLowerCase();
+    if(x.startsWith('ca')) return 'ca'; if(/^(es|gl|eu)/.test(x)) return 'es'; if(x.startsWith('en')) return 'en'; }
+  return 'en';
+}
+function L(ca,...a){
+  const lg=curLang(); let t=ca;
+  if(lg!=='ca'){ const e=I18N[ca]; if(e){ const v=e[lg==='es'?0:1]; if(v!=null) t=v; } }
+  return a.length?String(t).replace(/\{(\d+)\}/g,(m,i)=>i<a.length?String(a[i]):m):t;
+}
+const LOC=()=>({ca:'ca-ES',es:'es-ES',en:'en-GB'})[curLang()]||'ca-ES';
 let G=null; // partida
 
 /* Cada partida té una llavor: amb la mateixa llavor i les mateixes regles surten les mateixes fitxes (reptes) */
@@ -374,7 +448,7 @@ function newGame(opts={}){
      peak:2,settings:summary(),st:newSt(rows,cols)};
   GR=seeded(G.seed);
   const count=Math.round(rows*cols*9/16); // 9 al 4x4
-  const vals=[3]; while(vals.length<count) vals.push(drawLow());
+  const vals=[(!rules&&S.startHigh&&store.get('bestTile',0)>=377)?144:3]; while(vals.length<count) vals.push(drawLow());
   const cells=[]; for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)cells.push([r,c]);
   for(let i=cells.length-1;i>0;i--){const j=Math.floor(gRand()*(i+1));[cells[i],cells[j]]=[cells[j],cells[i]];}
   vals.forEach((v,i)=>{const[r,c]=cells[i];G.grid[r][c]=mk(v);});
@@ -462,11 +536,17 @@ function endGame(){
   setTimeout(()=>{
     $('#overPanel').classList.add('on');
     paintDisc($('#overTile'),max);
-    $('#overText').innerHTML=`<p><b style="font-size:26px;color:var(--gold)">${G.score}</b> punts${recScore?' · <b>rècord!</b>':''}</p>
-      <p class="small">Fitxa més alta: ${max}${recTile?' (rècord!)':''} · ${G.moves} moviments · ${fmt(G.elapsed)}</p>${ch?`<p><b>${ch}</b></p>`:''}`;
-    $('#btnChallenge').textContent=G.challenge?'⚔️ Torna-li el repte':'⚔️ Repta algú';
+    OVER={score:G.score,max,recScore,recTile,moves:G.moves,elapsed:G.elapsed,ch,chal:!!G.challenge}; renderOver();
   },900);
   updateHud();
+}
+
+let OVER=null;
+function renderOver(){
+  if(!OVER) return; const o=OVER;
+  $('#overText').innerHTML=`<p><b style="font-size:26px;color:var(--goldT)">${o.score}</b> ${L('punts')}${o.recScore?` · <b>${L('rècord!')}</b>`:''}</p>
+      <p class="small">${L('Fitxa més alta: {0}',o.max)}${o.recTile?' '+L('(rècord!)'):''} · ${L('{0} moviments',o.moves)} · ${fmt(o.elapsed)}</p>${o.ch?`<p><b>${o.ch}</b></p>`:''}`;
+  $('#btnChallenge').textContent=o.chal?L('⚔️ Torna-li el repte'):L('⚔️ Repta algú');
 }
 
 /* ================= DIBUIX ================= */
@@ -550,7 +630,7 @@ function render(merges){
   }));
   // següent
   const nt=$('#nextTile');
-  if(G.next.high) nt.innerHTML='<div class="seed" title="Fitxa alta"></div>'; else paintDisc(nt,G.next.v);
+  if(G.next.high) nt.innerHTML='<div class="seed" title="'+L('Fitxa alta')+'"></div>'; else paintDisc(nt,G.next.v);
   updateHud();
 }
 function updateHud(){
@@ -589,6 +669,7 @@ function ensureAudio(){
     AU.rev.buffer=buf; const rg=ctx.createGain(); rg.gain.value=.32; AU.rev.connect(rg).connect(AU.master);
     AU.music=ctx.createGain(); AU.music.gain.value=0; AU.music.connect(AU.master);
     const ms=ctx.createGain(); ms.gain.value=.7; AU.music.connect(ms).connect(AU.rev);
+    AU.ambG=ctx.createGain(); AU.ambG.gain.value=0; AU.ambG.connect(AU.master);
     AU.sfx=ctx.createGain(); AU.sfx.connect(AU.master);
     const ss=ctx.createGain(); ss.gain.value=.5; AU.sfx.connect(ss).connect(AU.rev);
     applyVolumes();
@@ -600,6 +681,7 @@ function applyVolumes(){
   const t=AU.ctx.currentTime;
   AU.music.gain.setTargetAtTime(S.music?Math.pow(S.musicVol/100,1.3)*1.8*AU.duck:0,t,.25); // més fort: als altaveus del mòbil quedava massa fluix
   AU.sfx.gain.setTargetAtTime(S.sound?.9:0,t,.05);
+  if(AU.ambG) AU.ambG.gain.setTargetAtTime(S.amb!=='cap'?Math.pow(S.ambVol/100,1.3)*4:0,t,.3);
 }
 function tone(t,f,type,peak,att,decay,lp,dest){
   const ctx=AU.ctx, o=ctx.createOscillator(), g=ctx.createGain(); let n=o;
@@ -697,13 +779,11 @@ function chime(v){ // so propi de cada número nou: més notes i més brillant c
 /* ================= ELOGIS DEL NARRADOR =================
    No surten a la pantalla: només se senten. Veu de narrador greu, lenta i suau (estil cantautor de veu fonda),
    amb un acord greu i càlid a sota. La música baixa una mica mentre parla, però no s'atura. */
-const PRAISE=[
-  {say:'Fantastic...',lang:'en'},
-  {say:'Guaaau...',lang:'ca'},
-  {say:'Exceptional...',lang:'en'},
-  {say:'Increïble...',lang:'ca'},
-  {say:'Bravo...',lang:'it'},
-];
+const PRAISE={ // per idioma; «lang» tria la veu
+  ca:[{say:'Fantastic...',lang:'en'},{say:'Guaaau...',lang:'ca'},{say:'Exceptional...',lang:'en'},{say:'Increïble...',lang:'ca'},{say:'Bravo...',lang:'it'}],
+  es:[{say:'Fantástico...',lang:'es'},{say:'Guaaau...',lang:'es'},{say:'Excepcional...',lang:'es'},{say:'Increíble...',lang:'es'},{say:'Bravo...',lang:'es'}],
+  en:[{say:'Fantastic...',lang:'en'},{say:'Wow...',lang:'en'},{say:'Exceptional...',lang:'en'},{say:'Incredible...',lang:'en'},{say:'Bravo...',lang:'en'}],
+};
 const MALE=/male|home|hombre|david|mark|guy|ryan|daniel|george|james|thomas|fred|alex|aaron|arthur|oliver|jorge|diego|pablo|enric|jordi|pau|luca|cosimo|giorgio|reed|rocko|grandpa|eddy/i;
 const FEMALE=/female|dona|mujer|zira|hazel|susan|samantha|karen|moira|tessa|helena|laura|monica|paulina|montse|alice|elsa|victoria|fiona|serena|sabina|catherine/i;
 let lastPraise=-1, VOICES=[], speakStart=0;
@@ -737,8 +817,9 @@ function speak(p){
 }
 function praise(v,delay){
   if(!(S.voice==='yes'||(S.voice==='big'&&v>8))) return; // «Grans»: només 13 o més
-  let i; do{ i=Math.floor(Math.random()*PRAISE.length); }while(i===lastPraise);
-  lastPraise=i; const p=PRAISE[i];
+  const PL=PRAISE[curLang()]||PRAISE.ca;
+  let i; do{ i=Math.floor(Math.random()*PL.length); }while(i===lastPraise);
+  lastPraise=i; const p=PL[i];
   delay?setTimeout(()=>speak(p),delay):speak(p);
 }
 
@@ -892,7 +973,7 @@ const GAME=((($('h1')||{}).firstChild||{}).textContent||'Joc').trim();
 function seeded(str){ let h=1779033703^str.length; for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19;}
   return ()=>{h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);h^=h>>>16;return (h>>>0)/4294967296;}; }
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const nf=n=>Math.round(n).toLocaleString('ca-ES');
+const nf=n=>Math.round(n).toLocaleString(LOC());
 const pct=x=>Math.round(x*100)+'%';
 const TAG='<span class="plus-tag">PLUS</span>';
 let toastT=0;
@@ -902,7 +983,7 @@ function closeSheet(){ $('#sheet').classList.remove('on'); }
 $('#sheet').addEventListener('click',e=>{ if(e.target.id==='sheet') closeSheet(); });
 async function shareText(text){
   try{ if(navigator.share){ await navigator.share({text}); return; } }catch(e){ return; }
-  try{ await navigator.clipboard.writeText(text); toast('Enllaç copiat: enganxa\'l al grup.'); }catch(e){ prompt('Copia aquest text:',text); }
+  try{ await navigator.clipboard.writeText(text); toast(L("Enllaç copiat: enganxa'l al grup.")); }catch(e){ prompt(L('Copia aquest text:'),text); }
 }
 const baseUrl=()=>location.href.split(/[?#]/)[0];
 
@@ -915,20 +996,23 @@ const unlimited=()=>{ const p=plusGet(); return p.on||Date.now()<p.pass; }; // j
 function plusStart(plan){ const p=plusGet(); plusSet(Object.assign(p,{on:true,plan,since:Date.now(),cancel:false})); }
 function renewDate(p){ const d=new Date(p.since); if(p.plan==='regal'){ d.setFullYear(d.getFullYear()+1); return d; }
   const step=p.plan==='mes'?1:12; while(d<=new Date()) d.setMonth(d.getMonth()+step); return d; }
-const MONTHS=['de gener','de febrer','de març','d’abril','de maig','de juny','de juliol','d’agost','de setembre','d’octubre','de novembre','de desembre'];
-const longDate=d=>`${d.getDate()} ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
-const featList=()=>`<ul class="feat">${PLUS_FEATS.map(([e,t])=>`<li><span>${e}</span><span style="flex:1">${t}</span>${isPlus()?'<b style="color:var(--jade)">✓</b>':''}</li>`).join('')}</ul>`;
+const MONTHS={ca:['de gener','de febrer','de març','d’abril','de maig','de juny','de juliol','d’agost','de setembre','d’octubre','de novembre','de desembre'],
+  es:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
+  en:['January','February','March','April','May','June','July','August','September','October','November','December']};
+const longDate=d=>{ const lg=curLang(), m=MONTHS[lg][d.getMonth()];
+  return lg==='en'?`${d.getDate()} ${m} ${d.getFullYear()}`:lg==='es'?`${d.getDate()} de ${m} de ${d.getFullYear()}`:`${d.getDate()} ${m} de ${d.getFullYear()}`; };
+const featList=()=>`<ul class="feat">${PLUS_FEATS.map(([e,t])=>`<li><span>${e}</span><span style="flex:1">${L(t)}</span>${isPlus()?'<b style="color:var(--jade)">✓</b>':''}</li>`).join('')}</ul>`;
 function askPlus(kind,then){
-  const T={stats:['📊','Les estadístiques completes són de Plus','Evolució de la puntuació, mapes de calor, fins on arribes, quan i com jugues, rècords i molt més.'],
-    leagues:['🏆',`Crear lligues és de ${GAME} Plus`,'Amb Plus pots crear totes les lligues que vulguis i convidar-hi la teva gent. Els convidats hi entren gratis.'],
-    reptes:['⚔️','Els reptes són de Plus','Desafia algú amb la mateixa partida: les mateixes fitxes, en el mateix ordre. Qui faci més punts, guanya. Acceptar un repte és gratis.']}[kind];
+  const T={stats:['📊',L('Les estadístiques completes són de Plus'),L('Evolució de la puntuació, mapes de calor, fins on arribes, quan i com jugues, rècords i molt més.')],
+    leagues:['🏆',L('Crear lligues és de {0} Plus',GAME),L('Amb Plus pots crear totes les lligues que vulguis i convidar-hi la teva gent. Els convidats hi entren gratis.')],
+    reptes:['⚔️',L('Els reptes són de Plus'),L('Desafia algú amb la mateixa partida: les mateixes fitxes, en el mateix ordre. Qui faci més punts, guanya. Acceptar un repte és gratis.')]}[kind];
   openSheet(`<div class="center" style="font-size:40px">${T[0]}</div>
     <h2 class="center">${T[1]}</h2>
     <p class="small center">${T[2]}</p>
-    <div class="banner"><b>⭐ ${GAME} Plus inclou</b>${featList()}</div>
-    <button class="gold" id="apGo">Activar Plus (prototip, gratis)</button>
-    <div class="btns" style="justify-content:center"><button id="apPrices">Veure preus</button><button id="apNo" style="border:0;background:none">Ara no</button></div>`,b=>{
-    b.querySelector('#apGo').onclick=()=>{ plusStart('any'); closeSheet(); toast('Plus activat (simulat)'); if(then) then(); };
+    <div class="banner"><b>${L('⭐ {0} Plus inclou',GAME)}</b>${featList()}</div>
+    <button class="gold" id="apGo">${L('Activar Plus (prototip, gratis)')}</button>
+    <div class="btns" style="justify-content:center"><button id="apPrices">${L('Veure preus')}</button><button id="apNo" style="border:0;background:none">${L('Ara no')}</button></div>`,b=>{
+    b.querySelector('#apGo').onclick=()=>{ plusStart('any'); closeSheet(); toast(L('Plus activat (simulat)')); if(then) then(); };
     b.querySelector('#apPrices').onclick=()=>{ closeSheet(); hubTab('plus'); };
     b.querySelector('#apNo').onclick=closeSheet;
   });
@@ -936,66 +1020,66 @@ function askPlus(kind,then){
 function renderPlus(){
   const p=plusGet(), el=$('#hubBody'), pass=Date.now()<p.pass;
   if(!p.on){
-    el.innerHTML=`<h2>⭐ ${GAME} Plus</h2><p class="small">Gratis: ${FREE_GAMES} partides al dia, i fins a ${MAX_VIDEOS} més mirant un vídeo. Preus amb IVA inclòs.</p>
-      ${pass?`<div class="banner">✓ Passi del dia actiu: jugues sense límit fins a les ${new Date(p.pass).toLocaleTimeString('ca-ES',{hour:'2-digit',minute:'2-digit'})}.</div>`:''}
-      <div class="banner"><b>⭐ ${GAME} Plus inclou</b>${featList()}</div>
-      <button class="offer" data-o="pass"><span><b>Passi del dia</b><small>Juga sense límit durant 24 hores · només partides · sense renovació</small></span><span class="pr">0,99 €</span></button>
-      <button class="offer best" data-o="any"><span><span class="tag">Millor preu</span><b style="display:block">Plus anual</b><small>Surt a 2,50 € al mes</small></span><span class="pr">29,99 €</span></button>
-      <details><summary class="small" style="padding:8px 0;cursor:pointer">Veure més opcions</summary>
-        <button class="offer" data-o="mes"><span><b>Plus mensual</b></span><span class="pr">4,99 €/mes</span></button>
-        <button class="offer" data-o="regal"><span><b>🎁 Regalar Plus a algú</b><small>Un any sencer per a un familiar</small></span><span class="pr">29,99 €</span></button>
+    el.innerHTML=`<h2>⭐ ${GAME} Plus</h2><p class="small">${L('Gratis: {0} partides al dia, i fins a {1} més mirant un vídeo. Preus amb IVA inclòs.',FREE_GAMES,MAX_VIDEOS)}</p>
+      ${pass?`<div class="banner">${L('✓ Passi del dia actiu: jugues sense límit fins a les {0}.',new Date(p.pass).toLocaleTimeString(LOC(),{hour:'2-digit',minute:'2-digit'}))}</div>`:''}
+      <div class="banner"><b>${L('⭐ {0} Plus inclou',GAME)}</b>${featList()}</div>
+      <button class="offer" data-o="pass"><span><b>${L('Passi del dia')}</b><small>${L('Juga sense límit durant 24 hores · només partides · sense renovació')}</small></span><span class="pr">${L('0,99 €')}</span></button>
+      <button class="offer best" data-o="any"><span><span class="tag">${L('Millor preu')}</span><b style="display:block">${L('Plus anual')}</b><small>${L('Surt a 2,50 € al mes')}</small></span><span class="pr">${L('29,99 €')}</span></button>
+      <details><summary class="small" style="padding:8px 0;cursor:pointer">${L('Veure més opcions')}</summary>
+        <button class="offer" data-o="mes"><span><b>${L('Plus mensual')}</b></span><span class="pr">${L('4,99 €/mes')}</span></button>
+        <button class="offer" data-o="regal"><span><b>${L('🎁 Regalar Plus a algú')}</b><small>${L('Un any sencer per a un familiar')}</small></span><span class="pr">${L('29,99 €')}</span></button>
       </details>
-      <p class="small">El Plus mensual i l’anual es renoven automàticament i es poden cancel·lar en qualsevol moment. El passi del dia no es renova.</p>
-      <p class="small"><b>Prototip: no es fa cap cobrament.</b></p>
-      <div class="btns"><button id="plRestore">Restaurar compres</button></div>`;
+      <p class="small">${L('El Plus mensual i l’anual es renoven automàticament i es poden cancel·lar en qualsevol moment. El passi del dia no es renova.')}</p>
+      <p class="small"><b>${L('Prototip: no es fa cap cobrament.')}</b></p>
+      <div class="btns"><button id="plRestore">${L('Restaurar compres')}</button></div>`;
     el.querySelectorAll('.offer').forEach(o=>o.onclick=()=>{
       const k=o.dataset.o;
-      if(k==='pass'){ plusSet(Object.assign(p,{pass:Date.now()+864e5})); toast('Passi del dia activat (simulat): jugues sense límit 24 hores'); updateHud(); }
+      if(k==='pass'){ plusSet(Object.assign(p,{pass:Date.now()+864e5})); toast(L('Passi del dia activat (simulat): jugues sense límit 24 hores')); updateHud(); }
       else if(k==='regal'){ giftSheet(); return; }
-      else { plusStart(k); toast('Plus activat (simulat)'); }
+      else { plusStart(k); toast(L('Plus activat (simulat)')); }
       renderPlus();
     });
-    el.querySelector('#plRestore').onclick=()=>toast('Compres restaurades (simulat)');
+    el.querySelector('#plRestore').onclick=()=>toast(L('Compres restaurades (simulat)'));
     return;
   }
-  const rd=renewDate(p), plan=p.plan==='mes'?'Plus mensual · 4,99 €/mes':p.plan==='regal'?'Plus de regal':'Plus anual · 29,99 €';
-  el.innerHTML=`<h2>⭐ La teva subscripció ${TAG}</h2>
+  const rd=renewDate(p), plan=p.plan==='mes'?L('Plus mensual')+' · '+L('4,99 €/mes'):p.plan==='regal'?L('Plus de regal'):L('Plus anual')+' · '+L('29,99 €');
+  el.innerHTML=`<h2>⭐ ${L('La teva subscripció')} ${TAG}</h2>
     <div class="kcard">
-      <div class="rec"><span>${GAME} Plus</span><b style="color:var(--jade)">✓ Actiu</b></div>
-      <div class="rec"><span>Pla</span><b>${plan}</b></div>
-      <div class="rec"><span>${p.plan==='regal'||p.cancel?'Actiu fins al':'Propera renovació'}</span><b>${longDate(rd)}</b></div>
+      <div class="rec"><span>${GAME} Plus</span><b style="color:var(--jade)">${L('✓ Actiu')}</b></div>
+      <div class="rec"><span>${L('Pla')}</span><b>${plan}</b></div>
+      <div class="rec"><span>${p.plan==='regal'||p.cancel?L('Actiu fins al'):L('Propera renovació')}</span><b>${longDate(rd)}</b></div>
     </div>
-    <div class="banner"><b>Inclou</b>${featList()}</div>
-    ${p.plan==='regal'?'<p class="small">És un regal: no es renova ni es cobra res.</p>':
-      p.cancel?`<p class="small">Has cancel·lat el pla: no es renovarà. Fins al ${longDate(rd)} continues tenint Plus.</p><div class="btns"><button id="plReact">Reactivar la renovació</button></div>`:
-      '<div class="btns"><button id="plCancel">Cancel·lar el pla</button></div>'}
-    <div class="btns"><button id="plGift">🎁 Regalar Plus a algú</button></div>
-    <p class="small">Prototip: a l’app de veritat la cancel·lació es fa a l’App Store o a Google Play.</p>
-    <div class="btns"><button id="plOff">Prototip: tornar a la versió gratuïta</button></div>`;
+    <div class="banner"><b>${L('Inclou')}</b>${featList()}</div>
+    ${p.plan==='regal'?'<p class="small">'+L('És un regal: no es renova ni es cobra res.')+'</p>':
+      p.cancel?`<p class="small">${L('Has cancel·lat el pla: no es renovarà. Fins al {0} continues tenint Plus.',longDate(rd))}</p><div class="btns"><button id="plReact">${L('Reactivar la renovació')}</button></div>`:
+      '<div class="btns"><button id="plCancel">'+L('Cancel·lar el pla')+'</button></div>'}
+    <div class="btns"><button id="plGift">${L('🎁 Regalar Plus a algú')}</button></div>
+    <p class="small">${L('Prototip: a l’app de veritat la cancel·lació es fa a l’App Store o a Google Play.')}</p>
+    <div class="btns"><button id="plOff">${L('Prototip: tornar a la versió gratuïta')}</button></div>`;
   const on=(id,f)=>{ const b=el.querySelector(id); if(b) b.onclick=f; };
-  on('#plReact',()=>{ plusSet(Object.assign(p,{cancel:false})); toast('Renovació reactivada (simulat)'); renderPlus(); });
-  on('#plCancel',()=>openSheet(`<h2>Cancel·lar ${GAME} Plus?</h2>
-      <p>No es tornarà a cobrar. Continuaràs tenint Plus fins al ${longDate(rd)}; després tornaràs a la versió gratuïta.</p>
-      <p class="small">No perds res: les partides, els rècords i les estadístiques es queden. Les lligues que has creat continuen, però no en podràs crear de noves.</p>
-      <div class="btns"><button id="cKeep">Mantenir Plus</button><button id="cYes">Sí, cancel·lar el pla</button></div>`,b=>{
+  on('#plReact',()=>{ plusSet(Object.assign(p,{cancel:false})); toast(L('Renovació reactivada (simulat)')); renderPlus(); });
+  on('#plCancel',()=>openSheet(`<h2>${L('Cancel·lar {0} Plus?',GAME)}</h2>
+      <p>${L('No es tornarà a cobrar. Continuaràs tenint Plus fins al {0}; després tornaràs a la versió gratuïta.',longDate(rd))}</p>
+      <p class="small">${L('No perds res: les partides, els rècords i les estadístiques es queden. Les lligues que has creat continuen, però no en podràs crear de noves.')}</p>
+      <div class="btns"><button id="cKeep">${L('Mantenir Plus')}</button><button id="cYes">${L('Sí, cancel·lar el pla')}</button></div>`,b=>{
       b.querySelector('#cKeep').onclick=closeSheet;
-      b.querySelector('#cYes').onclick=()=>{ plusSet(Object.assign(p,{cancel:true})); closeSheet(); toast(`Pla cancel·lat (simulat). Tens Plus fins al ${longDate(rd)}.`); renderPlus(); };
+      b.querySelector('#cYes').onclick=()=>{ plusSet(Object.assign(p,{cancel:true})); closeSheet(); toast(L('Pla cancel·lat (simulat). Tens Plus fins al {0}.',longDate(rd))); renderPlus(); };
     }));
   on('#plGift',giftSheet);
-  on('#plOff',()=>{ plusSet(Object.assign(p,{on:false,plan:null,cancel:false,pass:0})); toast('Tornes a la versió gratuïta (prototip)'); renderPlus(); });
+  on('#plOff',()=>{ plusSet(Object.assign(p,{on:false,plan:null,cancel:false,pass:0})); toast(L('Tornes a la versió gratuïta (prototip)')); renderPlus(); });
 }
 function giftSheet(){
-  openSheet(`<h2>🎁 Regala ${GAME} Plus</h2>
-    <p class="small">Un any de Plus: lligues pròpies i estadístiques completes. Li enviaràs un enllaç i el regal quedarà activat al seu mòbil.</p>
-    <label class="small">De part de</label><input id="gFrom" maxlength="30" placeholder="El teu nom">
-    <label class="small">Missatge</label><textarea id="gMsg" maxlength="140" rows="3">Perquè juguis cada dia una estona. Una abraçada!</textarea>
-    <button class="gold" id="gPay">Pagar 29,99 € i enviar</button>
-    <div class="btns" style="justify-content:center"><button id="gNo" style="border:0;background:none">Ara no</button></div>`,b=>{
+  openSheet(`<h2>${L('🎁 Regala {0} Plus',GAME)}</h2>
+    <p class="small">${L('Un any de Plus: lligues pròpies i estadístiques completes. Li enviaràs un enllaç i el regal quedarà activat al seu mòbil.')}</p>
+    <label class="small">${L('De part de')}</label><input id="gFrom" maxlength="30" placeholder="${L('El teu nom')}">
+    <label class="small">${L('Missatge')}</label><textarea id="gMsg" maxlength="140" rows="3">${L('Perquè juguis cada dia una estona. Una abraçada!')}</textarea>
+    <button class="gold" id="gPay">${L('Pagar 29,99 € i enviar')}</button>
+    <div class="btns" style="justify-content:center"><button id="gNo" style="border:0;background:none">${L('Ara no')}</button></div>`,b=>{
     b.querySelector('#gNo').onclick=closeSheet;
     b.querySelector('#gPay').onclick=()=>{
       const de=b.querySelector('#gFrom').value.trim(), msg=b.querySelector('#gMsg').value.trim();
-      closeSheet(); toast('Regal pagat (simulat)');
-      shareText(`T’he regalat un any de ${GAME} Plus, un joc de fitxes que creixen en espiral. Obre l’enllaç per activar-lo: ${baseUrl()}?regal=1&de=${encodeURIComponent(de)}&msg=${encodeURIComponent(msg)}`);
+      closeSheet(); toast(L('Regal pagat (simulat)'));
+      shareText(L('T’he regalat un any de {0} Plus, un joc de fitxes que creixen en espiral. Obre l’enllaç per activar-lo: {1}',GAME,`${baseUrl()}?regal=1&de=${encodeURIComponent(de)}&msg=${encodeURIComponent(msg)}`));
     };
   });
 }
@@ -1049,7 +1133,7 @@ function lineChart(series,{h=150,yLabel=v=>nf(v),xL='',xR='',dots=null,best=null
   if(!all.length) return '';
   const mx=Math.max(...all,...(dots||[]).map(d=>d.v)), mn=Math.min(y0,...all), n=Math.max(...series.map(s=>s.pts.length));
   const X=i=>L+(n<=1?0:i*(W-L-8)/(n-1)), Y=v=>T+(B-T)*(1-(v-mn)/((mx-mn)||1));
-  let g=''; for(let k=0;k<=2;k++){ const v=mn+(mx-mn)*k/2, y=Y(v); g+=`<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="#4d483d" stroke-dasharray="3 4"/><text x="${L-4}" y="${y+3}" text-anchor="end">${yLabel(v)}</text>`; }
+  let g=''; for(let k=0;k<=2;k++){ const v=mn+(mx-mn)*k/2, y=Y(v); g+=`<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="var(--line)" stroke-dasharray="3 4"/><text x="${L-4}" y="${y+3}" text-anchor="end">${yLabel(v)}</text>`; }
   const paths=series.map(s=>{ let d='',pen=false; s.pts.forEach((v,i)=>{ if(v==null){pen=false;return;} d+=`${pen?'L':'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`; pen=true; });
     return `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w||2.2}" stroke-linejoin="round" stroke-linecap="round"/>`; }).join('');
   const dt=dots?dots.map((d,i)=>`<circle cx="${X(i)}" cy="${Y(d.v)}" r="3.4" fill="${d.c}"/>`).join(''):'';
@@ -1064,7 +1148,10 @@ function heatGrid(vals,rows,cols,color){
 const card=(title,body,note)=>`<div class="kcard"><div class="khead">${title}</div>${body}${note?`<div class="knote">${note}</div>`:''}</div>`;
 const kpi=(l,v,sub)=>`<div class="kpi"><b>${v}</b><span>${l}</span>${sub?`<i>${sub}</i>`:''}</div>`;
 const dur=s=>s>=3600?`${Math.floor(s/3600)} h ${Math.round(s%3600/60)} min`:s>=60?`${Math.round(s/60)} min`:`${s} s`;
-const DOW=['Dl','Dt','Dc','Dj','Dv','Ds','Dg'], DOWL=['dilluns','dimarts','dimecres','dijous','divendres','dissabte','diumenge'];
+const DOWS={ca:['Dl','Dt','Dc','Dj','Dv','Ds','Dg'],es:['L','M','X','J','V','S','D'],en:['Mo','Tu','We','Th','Fr','Sa','Su']},
+  DOWLS={ca:['dilluns','dimarts','dimecres','dijous','divendres','dissabte','diumenge'],es:['lunes','martes','miércoles','jueves','viernes','sábado','domingo'],
+    en:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']};
+const DOW=()=>DOWS[curLang()]||DOWS.ca, DOWL=()=>DOWLS[curLang()]||DOWLS.ca;
 const dow=ts=>(new Date(ts).getDay()+6)%7;
 const dayKey=ts=>{ const d=new Date(ts); return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; };
 const PARTS=[['Matí',6,12],['Migdia',12,15],['Tarda',15,20],['Nit',20,30]];
@@ -1083,127 +1170,126 @@ function renderStats(){
   const el=$('#hubBody'), real=store.get('history',[]);
   const played=Math.max(store.get('games',0),real.length);
   const bestTile=Math.max(store.get('bestTile',0),G?maxOf(G.grid):0), best=Math.max(store.get('best',0),G?G.score:0);
-  let h=card('📊 Resum',`<div class="kgrid3">${kpi('Partides jugades',nf(played))}${kpi('Fitxa més alta',bestTile||'–')}${kpi('Puntuació màxima',nf(best))}</div>`,
-    played?'':'Encara no has acabat cap partida. La fitxa més alta i la puntuació també compten la partida que jugues ara.');
+  let h=card(L('📊 Resum'),`<div class="kgrid3">${kpi(L('Partides jugades'),nf(played))}${kpi(L('Fitxa més alta'),bestTile||'–')}${kpi(L('Puntuació màxima'),nf(best))}</div>`,
+    played?'':L('Encara no has acabat cap partida. La fitxa més alta i la puntuació també compten la partida que jugues ara.'));
   if(!isPlus()){
-    h+=`<div class="kcard"><div class="khead">Estadístiques completes ${TAG}</div>
+    h+=`<div class="kcard"><div class="khead">${L('Estadístiques completes')} ${TAG}</div>
       <ul class="feat">
-        <li>📈 Evolució de la puntuació, partida a partida</li><li>🌻 Fins on arribes: el 89, el 144, el 233…</li>
-        <li>🔥 Mapes de calor: on fas les combinacions i per on entren les fitxes</li><li>🧭 Cap on llisques més</li>
-        <li>📅 Activitat de cada dia, ratxes i quan jugues</li><li>🏅 Rècords i molt més: més de 40 dades i gràfics</li></ul>
-      <button class="gold" id="stGo">Veure totes les estadístiques</button></div>`;
+        ${['📈 Evolució de la puntuació, partida a partida','🌻 Fins on arribes: el 89, el 144, el 233…','🔥 Mapes de calor: on fas les combinacions i per on entren les fitxes',
+          '🧭 Cap on llisques més','📅 Activitat de cada dia, ratxes i quan jugues','🏅 Rècords i molt més: més de 40 dades i gràfics'].map(x=>`<li>${L(x)}</li>`).join('')}</ul>
+      <button class="gold" id="stGo">${L('Veure totes les estadístiques')}</button></div>`;
     el.innerHTML=h; el.querySelector('#stGo').onclick=()=>askPlus('stats',renderStats); return;
   }
   const sample=real.length<5, all=(sample?sampleGames():real.slice()).sort((a,b)=>gameTs(a)-gameTs(b));
   const lim=statPeriod==='7'?7:statPeriod==='30'?30:0, cut=lim?Date.now()-lim*864e5:0;
   const gs=all.filter(g=>gameTs(g)>=cut);
-  h+=`<div class="seg2">${[['7','7 dies'],['30','30 dies'],['all','Sempre']].map(([k,l])=>`<button data-p="${k}" class="${statPeriod===k?'on':''}">${l}</button>`).join('')}</div>`;
-  if(sample) h+=`<div class="banner">Dades d’exemple: quan hagis acabat 5 partides, hi sortiran les teves.</div>`;
-  if(!gs.length){ el.innerHTML=h+`<p class="small">No hi ha partides en aquest període.</p>`; bindStats(el); return; }
+  h+=`<div class="seg2">${[['7','7 dies'],['30','30 dies'],['all','Sempre']].map(([k,l])=>`<button data-p="${k}" class="${statPeriod===k?'on':''}">${L(l)}</button>`).join('')}</div>`;
+  if(sample) h+=`<div class="banner">${L('Dades d’exemple: quan hagis acabat 5 partides, hi sortiran les teves.')}</div>`;
+  if(!gs.length){ el.innerHTML=h+`<p class="small">${L('No hi ha partides en aquest període.')}</p>`; bindStats(el); return; }
   const n=gs.length, sum=f=>gs.reduce((a,g)=>a+(f(g)||0),0), avg=f=>sum(f)/n, S2=g=>g.st||{};
   const sk=streaks(all);
   // 1. Xifres
-  h+=card(`🔢 Les teves xifres ${TAG}`,`<div class="kgrid3">${kpi('Partides',nf(n))}${kpi('Temps jugat',dur(sum(g=>g.secs)))}${kpi('Punts totals',nf(sum(g=>g.score)))}
-    ${kpi('Mitjana de punts',nf(avg(g=>g.score)))}${kpi('Moviments per partida',nf(avg(g=>g.moves)))}${kpi('Ratxa actual',sk.cur+' dies','Millor: '+sk.best)}</div>`);
+  h+=card(`🔢 ${L('Les teves xifres')} ${TAG}`,`<div class="kgrid3">${kpi(L('Partides'),nf(n))}${kpi(L('Temps jugat'),dur(sum(g=>g.secs)))}${kpi(L('Punts totals'),nf(sum(g=>g.score)))}
+    ${kpi(L('Mitjana de punts'),nf(avg(g=>g.score)))}${kpi(L('Moviments per partida'),nf(avg(g=>g.moves)))}${kpi(L('Ratxa actual'),L('{0} dies',sk.cur),L('Millor: {0}',sk.best))}</div>`);
   // 2. Consells
   const tips=[];
   if(n>=15){ const a=gs.slice(0,10).reduce((s,g)=>s+g.score,0)/10, b=gs.slice(-10).reduce((s,g)=>s+g.score,0)/10;
-    tips.push(b>a?`Fas un ${Math.round((b/a-1)*100)}% més punts que a les teves 10 primeres partides.`:'Les últimes partides t’han anat una mica pitjor que les primeres. Respira i torna-hi!'); }
-  const dc=Array(7).fill(0); gs.forEach(g=>dc[dow(gameTs(g))]++); tips.push(`El dia que més jugues és el ${DOWL[dc.indexOf(Math.max(...dc))]}.`);
+    tips.push(b>a?L('Fas un {0}% més punts que a les teves 10 primeres partides.',Math.round((b/a-1)*100)):L('Les últimes partides t’han anat una mica pitjor que les primeres. Respira i torna-hi!')); }
+  const dc=Array(7).fill(0); gs.forEach(g=>dc[dow(gameTs(g))]++); tips.push(L('El dia que més jugues és el {0}.',DOWL()[dc.indexOf(Math.max(...dc))]));
   const pa=PARTS.map((p,i)=>{ const x=gs.filter(g=>partOf(gameTs(g))===i); return {i,n:x.length,a:x.length?x.reduce((s,g)=>s+g.score,0)/x.length:0}; }).filter(x=>x.n>=3).sort((a,b)=>b.a-a.a);
-  if(pa.length) tips.push(`On fas més punts és ${['al matí','al migdia','a la tarda','a la nit'][pa[0].i]}: ${nf(pa[0].a)} de mitjana.`);
+  if(pa.length) tips.push(L('On fas més punts és {0}: {1} de mitjana.',L(['al matí','al migdia','a la tarda','a la nit'][pa[0].i]),nf(pa[0].a)));
   const goal=[...SERIES].reverse().find(v=>v>=21&&gs.filter(g=>g.max>=v).length/n>=.25);
-  if(goal) tips.push(`En el ${pct(gs.filter(g=>g.max>=goal).length/n)} de les partides arribes al ${goal}. El següent repte: el ${SERIES[IDX.get(goal)+1]}.`);
+  if(goal) tips.push(L('En el {0} de les partides arribes al {1}. El següent repte: el {2}.',pct(gs.filter(g=>g.max>=goal).length/n),goal,SERIES[IDX.get(goal)+1]));
   const dsum={up:0,down:0,left:0,right:0}; gs.forEach(g=>{ const d=S2(g).dirs||{}; for(const k in dsum) dsum[k]+=d[k]||0; });
-  const dtot=Object.values(dsum).reduce((a,b)=>a+b,0)||1, dname={up:'amunt',down:'avall',left:'a l’esquerra',right:'a la dreta'};
+  const dtot=Object.values(dsum).reduce((a,b)=>a+b,0)||1, dname={up:L('amunt'),down:L('avall'),left:L('a l’esquerra'),right:L('a la dreta')};
   const fav=Object.keys(dsum).sort((a,b)=>dsum[b]-dsum[a])[0];
-  if(dtot>1) tips.push(`Llisques sobretot ${dname[fav]} (${pct(dsum[fav]/dtot)} dels moviments).`);
-  h+=card('💡 Coses que hem vist',`<ul class="tips">${tips.map(t=>`<li>${t}</li>`).join('')}</ul>`);
+  if(dtot>1) tips.push(L('Llisques sobretot {0} ({1} dels moviments).',dname[fav],pct(dsum[fav]/dtot)));
+  h+=card(L('💡 Coses que hem vist'),`<ul class="tips">${tips.map(t=>`<li>${t}</li>`).join('')}</ul>`);
   // 3. Evolució
   const last=gs.slice(-40), ma=last.map((g,i)=>{ const w=last.slice(Math.max(0,i-4),i+1); return w.reduce((a,x)=>a+x.score,0)/w.length; });
   const bi=last.reduce((b,g,i)=>g.score>last[b].score?i:b,0);
-  h+=card('📈 Evolució de la puntuació',last.length<2?'<p class="small">Calen almenys 2 partides.</p>':
-    lineChart([{pts:ma,color:'#efe6d2',w:2}],{dots:last.map(g=>({v:g.score,c:tileColor(g.max)})),best:{i:bi,v:last[bi].score},xL:'més antiga',xR:'més recent'})+
-    `<div class="legend"><span>Cada punt és una partida, del color de la seva fitxa més alta · línia: mitjana de 5</span></div>`,
-    last.length<2?'':`Les últimes ${last.length} partides. Mitjana al principi: ${nf(ma[Math.min(4,ma.length-1)])} · ara: ${nf(ma[ma.length-1])}.`);
+  h+=card(L('📈 Evolució de la puntuació'),last.length<2?'<p class="small">'+L('Calen almenys 2 partides.')+'</p>':
+    lineChart([{pts:ma,color:'var(--ink)',w:2}],{dots:last.map(g=>({v:g.score,c:tileColor(g.max)})),best:{i:bi,v:last[bi].score},xL:L('més antiga'),xR:L('més recent')})+
+    `<div class="legend"><span>${L('Cada punt és una partida, del color de la seva fitxa més alta · línia: mitjana de 5')}</span></div>`,
+    last.length<2?'':L('Les últimes {0} partides. Mitjana al principi: {1} · ara: {2}.',last.length,nf(ma[Math.min(4,ma.length-1)]),nf(ma[ma.length-1])));
   // 4. Distribució de punts
   const mxS=Math.max(...gs.map(g=>g.score)), step=Math.max(100,Math.ceil(mxS/8/100)*100), bins=Array(Math.ceil((mxS+1)/step)).fill(0);
   gs.forEach(g=>bins[Math.min(bins.length-1,Math.floor(g.score/step))]++);
-  h+=card('📊 Quants punts fas',columns(bins,bins.map((_,i)=>i*step>=1000?(i*step/1000).toFixed(1).replace('.0','')+'k':i*step),bins.map(()=>'#7cc4a6')),`Histograma de punts per partida (trams de ${nf(step)}).`);
+  h+=card(L('📊 Quants punts fas'),columns(bins,bins.map((_,i)=>i*step>=1000?(i*step/1000).toFixed(1).replace('.0','')+'k':i*step),bins.map(()=>'#7cc4a6')),L('Histograma de punts per partida (trams de {0}).',nf(step)));
   // 5. Fitxa més alta per partida
   const maxVals=SERIES.filter(v=>gs.some(g=>g.max===v)), mc=maxVals.map(v=>gs.filter(g=>g.max===v).length);
-  h+=card('🌻 Fitxa més alta de cada partida',columns(mc,maxVals,maxVals.map(tileColor),110),`La més habitual: el ${maxVals[mc.indexOf(Math.max(...mc))]}.`);
+  h+=card(L('🌻 Fitxa més alta de cada partida'),columns(mc,maxVals,maxVals.map(tileColor),110),L('La més habitual: el {0}.',maxVals[mc.indexOf(Math.max(...mc))]));
   // 6. Fins on arribes
   const top=Math.max(...gs.map(g=>g.max)), steps=SERIES.filter(v=>v>=21&&v<=SERIES[Math.min(IDX.get(top)+1,SERIES.length-1)]);
-  h+=card('🪜 Fins on arribes',steps.map(v=>{ const reach=gs.filter(g=>g.max>=v), mv=reach.map(g=>((S2(g).miles||[]).find(m=>m[0]===v)||[])[1]).filter(Boolean);
-    return hbar(`al ${v}`,reach.length/n,`${pct(reach.length/n)}${mv.length?` · mov. ${Math.round(mv.reduce((a,b)=>a+b,0)/mv.length)}`:''}`,tileColor(v)); }).join(''),
-    'Percentatge de partides que hi arriben · moviment mitjà en què hi arribes per primer cop.');
+  h+=card(L('🪜 Fins on arribes'),steps.map(v=>{ const reach=gs.filter(g=>g.max>=v), mv=reach.map(g=>((S2(g).miles||[]).find(m=>m[0]===v)||[])[1]).filter(Boolean);
+    return hbar(L('al {0}',v),reach.length/n,`${pct(reach.length/n)}${mv.length?` · ${L('mov. {0}',Math.round(mv.reduce((a,b)=>a+b,0)/mv.length))}`:''}`,tileColor(v)); }).join(''),
+    L('Percentatge de partides que hi arriben · moviment mitjà en què hi arribes per primer cop.'));
   // 7. Durada
   const db=[[0,60,'<1'],[60,120,'1–2'],[120,180,'2–3'],[180,300,'3–5'],[300,480,'5–8'],[480,720,'8–12'],[720,1e9,'12+']], dcn=db.map(([a,b])=>gs.filter(g=>g.secs>=a&&g.secs<b).length);
   const longest=gs.reduce((b,g)=>g.secs>b.secs?g:b);
-  h+=card('⏱ Quant duren les partides',columns(dcn,db.map(x=>x[2]),db.map(()=>'#c98f32'),100)+
-    `<div class="kgrid3">${kpi('Durada mitjana',dur(Math.round(avg(g=>g.secs))))}${kpi('Moviments / minut',(sum(g=>g.moves)/Math.max(1,sum(g=>g.secs))*60).toFixed(0))}${kpi('Punts / minut',nf(sum(g=>g.score)/Math.max(1,sum(g=>g.secs))*60))}</div>`,
-    `Minuts per partida. La més llarga: ${dur(longest.secs)} (${nf(longest.moves)} moviments).`);
+  h+=card(L('⏱ Quant duren les partides'),columns(dcn,db.map(x=>x[2]),db.map(()=>'#c98f32'),100)+
+    `<div class="kgrid3">${kpi(L('Durada mitjana'),dur(Math.round(avg(g=>g.secs))))}${kpi(L('Moviments / minut'),(sum(g=>g.moves)/Math.max(1,sum(g=>g.secs))*60).toFixed(0))}${kpi(L('Punts / minut'),nf(sum(g=>g.score)/Math.max(1,sum(g=>g.secs))*60))}</div>`,
+    L('Minuts per partida. La més llarga: {0} ({1} moviments).',dur(longest.secs),nf(longest.moves)));
   // 8. Mapes de calor (mida més jugada)
   const sizes={}; gs.forEach(g=>sizes[g.size||'4x4']=(sizes[g.size||'4x4']||0)+1);
   const msz=Object.keys(sizes).sort((a,b)=>sizes[b]-sizes[a])[0], {rows:hr,cols:hc}=dims(msz), cellsN=hr*hc;
   const mh=Array(cellsN).fill(0), sh=Array(cellsN).fill(0);
   gs.filter(g=>(g.size||'4x4')===msz).forEach(g=>{ const s3=S2(g); (s3.mergeHeat||[]).forEach((v,i)=>{ if(i<cellsN) mh[i]+=v; }); (s3.spawnHeat||[]).forEach((v,i)=>{ if(i<cellsN) sh[i]+=v; }); });
-  h+=card('🔥 Mapes de calor',`<div class="heats"><div>On fas les combinacions${heatGrid(mh,hr,hc,'#e8ae2c')}</div><div>Per on entren les fitxes noves${heatGrid(sh,hr,hc,'#7cc4a6')}</div></div>`,
-    `Tauler ${msz.replace('x','×')} (${sizes[msz]} partides). Com més intens, més vegades.`);
+  h+=card(L('🔥 Mapes de calor'),`<div class="heats"><div>${L('On fas les combinacions')}${heatGrid(mh,hr,hc,'#e8ae2c')}</div><div>${L('Per on entren les fitxes noves')}${heatGrid(sh,hr,hc,'#7cc4a6')}</div></div>`,
+    L('Tauler {0} ({1} partides). Com més intens, més vegades.',msz.replace('x','×'),sizes[msz]));
   // 9. Direccions
   const dmx=Math.max(1,...Object.values(dsum)), dp=k=>dtot>1?pct(dsum[k]/dtot):'–', dbg=k=>`background:rgba(124,196,166,${(.15+.7*dsum[k]/dmx).toFixed(2)})`;
-  h+=card('🧭 Cap on llisques',`<div class="compass"><div></div><div style="${dbg('up')}">↑<b>${dp('up')}</b></div><div></div>
-    <div style="${dbg('left')}">←<b>${dp('left')}</b></div><div><b>${nf(dtot)}</b>mov.</div><div style="${dbg('right')}">→<b>${dp('right')}</b></div>
-    <div></div><div style="${dbg('down')}">↓<b>${dp('down')}</b></div><div></div></div>`,'Molts jugadors deixen una vora quieta i fan créixer les fitxes en un racó.');
+  h+=card(L('🧭 Cap on llisques'),`<div class="compass"><div></div><div style="${dbg('up')}">↑<b>${dp('up')}</b></div><div></div>
+    <div style="${dbg('left')}">←<b>${dp('left')}</b></div><div><b>${nf(dtot)}</b>${L('mov.')}</div><div style="${dbg('right')}">→<b>${dp('right')}</b></div>
+    <div></div><div style="${dbg('down')}">↓<b>${dp('down')}</b></div><div></div></div>`,L('Molts jugadors deixen una vora quieta i fan créixer les fitxes en un racó.'));
   // 10. Combinacions per número
   const mt={}; gs.forEach(g=>{ const m=S2(g).merges||{}; for(const k in m) mt[k]=(mt[k]||0)+m[k]; });
   const mk2=Object.keys(mt).map(Number).sort((a,b)=>a-b);
-  if(mk2.length) h+=card('🔗 Combinacions per número',columns(mk2.map(k=>mt[k]),mk2,mk2.map(tileColor),110,v=>v>=1000?(v/1000).toFixed(1)+'k':v),
-    `${nf(Object.values(mt).reduce((a,b)=>a+b,0))} combinacions en total · ${nf(sum(g=>Object.values(S2(g).merges||{}).reduce((a,b)=>a+b,0))/n)} per partida.`);
+  if(mk2.length) h+=card(L('🔗 Combinacions per número'),columns(mk2.map(k=>mt[k]),mk2,mk2.map(tileColor),110,v=>v>=1000?(v/1000).toFixed(1)+'k':v),
+    L('{0} combinacions en total · {1} per partida.',nf(Object.values(mt).reduce((a,b)=>a+b,0)),nf(sum(g=>Object.values(S2(g).merges||{}).reduce((a,b)=>a+b,0))/n)));
   // 11. La partida, pas a pas
   const L2=Math.min(30,Math.max(0,...gs.map(g=>(S2(g).curve||[]).length)));
   if(L2>=2){
     const ac=[],ae=[]; for(let i=0;i<L2;i++){ const c=gs.map(g=>(S2(g).curve||[])[i]).filter(v=>v!=null), e=gs.map(g=>(S2(g).empty||[])[i]).filter(v=>v!=null);
       ac.push(c.length>=Math.max(1,n*.15)?c.reduce((a,b)=>a+b,0)/c.length:null); ae.push(e.length>=Math.max(1,n*.15)?e.reduce((a,b)=>a+b,0)/e.length:null); }
     const mxE=Math.max(1,...ae.filter(v=>v!=null)), mxC=Math.max(1,...ac.filter(v=>v!=null)), scale=mxC/mxE;
-    h+=card('🎢 La partida, pas a pas',lineChart([{pts:ac,color:'#e8c35a'},{pts:ae.map(v=>v==null?null:v*scale),color:'#7cc4a6'}],{xL:'mov. 10',xR:`mov. ${L2*10}`})+
-      `<div class="legend"><i style="background:#e8c35a"></i>punts acumulats <i style="background:#7cc4a6;margin-left:8px"></i>caselles lliures (fins a ${mxE.toFixed(0)})</div>`,
-      'Mitjana de les partides cada 10 moviments. Quan la línia verda baixa, el tauler s’omple.');
+    h+=card(L('🎢 La partida, pas a pas'),lineChart([{pts:ac,color:'#e8c35a'},{pts:ae.map(v=>v==null?null:v*scale),color:'#7cc4a6'}],{xL:L('mov. {0}',10),xR:L('mov. {0}',L2*10)})+
+      `<div class="legend"><i style="background:#e8c35a"></i>${L('punts acumulats')} <i style="background:#7cc4a6;margin-left:8px"></i>${L('caselles lliures (fins a {0})',mxE.toFixed(0))}</div>`,
+      L('Mitjana de les partides cada 10 moviments. Quan la línia verda baixa, el tauler s’omple.'));
   }
   // 12. Activitat (15 setmanes)
   const perDay={}; all.forEach(g=>{ const k=dayKey(gameTs(g)); perDay[k]=(perDay[k]||0)+1; });
   const today=new Date(); today.setHours(0,0,0,0); const start=new Date(today); start.setDate(start.getDate()-dow(today.getTime())-14*7);
   const shade=c=>!c?'#00000040':c===1?'#2f5a4b':c===2?'#3a9a7a':c===3?'#5fb391':'#9fd6c4';
   let cal='',wk=0,bestW=0; for(let i=0;i<105;i++){ const d=new Date(start); d.setDate(start.getDate()+i); const c=d>today?-1:(perDay[dayKey(d.getTime())]||0);
-    cal+=`<div style="background:${c<0?'transparent':shade(c)}" title="${d.toLocaleDateString('ca-ES')}: ${Math.max(0,c)}"></div>`; wk+=Math.max(0,c); if(i%7===6){ bestW=Math.max(bestW,wk); wk=0; } }
-  h+=card('📅 Activitat',`<div class="cal">${cal}</div><div class="legend">Menys <i style="background:${shade(0)}"></i><i style="background:${shade(1)}"></i><i style="background:${shade(2)}"></i><i style="background:${shade(3)}"></i><i style="background:${shade(4)}"></i> Més</div>
-    <div class="kgrid3" style="margin-top:8px">${kpi('Dies que has jugat',sk.days.length)}${kpi('Màxim en un dia',Math.max(0,...Object.values(perDay)))}${kpi('Millor setmana',bestW+' part.')}</div>`,
-    'Les últimes 15 setmanes. Cada quadre és un dia.');
+    cal+=`<div style="background:${c<0?'transparent':shade(c)}" title="${d.toLocaleDateString(LOC())}: ${Math.max(0,c)}"></div>`; wk+=Math.max(0,c); if(i%7===6){ bestW=Math.max(bestW,wk); wk=0; } }
+  h+=card(L('📅 Activitat'),`<div class="cal">${cal}</div><div class="legend">${L('Menys')} <i style="background:${shade(0)}"></i><i style="background:${shade(1)}"></i><i style="background:${shade(2)}"></i><i style="background:${shade(3)}"></i><i style="background:${shade(4)}"></i> ${L('Més')}</div>
+    <div class="kgrid3" style="margin-top:8px">${kpi(L('Dies que has jugat'),sk.days.length)}${kpi(L('Màxim en un dia'),Math.max(0,...Object.values(perDay)))}${kpi(L('Millor setmana'),L('{0} part.',bestW))}</div>`,
+    L('Les últimes 15 setmanes. Cada quadre és un dia.'));
   // 13. Quan jugues
   const mxd=Math.max(...dc);
-  h+=card('🕰 Quan jugues',columns(dc,DOW,dc.map(v=>v===mxd?'#e8c35a':'#3a9a7a'),100)+
-    PARTS.map((p,i)=>{ const x=gs.filter(g=>partOf(gameTs(g))===i); return hbar(p[0],x.length/n,`${x.length} · ${x.length?nf(x.reduce((a,g)=>a+g.score,0)/x.length):'–'} p.`,'#7fa3d9'); }).join(''),
-    'A les franges: partides · punts de mitjana.');
+  h+=card(L('🕰 Quan jugues'),columns(dc,DOW(),dc.map(v=>v===mxd?'#e8c35a':'#3a9a7a'),100)+
+    PARTS.map((p,i)=>{ const x=gs.filter(g=>partOf(gameTs(g))===i); return hbar(L(p[0]),x.length/n,L('{0} · {1} p.',x.length,x.length?nf(x.reduce((a,g)=>a+g.score,0)/x.length):'–'),'#7fa3d9'); }).join(''),
+    L('A les franges: partides · punts de mitjana.'));
   // 14. Com jugues
   const withHigh=gs.filter(g=>(S2(g).highs||0)>0).length, multi=sum(g=>S2(g).multi||0), sh2=sum(g=>S2(g).shakes||0);
   const mergesTot=sum(g=>Object.values(S2(g).merges||{}).reduce((a,b)=>a+b,0)), movesTot=Math.max(1,sum(g=>g.moves));
-  h+=card('🧩 Com jugues',hbar('Amb llavor daurada',withHigh/n,pct(withHigh/n),'#e8c35a')+hbar('Dobles combinacions',multi/movesTot*8,`${(multi/n).toFixed(1)} / part.`,'#c4673f')+
-    hbar('Combinacions / mov.',mergesTot/movesTot,(mergesTot/movesTot).toFixed(2),'#7cc4a6')+
-    `<div class="kgrid3" style="margin-top:8px">${kpi('Llavors per partida',(sum(g=>S2(g).highs||0)/n).toFixed(1))}${kpi('Moviments en fals',(sh2/n).toFixed(1),'per partida')}${kpi('Punts / moviment',(sum(g=>g.score)/movesTot).toFixed(1))}</div>`,
-    'Dobles combinacions: moviments en què s’ajunten dues parelles o més. Moviments en fals: quan el tauler no es pot moure cap a on llisques.');
+  h+=card(L('🧩 Com jugues'),hbar(L('Amb llavor daurada'),withHigh/n,pct(withHigh/n),'#e8c35a')+hbar(L('Dobles combinacions'),multi/movesTot*8,L('{0} / part.',(multi/n).toFixed(1)),'#c4673f')+
+    hbar(L('Combinacions / mov.'),mergesTot/movesTot,(mergesTot/movesTot).toFixed(2),'#7cc4a6')+
+    `<div class="kgrid3" style="margin-top:8px">${kpi(L('Llavors per partida'),(sum(g=>S2(g).highs||0)/n).toFixed(1))}${kpi(L('Moviments en fals'),(sh2/n).toFixed(1),L('per partida'))}${kpi(L('Punts / moviment'),(sum(g=>g.score)/movesTot).toFixed(1))}</div>`,
+    L('Dobles combinacions: moviments en què s’ajunten dues parelles o més. Moviments en fals: quan el tauler no es pot moure cap a on llisques.'));
   // 15. Per mida de tauler
-  h+=card('📐 Per mida de tauler',`<table class="kt"><tr><th>Tauler</th><th>Partides</th><th>Mitjana</th><th>Millor</th><th>Fitxa</th></tr>${
+  h+=card(L('📐 Per mida de tauler'),`<table class="kt"><tr>${['Tauler','Partides','Mitjana','Millor','Fitxa'].map(x=>`<th>${L(x)}</th>`).join('')}</tr>${
     Object.keys(sizes).sort().map(sz=>{ const x=gs.filter(g=>(g.size||'4x4')===sz); return `<tr><td>${sz.replace('x','×')}</td><td>${x.length}</td><td>${nf(x.reduce((a,g)=>a+g.score,0)/x.length)}</td><td>${nf(Math.max(...x.map(g=>g.score)))}</td><td>${Math.max(...x.map(g=>g.max))}</td></tr>`; }).join('')}</table>`);
   // 16. Rècords
   const bS=gs.reduce((b,g)=>g.score>b.score?g:b), bM=gs.reduce((b,g)=>g.moves>b.moves?g:b);
   const f89=gs.map(g=>((S2(g).miles||[]).find(m=>m[0]===89)||[])[1]).filter(Boolean);
   const mostMerges=Math.max(...gs.map(g=>Object.values(S2(g).merges||{}).reduce((a,b)=>a+b,0)));
   const rec=(e,l,v)=>`<div class="rec"><span>${e} ${l}</span><b>${v}</b></div>`;
-  h+=card('🏅 Rècords',rec('🏆','Millor puntuació',nf(bS.score))+rec('🌻','Fitxa més alta',Math.max(...gs.map(g=>g.max)))+
-    rec('⚡','Més ràpid fins al 89',f89.length?Math.min(...f89)+' mov.':'–')+rec('🐢','Partida més llarga',nf(bM.moves)+' mov.')+
-    rec('⌛','Més temps en una partida',dur(longest.secs))+rec('🔗','Més combinacions en una partida',nf(mostMerges))+
-    rec('🔥','Millor ratxa',sk.best+' dies')+rec('📅','Més partides en un dia',Math.max(0,...Object.values(perDay))));
+  h+=card(L('🏅 Rècords'),rec('🏆',L('Millor puntuació'),nf(bS.score))+rec('🌻',L('Fitxa més alta'),Math.max(...gs.map(g=>g.max)))+
+    rec('⚡',L('Més ràpid fins al 89'),f89.length?L('{0} mov.',Math.min(...f89)):'–')+rec('🐢',L('Partida més llarga'),L('{0} mov.',nf(bM.moves)))+
+    rec('⌛',L('Més temps en una partida'),dur(longest.secs))+rec('🔗',L('Més combinacions en una partida'),nf(mostMerges))+
+    rec('🔥',L('Millor ratxa'),L('{0} dies',sk.best))+rec('📅',L('Més partides en un dia'),Math.max(0,...Object.values(perDay))));
   el.innerHTML=h; bindStats(el);
 }
 function bindStats(el){ el.querySelectorAll('.seg2 button').forEach(b=>b.onclick=()=>{ statPeriod=b.dataset.p; renderStats(); }); }
@@ -1222,7 +1308,7 @@ const LTYPES={
 const FAKE=['Rosa del Montseny','GiraSol_77','Pinyol','LaFigaFresca','Avi Quim','Espiral','Llavoreta','Núria R.','Txema','MolsaVerda','Safrà','Pere Pinya'];
 const lgGet=()=>store.get('leagues',[{id:'comarca',pub:true},{id:'global',pub:true}]);
 const lgSet=l=>store.set('leagues',l);
-const lgInfo=l=>l.pub?{e:OPEN[l.id][0],name:OPEN[l.id][1]}:{e:LTYPES[l.type][0],name:l.name||LTYPES[l.type][2],tname:LTYPES[l.type][1]};
+const lgInfo=l=>l.pub?{e:OPEN[l.id][0],name:L(OPEN[l.id][1])}:{e:LTYPES[l.type][0],name:l.name||L(LTYPES[l.type][2]),tname:L(LTYPES[l.type][1])};
 let rankPeriod='dia';
 const PNOTE={dia:'Millor puntuació d’avui. Dades d’exemple.',setmana:'Millor puntuació d’aquesta setmana. Dades d’exemple.',mes:'Millor puntuació d’aquest mes. Dades d’exemple.'};
 function periodStart(per){ const d=new Date(); d.setHours(0,0,0,0); if(per==='setmana') d.setDate(d.getDate()-dow(d.getTime())); if(per==='mes') d.setDate(1); return d.getTime(); }
@@ -1231,21 +1317,23 @@ function myBest(per){ const st=periodStart(per), gs=store.get('history',[]).filt
 const RANGE={dia:[500,4200],setmana:[1400,6500],mes:[2400,9000]};
 const pkey=per=>per+new Date(periodStart(per)).toDateString();
 function renderRank(){
-  const el=$('#hubBody'), L=lgGet(); let sel=store.get('leagueSel',null); if(!L.find(l=>l.id===sel)) sel=L[0]&&L[0].id;
-  let h=`<div class="seg2">${[['dia','Diari'],['setmana','Setmanal'],['mes','Mensual']].map(([k,l])=>`<button data-p="${k}" class="${rankPeriod===k?'on':''}">${l}</button>`).join('')}</div>
-    <div class="chips">${L.map(l=>{ const i=lgInfo(l); return `<button data-l="${esc(l.id)}" class="${l.id===sel?'on':''}">${i.e} ${esc(i.name)}</button>`; }).join('')}
-    <button id="lgAdd">＋ Afegir</button>${L.length>1?'<button id="lgOrd">⇅ Ordenar</button>':''}</div>`;
-  const l=L.find(x=>x.id===sel);
-  if(!l) h+=card('🏆 Encara no tens cap lliga','<p class="small">Crea’n una per a la teva gent o afegeix una classificació oberta.</p><button class="gold" id="lgAdd2">＋ Afegir una lliga</button>');
+  const el=$('#hubBody'), LG=lgGet(); let sel=store.get('leagueSel',null); if(!LG.find(l=>l.id===sel)) sel=LG[0]&&LG[0].id;
+  let h=`<div class="seg2">${[['dia','Diari'],['setmana','Setmanal'],['mes','Mensual']].map(([k,l])=>`<button data-p="${k}" class="${rankPeriod===k?'on':''}">${L(l)}</button>`).join('')}</div>
+    <div class="chips">${LG.map(l=>{ const i=lgInfo(l); return `<button data-l="${esc(l.id)}" class="${l.id===sel?'on':''}">${i.e} ${esc(i.name)}</button>`; }).join('')}
+    <button id="lgAdd">${L('＋ Afegir')}</button>${LG.length>1?`<button id="lgOrd">${L('⇅ Ordenar')}</button>`:''}</div>
+    ${LG.length>1?`<p class="small" style="margin-top:-6px">${L('Mantén premuda una lliga i arrossega-la per canviar-ne l’ordre.')}</p>`:''}`;
+  const l=LG.find(x=>x.id===sel);
+  if(!l) h+=card(L('🏆 Encara no tens cap lliga'),'<p class="small">'+L('Crea’n una per a la teva gent o afegeix una classificació oberta.')+'</p><button class="gold" id="lgAdd2">'+L('＋ Afegir una lliga')+'</button>');
   else if(l.pub) h+=openLeague(l);
   else if(l.type==='parella') h+=duelLeague(l);
   else h+=ownLeague(l);
   h+=reptesCard();
-  if(!L.some(x=>!x.pub)) h+=`<div class="kcard"><div class="khead">Juga amb la teva gent ${TAG}</div><p class="small">Crea una lliga i envia l’enllaç pel grup: família, amics, la parella…</p>
-    <div class="chips">${['familia','amics','escola','parella'].map(t=>`<button data-new="${t}">${LTYPES[t][0]} ${LTYPES[t][1]}</button>`).join('')}</div></div>`;
+  if(!LG.some(x=>!x.pub)) h+=`<div class="kcard"><div class="khead">${L('Juga amb la teva gent')} ${TAG}</div><p class="small">${L('Crea una lliga i envia l’enllaç pel grup: família, amics, la parella…')}</p>
+    <div class="chips">${['familia','amics','escola','parella'].map(t=>`<button data-new="${t}">${LTYPES[t][0]} ${L(LTYPES[t][1])}</button>`).join('')}</div></div>`;
   el.innerHTML=h;
   el.querySelectorAll('.seg2 button').forEach(b=>b.onclick=()=>{ rankPeriod=b.dataset.p; renderRank(); });
-  el.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ store.set('leagueSel',b.dataset.l); renderRank(); });
+  el.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ if(b.dataset.dragged) return; store.set('leagueSel',b.dataset.l); renderRank(); });
+  sortable(el.querySelector('.chips'),'[data-l]',els=>{ const ids=els.map(e=>e.dataset.l), L2=lgGet(); L2.sort((a,b)=>ids.indexOf(a.id)-ids.indexOf(b.id)); lgSet(L2); renderRank(); toast(L('Ordre desat')); });
   el.querySelectorAll('[data-new]').forEach(b=>b.onclick=()=>createLeague(b.dataset.new));
   ['#lgAdd','#lgAdd2'].forEach(id=>{ const b=el.querySelector(id); if(b) b.onclick=addSheet; });
   const o=el.querySelector('#lgOrd'); if(o) o.onclick=orderSheet;
@@ -1255,56 +1343,56 @@ function renderRank(){
 function openLeague(l){
   const R=seeded(l.id+pkey(rankPeriod)), [a,b]=RANGE[rankPeriod];
   const rows=FAKE.map(nm=>({nm,v:Math.round((a+R()*(b-a))/5)*5})); const me=myBest(rankPeriod);
-  rows.push({nm:'Tu',v:me?me.v:null,me:true}); rows.sort((x,y)=>(y.v??-1)-(x.v??-1));
+  rows.push({nm:L('Tu'),v:me?me.v:null,me:true}); rows.sort((x,y)=>(y.v??-1)-(x.v??-1));
   const pod=[[1,'#b8bcc4',70],[0,'#e3ae3b',96],[2,'#c98b5a',54]].map(([i,c,hh])=>{ const r=rows[i]; return `<div><div class="nm">${esc(r.nm)}</div><div>${r.v!=null?nf(r.v):'–'}</div><div class="blk" style="background:${c};height:${hh}px">${i+1}</div></div>`; }).join('');
-  return `<div class="kcard"><div class="khead">${lgInfo(l).e} ${lgInfo(l).name}</div><div class="podium">${pod}</div><div class="knote">${PNOTE[rankPeriod]}${me?'':' Encara no has acabat cap partida en aquest període.'}</div></div>
-    <div class="kcard">${rows.slice(3).map((r,i)=>`<div class="rrow ${r.me?'me':''}"><span class="p">${r.v==null?'–':i+4}</span><span class="n">${esc(r.nm)}</span><span class="v">${r.v!=null?nf(r.v):'Encara no has jugat'}</span></div>`).join('')}</div>`;
+  return `<div class="kcard"><div class="khead">${lgInfo(l).e} ${lgInfo(l).name}</div><div class="podium">${pod}</div><div class="knote">${L(PNOTE[rankPeriod])}${me?'':' '+L('Encara no has acabat cap partida en aquest període.')}</div></div>
+    <div class="kcard">${rows.slice(3).map((r,i)=>`<div class="rrow ${r.me?'me':''}"><span class="p">${r.v==null?'–':i+4}</span><span class="n">${esc(r.nm)}</span><span class="v">${r.v!=null?nf(r.v):L('Encara no has jugat')}</span></div>`).join('')}</div>`;
 }
 function ownLeague(l){
   const t=LTYPES[l.type], R=seeded((l.name||'')+l.type+pkey(rankPeriod)), [a,b]=RANGE[rankPeriod], me=myBest(rankPeriod);
   const rows=t[4].map((nm,i)=>({nm,v:(rankPeriod==='dia'&&i===t[4].length-1&&t[4].length>2)?null:Math.round((a+R()*(b-a))/5)*5,days:1+Math.floor(R()*(rankPeriod==='setmana'?6:25))}));
-  rows.push({nm:'Tu',v:me?me.v:null,days:me?me.days:0,me:true}); rows.sort((x,y)=>(y.v??-1)-(x.v??-1));
-  return `<div class="kcard"><div class="khead"><span style="font-size:30px">${t[0]}</span><span>${esc(lgInfo(l).name)}<br><span class="small">${t[1]} · ${rows.length} membres</span></span></div>
-    ${rows.map((r,i)=>`<div class="rrow ${r.me?'me':''}"><span class="p">${r.v==null?'–':i===0?'🥇':i+1}</span><span class="n">${esc(r.nm)}</span><span class="v">${r.v==null?(r.me?'Encara no has jugat':'Encara no ha jugat'):nf(r.v)+(rankPeriod!=='dia'?` · ${r.days} dies`:'')}</span></div>`).join('')}
-    <div class="knote">${PNOTE[rankPeriod]}</div><button class="gold" id="lgInvite">Convidar a la lliga</button></div>`;
+  rows.push({nm:L('Tu'),v:me?me.v:null,days:me?me.days:0,me:true}); rows.sort((x,y)=>(y.v??-1)-(x.v??-1));
+  return `<div class="kcard"><div class="khead"><span style="font-size:30px">${t[0]}</span><span>${esc(lgInfo(l).name)}<br><span class="small">${L(t[1])} · ${L('{0} membres',rows.length)}</span></span></div>
+    ${rows.map((r,i)=>`<div class="rrow ${r.me?'me':''}"><span class="p">${r.v==null?'–':i===0?'🥇':i+1}</span><span class="n">${esc(r.nm)}</span><span class="v">${r.v==null?(r.me?L('Encara no has jugat'):L('Encara no ha jugat')):nf(r.v)+(rankPeriod!=='dia'?` · ${L('{0} dies',r.days)}`:'')}</span></div>`).join('')}
+    <div class="knote">${L(PNOTE[rankPeriod])}</div><button class="gold" id="lgInvite">${L('Convidar a la lliga')}</button></div>`;
 }
 function duelLeague(l){
   const who=LTYPES.parella[4][0], R=seeded((l.name||'')+'duel'+pkey(rankPeriod));
   let body='';
   if(rankPeriod==='dia'){
     const her=Math.round((800+R()*3200)/5)*5, me=myBest('dia');
-    body=`<div class="duel"><div class="center"><div class="av" style="background:#7cc4a6">Tu</div>${me?nf(me.v):'–'}</div><b>vs</b><div class="center"><div class="av" style="background:#e88b6a">${who[0]}</div>${nf(her)}</div></div>
-      <p class="center"><b>${!me?`${who} ja ha jugat. Et toca!`:me.v>her?`Avui guanyes per ${nf(me.v-her)} punts`:me.v<her?`Avui guanya ${who} per ${nf(her-me.v)} punts`:'Empat exacte!'}</b></p>`;
+    body=`<div class="duel"><div class="center"><div class="av" style="background:#7cc4a6">${L('Tu')}</div>${me?nf(me.v):'–'}</div><b>vs</b><div class="center"><div class="av" style="background:#e88b6a">${who[0]}</div>${nf(her)}</div></div>
+      <p class="center"><b>${!me?L('{0} ja ha jugat. Et toca!',who):me.v>her?L('Avui guanyes per {0} punts',nf(me.v-her)):me.v<her?L('Avui guanya {0} per {1} punts',who,nf(her-me.v)):L('Empat exacte!')}</b></p>`;
   }else if(rankPeriod==='setmana'){
     const st=periodStart('setmana'), hist=store.get('history',[]), today=dow(Date.now()); let mine=0,hers=0;
-    const cells=DOW.map((d,i)=>{ if(i>today) return `<div>${d}<b>·</b></div>`;
+    const cells=DOW().map((d,i)=>{ if(i>today) return `<div>${d}<b>·</b></div>`;
       const day=st+i*864e5, ms=hist.filter(g=>gameTs(g)>=day&&gameTs(g)<day+864e5).map(g=>g.score), my=ms.length?Math.max(...ms):null, her=Math.round(800+seeded((l.name||'')+'d'+day)()*3200);
       if(i===today&&my==null) return `<div>${d}<b>?</b></div>`;
       const w=my!=null&&my>her; if(w) mine++; else hers++; return `<div>${d}<b style="color:${w?'#e8c35a':'#e88b6a'}">${w?'★':'●'}</b></div>`; }).join('');
-    body=`<div class="week">${cells}</div><p class="center"><b>${mine>hers?'Vas guanyant la setmana':mine<hers?`Aquesta setmana va per davant ${who}`:'Setmana empatada'}</b></p>
-      <div class="legend" style="justify-content:center">★ dies que guanyes · ● dies que guanya ${who}</div>`;
+    body=`<div class="week">${cells}</div><p class="center"><b>${mine>hers?L('Vas guanyant la setmana'):mine<hers?L('Aquesta setmana va per davant {0}',who):L('Setmana empatada')}</b></p>
+      <div class="legend" style="justify-content:center">${L('★ dies que guanyes · ● dies que guanya {0}',who)}</div>`;
   }else{
     const a=8+Math.floor(R()*8), b=8+Math.floor(R()*8);
-    body=`<div class="duel"><div class="center"><div class="av" style="background:#7cc4a6">Tu</div>${a} dies</div><b>vs</b><div class="center"><div class="av" style="background:#e88b6a">${who[0]}</div>${b} dies</div></div>
-      <p class="center"><b>${a>b?'Vas guanyant el mes':a<b?`Aquest mes va per davant ${who}`:'Mes empatat'}</b></p>`;
+    body=`<div class="duel"><div class="center"><div class="av" style="background:#7cc4a6">${L('Tu')}</div>${L('{0} dies',a)}</div><b>vs</b><div class="center"><div class="av" style="background:#e88b6a">${who[0]}</div>${L('{0} dies',b)}</div></div>
+      <p class="center"><b>${a>b?L('Vas guanyant el mes'):a<b?L('Aquest mes va per davant {0}',who):L('Mes empatat')}</b></p>`;
   }
-  return `<div class="kcard"><div class="khead"><span style="font-size:30px">💞</span><span>${esc(lgInfo(l).name)}<br><span class="small">Duel diari</span></span></div>${body}
-    <div class="knote">Dades d’exemple.</div><button class="gold" id="lgInvite">Enviar-li l’enllaç</button></div>`;
+  return `<div class="kcard"><div class="khead"><span style="font-size:30px">💞</span><span>${esc(lgInfo(l).name)}<br><span class="small">${L('Duel diari')}</span></span></div>${body}
+    <div class="knote">${L('Dades d’exemple.')}</div><button class="gold" id="lgInvite">${L('Enviar-li l’enllaç')}</button></div>`;
 }
 function invite(l){
   const nm=lgInfo(l).name, link=`${baseUrl()}?lliga=${encodeURIComponent(nm)}&tipus=${l.type}`;
-  shareText(l.type==='parella'?`Juguem cada dia a ${GAME}? Guanya qui fa més punts. La nostra lliga: «${nm}» ${link}`:
-    `Uneix-te a la lliga «${nm}» de ${GAME}: cada dia, a veure qui fa més punts. ${link}`);
+  shareText(l.type==='parella'?L('Juguem cada dia a {0}? Guanya qui fa més punts. La nostra lliga: «{1}» {2}',GAME,nm,link):
+    L('Uneix-te a la lliga «{0}» de {1}: cada dia, a veure qui fa més punts. {2}',nm,GAME,link));
 }
 function addSheet(){
-  const L=lgGet();
-  openSheet(`<h2>Afegir una lliga</h2><p class="small">Pots estar a tantes lligues com vulguis i ordenar-les al teu gust.</p>
-    <div class="khead">Amb la teva gent ${TAG}</div>
-    ${isPlus()?'':'<p class="small">Crear una lliga és de Plus. Les lligues obertes i unir-te a una lliga on t’han convidat són gratis.</p>'}
-    <div class="tgrid">${Object.entries(LTYPES).map(([k,t])=>`<button data-t="${k}"><span>${t[0]}</span>${t[1]}</button>`).join('')}</div>
-    <div class="khead" style="margin-top:12px">Obertes a tothom</div>
-    ${Object.entries(OPEN).map(([k,[e,nm]])=>`<div class="rrow"><span>${e}</span><span class="n">${nm}</span>${L.some(l=>l.id===k)?'<span class="small">✓ Ja hi és</span>':`<button data-o="${k}">＋ Afegir</button>`}</div>`).join('')}
-    <div class="btns" style="justify-content:flex-end"><button id="asClose">Tancar</button></div>`,b=>{
+  const LG=lgGet();
+  openSheet(`<h2>${L('Afegir una lliga')}</h2><p class="small">${L('Pots estar a tantes lligues com vulguis i ordenar-les al teu gust.')}</p>
+    <div class="khead">${L('Amb la teva gent')} ${TAG}</div>
+    ${isPlus()?'':'<p class="small">'+L('Crear una lliga és de Plus. Les lligues obertes i unir-te a una lliga on t’han convidat són gratis.')+'</p>'}
+    <div class="tgrid">${Object.entries(LTYPES).map(([k,t])=>`<button data-t="${k}"><span>${t[0]}</span>${L(t[1])}</button>`).join('')}</div>
+    <div class="khead" style="margin-top:12px">${L('Obertes a tothom')}</div>
+    ${Object.entries(OPEN).map(([k,[e,nm]])=>`<div class="rrow"><span>${e}</span><span class="n">${L(nm)}</span>${LG.some(l=>l.id===k)?'<span class="small">'+L('✓ Ja hi és')+'</span>':`<button data-o="${k}">${L('＋ Afegir')}</button>`}</div>`).join('')}
+    <div class="btns" style="justify-content:flex-end"><button id="asClose">${L('Tancar')}</button></div>`,b=>{
     b.querySelector('#asClose').onclick=closeSheet;
     b.querySelectorAll('[data-o]').forEach(x=>x.onclick=()=>{ const L2=lgGet(); L2.push({id:x.dataset.o,pub:true}); lgSet(L2); store.set('leagueSel',x.dataset.o); closeSheet(); renderRank(); });
     b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{ closeSheet(); createLeague(x.dataset.t); });
@@ -1313,42 +1401,32 @@ function addSheet(){
 function createLeague(type){
   if(!isPlus()){ askPlus('leagues',()=>createLeague(type)); return; }
   const t=LTYPES[type];
-  openSheet(`<div class="center" style="font-size:40px">${t[0]}</div><h2 class="center">Nova lliga · ${t[1]}</h2>
-    <p class="small">${type==='parella'?'Un duel cada dia amb la mateixa persona: guanya qui fa més punts.':'Cada dia, a veure qui fa més punts. Sense comptes ni contrasenyes: només un enllaç per al grup.'}</p>
-    <label class="small">Nom de la lliga</label><input id="nlName" maxlength="30" placeholder="${esc(t[3])}">
-    <button class="gold" id="nlGo">Crear i convidar</button>
-    <div class="btns" style="justify-content:center"><button id="nlBack" style="border:0;background:none">Enrere</button></div>`,b=>{
+  openSheet(`<div class="center" style="font-size:40px">${t[0]}</div><h2 class="center">${L('Nova lliga')} · ${L(t[1])}</h2>
+    <p class="small">${type==='parella'?L('Un duel cada dia amb la mateixa persona: guanya qui fa més punts.'):L('Cada dia, a veure qui fa més punts. Sense comptes ni contrasenyes: només un enllaç per al grup.')}</p>
+    <label class="small">${L('Nom de la lliga')}</label><input id="nlName" maxlength="30" placeholder="${esc(L(t[3]))}">
+    <button class="gold" id="nlGo">${L('Crear i convidar')}</button>
+    <div class="btns" style="justify-content:center"><button id="nlBack" style="border:0;background:none">${L('Enrere')}</button></div>`,b=>{
     b.querySelector('#nlBack').onclick=()=>{ closeSheet(); addSheet(); };
     b.querySelector('#nlGo').onclick=()=>{
-      const name=b.querySelector('#nlName').value.trim()||t[2], l={id:'own'+Date.now(),type,name}, L=lgGet(); L.push(l); lgSet(L); store.set('leagueSel',l.id);
-      closeSheet(); toast(`Lliga creada: ${name}`); renderRank(); invite(l);
+      const name=b.querySelector('#nlName').value.trim()||L(t[2]), l={id:'own'+Date.now(),type,name}, LG=lgGet(); LG.push(l); lgSet(LG); store.set('leagueSel',l.id);
+      closeSheet(); toast(L('Lliga creada: {0}',name)); renderRank(); invite(l);
     };
   });
 }
 function orderSheet(){
-  const draw=()=>{ const L=lgGet();
-    return `<h2>Les teves lligues</h2><p class="small">Arrossega-les amb el dit (des de ⋮⋮) o fes servir les fletxes. La primera és la que veuràs en obrir la classificació.</p>
-      <ul class="ord">${L.map((l,i)=>{ const inf=lgInfo(l); return `<li><span class="hd">⋮⋮ ${inf.e}</span><span class="nm">${esc(inf.name)}${i===0?'<small>Principal</small>':''}</span>
-        <button data-up="${i}" ${i===0?'disabled':''} aria-label="Pujar">↑</button><button data-dn="${i}" ${i===L.length-1?'disabled':''} aria-label="Baixar">↓</button><button data-rm="${i}" aria-label="Treure">✕</button></li>`; }).join('')}</ul>
-      <div class="btns" style="justify-content:flex-end"><button id="ordDone">Fet</button></div>`; };
-  const mv=(from,to)=>{ const L=lgGet(); to=Math.max(0,Math.min(L.length-1,to)); const [x]=L.splice(from,1); L.splice(to,0,x); lgSet(L); };
+  const draw=()=>{ const LG=lgGet();
+    return `<h2>${L('Les teves lligues')}</h2><p class="small">${L('Arrossega-les amb el dit (des de ⋮⋮) o fes servir les fletxes. La primera és la que veuràs en obrir la classificació.')}</p>
+      <ul class="ord">${LG.map((l,i)=>{ const inf=lgInfo(l); return `<li data-i="${i}"><span class="hd">⋮⋮ ${inf.e}</span><span class="nm">${esc(inf.name)}${i===0?'<small>'+L('Principal')+'</small>':''}</span>
+        <button data-up="${i}" ${i===0?'disabled':''} aria-label="${L('Pujar')}">↑</button><button data-dn="${i}" ${i===LG.length-1?'disabled':''} aria-label="${L('Baixar')}">↓</button><button data-rm="${i}" aria-label="${L('Treure')}">✕</button></li>`; }).join('')}</ul>
+      <div class="btns" style="justify-content:flex-end"><button id="ordDone">${L('Fet')}</button></div>`; };
+  const mv=(from,to)=>{ const LG=lgGet(); to=Math.max(0,Math.min(LG.length-1,to)); const [x]=LG.splice(from,1); LG.splice(to,0,x); lgSet(LG); };
   const bind=b=>{
     b.querySelector('#ordDone').onclick=()=>{ closeSheet(); renderRank(); };
     b.querySelectorAll('[data-up]').forEach(x=>x.onclick=()=>{ mv(+x.dataset.up,+x.dataset.up-1); openSheet(draw(),bind); });
     b.querySelectorAll('[data-dn]').forEach(x=>x.onclick=()=>{ mv(+x.dataset.dn,+x.dataset.dn+1); openSheet(draw(),bind); });
-    b.querySelectorAll('[data-rm]').forEach(x=>x.onclick=()=>{ const L=lgGet(), [r]=L.splice(+x.dataset.rm,1); lgSet(L); toast(`Has tret «${lgInfo(r).name}»`); openSheet(draw(),bind); });
-    // arrossegar amb el dit
-    b.querySelectorAll('.ord .hd').forEach(hd=>hd.addEventListener('pointerdown',e=>{
-      const li=hd.parentElement, ul=li.parentElement, from=[...ul.children].indexOf(li); let y0=e.clientY;
-      try{ hd.setPointerCapture(e.pointerId); }catch(err){} li.classList.add('drag'); e.preventDefault();
-      const onMove=ev=>{ let dy=ev.clientY-y0; const hgt=li.offsetHeight+6;
-        if(dy>hgt/2&&li.nextElementSibling){ ul.insertBefore(li.nextElementSibling,li); y0+=hgt; dy-=hgt; }
-        else if(dy<-hgt/2&&li.previousElementSibling){ ul.insertBefore(li,li.previousElementSibling); y0-=hgt; dy+=hgt; }
-        li.style.transform=`translateY(${dy}px)`; };
-      const onUp=()=>{ hd.removeEventListener('pointermove',onMove); hd.removeEventListener('pointerup',onUp); hd.removeEventListener('pointercancel',onUp);
-        const to=[...ul.children].indexOf(li); li.style.transform=''; li.classList.remove('drag'); if(to!==from) mv(from,to); openSheet(draw(),bind); };
-      hd.addEventListener('pointermove',onMove); hd.addEventListener('pointerup',onUp); hd.addEventListener('pointercancel',onUp);
-    }));
+    b.querySelectorAll('[data-rm]').forEach(x=>x.onclick=()=>{ const LG=lgGet(), [r]=LG.splice(+x.dataset.rm,1); lgSet(LG); toast(L('Has tret «{0}»',lgInfo(r).name)); openSheet(draw(),bind); });
+    // arrossegar amb el dit: des de ⋮⋮ de seguida, o mantenint premuda la fila
+    sortable(b.querySelector('.ord'),'li',els=>{ const LG=lgGet(), order=els.map(e=>+e.dataset.i); lgSet(order.map(i=>LG[i])); openSheet(draw(),bind); },'.hd');
   };
   openSheet(draw(),bind);
 }
@@ -1358,7 +1436,8 @@ let hubCur='stats';
 function hubTab(t){ hubCur=t; document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
   $('#hubBody').scrollTop=0; (t==='stats'?renderStats:t==='rank'?renderRank:renderPlus)(); }
 function openHub(t){ $('#hub').classList.add('on'); hubTab(t||hubCur); }
-$('#btnHub').onclick=()=>openHub();
+$('#btnHub').onclick=()=>openHub('rank');
+$('#btnStats').onclick=()=>openHub('stats');
 $('#btnOverStats').onclick=()=>{ closePanels(); openHub('stats'); };
 $('#hubClose').onclick=()=>$('#hub').classList.remove('on');
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>hubTab(b.dataset.tab));
@@ -1366,11 +1445,11 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>hubTab(b.data
 /* Enllaços d'invitació i de regal */
 (function(){ try{
   const q=new URLSearchParams(location.search); let changed=false;
-  if(q.get('lliga')){ const name=q.get('lliga').slice(0,30), type=LTYPES[q.get('tipus')]?q.get('tipus'):'altra', L=lgGet();
-    let l=L.find(x=>!x.pub&&x.name===name&&x.type===type); if(!l){ l={id:'own'+Date.now(),type,name,joined:true}; L.push(l); lgSet(L); }
-    store.set('leagueSel',l.id); changed=true; setTimeout(()=>{ openHub('rank'); toast(`T’has unit a la lliga «${name}»`); },300); }
+  if(q.get('lliga')){ const name=q.get('lliga').slice(0,30), type=LTYPES[q.get('tipus')]?q.get('tipus'):'altra', LG=lgGet();
+    let l=LG.find(x=>!x.pub&&x.name===name&&x.type===type); if(!l){ l={id:'own'+Date.now(),type,name,joined:true}; LG.push(l); lgSet(LG); }
+    store.set('leagueSel',l.id); changed=true; setTimeout(()=>{ openHub('rank'); toast(L('T’has unit a la lliga «{0}»',name)); },300); }
   if(q.get('regal')){ const p=plusGet(); plusSet(Object.assign(p,{on:true,plan:'regal',since:Date.now(),cancel:false})); changed=true;
-    const de=q.get('de'); setTimeout(()=>{ openHub('plus'); toast(`🎁 Regal activat: un any de Plus${de?' de part de '+de.slice(0,30):''}`); },300); }
+    const de=q.get('de'); setTimeout(()=>{ openHub('plus'); toast(L('🎁 Regal activat: un any de Plus')+(de?' '+L('de part de {0}',de.slice(0,30)):'')); },300); }
   if(changed) history.replaceState(null,'',baseUrl());
 }catch(e){} })();
 
@@ -1381,82 +1460,82 @@ function daily(){ const k=dayKey(Date.now()); let d=store.get('daily',null); if(
 const canPlay=()=>{ if(unlimited()) return true; const d=daily(); return d.played<FREE_GAMES+d.videos; };
 function countGame(){ if(unlimited()) return; const d=daily(); d.played++; store.set('daily',d); }
 function quotaText(){
-  if(G&&G.challenge){ const c=store.get('reptes',[]).find(x=>x.id===G.challenge); if(c) return `⚔️ Repte de ${esc(c.from)}: supera <b>${nf(c.score)}</b> punts`; }
+  if(G&&G.challenge){ const c=store.get('reptes',[]).find(x=>x.id===G.challenge); if(c) return L('⚔️ Repte de {0}: supera <b>{1}</b> punts',esc(c.from),nf(c.score)); }
   const p=plusGet();
-  if(p.on) return '♾️ Partides il·limitades amb Plus';
-  if(Date.now()<p.pass) return `♾️ Passi del dia: sense límit fins a les ${new Date(p.pass).toLocaleTimeString('ca-ES',{hour:'2-digit',minute:'2-digit'})}`;
+  if(p.on) return L('♾️ Partides il·limitades amb Plus');
+  if(Date.now()<p.pass) return L('♾️ Passi del dia: sense límit fins a les {0}',new Date(p.pass).toLocaleTimeString(LOC(),{hour:'2-digit',minute:'2-digit'}));
   const d=daily(), tot=FREE_GAMES+d.videos;
-  return `Partides d’avui: <b>${Math.min(d.played,tot)} de ${tot}</b>${d.videos?` (${d.videos} amb vídeo)`:''}`;
+  return L('Partides d’avui: <b>{0} de {1}</b>',Math.min(d.played,tot),tot)+(d.videos?' '+L('({0} amb vídeo)',d.videos):'');
 }
 function gateSheet(){
   const d=daily(), left=MAX_VIDEOS-d.videos;
-  openSheet(`<div class="center" style="font-size:40px">🌱</div><h2 class="center">Ja has fet les partides d’avui</h2>
-    <p class="small center">Cada dia tens ${FREE_GAMES} partides gratis. Demà en tindràs ${FREE_GAMES} més. Si vols continuar ara:</p>
-    ${left>0?`<button class="offer" id="gtVideo"><span><b>▶ Mira un vídeo i juga’n una més</b><small>Te’n queden ${left} de ${MAX_VIDEOS} per avui</small></span><span class="pr">Gratis</span></button>`:
-      `<p class="small center">Avui ja has mirat els ${MAX_VIDEOS} vídeos.</p>`}
-    <button class="offer" id="gtPass"><span><b>Passi del dia</b><small>Juga sense límit durant 24 hores · sense renovació</small></span><span class="pr">0,99 €</span></button>
-    <button class="offer best" id="gtPlus"><span><span class="tag">${GAME} Plus</span><b style="display:block">Partides il·limitades i molt més</b><small>Lligues pròpies, reptes i estadístiques completes · des de 2,50 €/mes</small></span><span class="pr">›</span></button>
-    <p class="small center"><b>Prototip: no es fa cap cobrament.</b></p>
-    <div class="btns" style="justify-content:center"><button id="gtNo" style="border:0;background:none">Ara no, torno demà</button></div>`,b=>{
+  openSheet(`<div class="center" style="font-size:40px">🌱</div><h2 class="center">${L('Ja has fet les partides d’avui')}</h2>
+    <p class="small center">${L('Cada dia tens {0} partides gratis. Demà en tindràs {0} més. Si vols continuar ara:',FREE_GAMES)}</p>
+    ${left>0?`<button class="offer" id="gtVideo"><span><b>${L('▶ Mira un vídeo i juga’n una més')}</b><small>${L('Te’n queden {0} de {1} per avui',left,MAX_VIDEOS)}</small></span><span class="pr">${L('Gratis')}</span></button>`:
+      `<p class="small center">${L('Avui ja has mirat els {0} vídeos.',MAX_VIDEOS)}</p>`}
+    <button class="offer" id="gtPass"><span><b>${L('Passi del dia')}</b><small>${L('Juga sense límit durant 24 hores · sense renovació')}</small></span><span class="pr">${L('0,99 €')}</span></button>
+    <button class="offer best" id="gtPlus"><span><span class="tag">${GAME} Plus</span><b style="display:block">${L('Partides il·limitades i molt més')}</b><small>${L('Lligues pròpies, reptes i estadístiques completes · des de 2,50 €/mes')}</small></span><span class="pr">›</span></button>
+    <p class="small center"><b>${L('Prototip: no es fa cap cobrament.')}</b></p>
+    <div class="btns" style="justify-content:center"><button id="gtNo" style="border:0;background:none">${L('Ara no, torno demà')}</button></div>`,b=>{
     const v=b.querySelector('#gtVideo'); if(v) v.onclick=videoSheet;
-    b.querySelector('#gtPass').onclick=()=>{ plusSet(Object.assign(plusGet(),{pass:Date.now()+864e5})); closeSheet(); toast('Passi del dia activat (simulat): jugues sense límit 24 hores'); updateHud(); };
+    b.querySelector('#gtPass').onclick=()=>{ plusSet(Object.assign(plusGet(),{pass:Date.now()+864e5})); closeSheet(); toast(L('Passi del dia activat (simulat): jugues sense límit 24 hores')); updateHud(); };
     b.querySelector('#gtPlus').onclick=()=>{ closeSheet(); openHub('plus'); };
     b.querySelector('#gtNo').onclick=closeSheet;
   });
 }
 function videoSheet(){
   const N=5; let n=N;
-  openSheet(`<div class="center"><div class="small">Anunci (simulat)</div><div style="font-size:64px;margin:14px 0" id="vdN">${N}</div>
+  openSheet(`<div class="center"><div class="small">${L('Anunci (simulat)')}</div><div style="font-size:64px;margin:14px 0" id="vdN">${N}</div>
     <div class="hb"><span class="bar"><div id="vdBar" style="width:0;background:var(--gold)"></div></span></div>
-    <p class="small">A l’app de veritat aquí hi hauria un vídeo d’uns 15–30 segons. Si el tanques abans d’hora, no compta.</p></div>`);
+    <p class="small">${L('A l’app de veritat aquí hi hauria un vídeo d’uns 15–30 segons. Si el tanques abans d’hora, no compta.')}</p></div>`);
   const iv=setInterval(()=>{
     if(!$('#sheet').classList.contains('on')||!$('#vdN')){ clearInterval(iv); return; }
     n--; $('#vdN').textContent=n; $('#vdBar').style.width=((N-n)/N*100)+'%';
     if(n<=0){ clearInterval(iv); const d=daily(); d.videos=Math.min(MAX_VIDEOS,d.videos+1); store.set('daily',d); updateHud();
-      $('#sheetBody').innerHTML=`<div class="center"><div style="font-size:40px">🎉</div><h2>Tens una partida més</h2><button class="gold" id="vdGo">Jugar</button></div>`;
+      $('#sheetBody').innerHTML=`<div class="center"><div style="font-size:40px">🎉</div><h2>${L('Tens una partida més')}</h2><button class="gold" id="vdGo">${L('Jugar')}</button></div>`;
       $('#vdGo').onclick=closeSheet; }
   },1000);
 }
-$('#btnResetDay').onclick=()=>{ store.set('daily',{day:dayKey(Date.now()),played:0,videos:0}); if(G&&!G.over&&G.moves===0) G.counted=false; updateHud(); toast('Comptador d’avui a zero (prototip)'); };
+$('#btnResetDay').onclick=()=>{ store.set('daily',{day:dayKey(Date.now()),played:0,videos:0}); if(G&&!G.over&&G.moves===0) G.counted=false; updateHud(); toast(L('Comptador d’avui a zero (prototip)')); };
 
 /* ---------- Reptes: la mateixa partida per a dues persones ---------- */
 const rulesStr=r=>[r.size,r.bag,r.allow11?1:0,r.threshold,r.odds,r.below].join('.');
 function rulesParse(t){ const a=String(t||'').split('.'); if(a.length<6||!/^\d+x\d+$/.test(a[0])) return null;
   return {size:a[0],bag:+a[1]||6,allow11:a[2]==='1',threshold:+a[3],odds:+a[4]||20,below:+a[5]||4}; }
 function challengeResult(id,score){
-  const L=store.get('reptes',[]), c=L.find(x=>x.id===id); if(!c) return null;
-  c.mine=Math.max(c.mine||0,score); c.status=c.mine>c.score?'won':c.mine<c.score?'lost':'tie'; store.set('reptes',L);
-  return c.status==='won'?`⚔️ Has guanyat el repte de ${esc(c.from)}! (${nf(c.score)})`:c.status==='lost'?`⚔️ ${esc(c.from)} guanya per ${nf(c.score-c.mine)} punts`:'⚔️ Empat exacte!';
+  const LG=store.get('reptes',[]), c=LG.find(x=>x.id===id); if(!c) return null;
+  c.mine=Math.max(c.mine||0,score); c.status=c.mine>c.score?'won':c.mine<c.score?'lost':'tie'; store.set('reptes',LG);
+  return c.status==='won'?L('⚔️ Has guanyat el repte de {0}! ({1})',esc(c.from),nf(c.score)):c.status==='lost'?L('⚔️ {0} guanya per {1} punts',esc(c.from),nf(c.score-c.mine)):L('⚔️ Empat exacte!');
 }
 function sendChallenge(g){
-  if(!g||!g.seed){ toast('Acaba una partida per poder reptar amb ella.'); return; }
+  if(!g||!g.seed){ toast(L('Acaba una partida per poder reptar amb ella.')); return; }
   if(!isPlus()){ askPlus('reptes',()=>sendChallenge(g)); return; }
-  openSheet(`<div class="center" style="font-size:40px">⚔️</div><h2 class="center">Repta algú</h2>
-    <p class="small">Li enviaràs aquesta mateixa partida: les mateixes fitxes, en el mateix ordre. Has fet <b>${nf(g.score)}</b> punts (fitxa ${g.max}). Si et supera, guanya.</p>
-    <label class="small">El teu nom</label><input id="chName" maxlength="20" value="${esc(store.get('myName',''))}" placeholder="Com et diuen?">
-    <button class="gold" id="chGo">Enviar el repte</button>
-    <div class="btns" style="justify-content:center"><button id="chNo" style="border:0;background:none">Ara no</button></div>`,b=>{
+  openSheet(`<div class="center" style="font-size:40px">⚔️</div><h2 class="center">${L('Repta algú')}</h2>
+    <p class="small">${L('Li enviaràs aquesta mateixa partida: les mateixes fitxes, en el mateix ordre. Has fet <b>{0}</b> punts (fitxa {1}). Si et supera, guanya.',nf(g.score),g.max)}</p>
+    <label class="small">${L('El teu nom')}</label><input id="chName" maxlength="20" value="${esc(store.get('myName',''))}" placeholder="${L('Com et diuen?')}">
+    <button class="gold" id="chGo">${L('Enviar el repte')}</button>
+    <div class="btns" style="justify-content:center"><button id="chNo" style="border:0;background:none">${L('Ara no')}</button></div>`,b=>{
     b.querySelector('#chNo').onclick=closeSheet;
     b.querySelector('#chGo').onclick=()=>{
-      const name=b.querySelector('#chName').value.trim()||'Algú'; store.set('myName',name);
+      const name=b.querySelector('#chName').value.trim()||L('Algú'); store.set('myName',name);
       const r=g.rules||{size:g.size||'4x4',bag:6,allow11:true,threshold:34,odds:20,below:4};
-      const L=store.get('reptes',[]); L.unshift({id:'r'+Date.now(),dir:'out',seed:g.seed,rules:r,score:g.score,max:g.max,from:name,ts:Date.now()}); store.set('reptes',L.slice(0,50));
+      const LG=store.get('reptes',[]); LG.unshift({id:'r'+Date.now(),dir:'out',seed:g.seed,rules:r,score:g.score,max:g.max,from:name,ts:Date.now()}); store.set('reptes',LG.slice(0,50));
       closeSheet();
-      shareText(`⚔️ Et repto a ${GAME}! He fet ${nf(g.score)} punts (fitxa ${g.max}) amb aquesta partida. Tindràs les mateixes fitxes: a veure si em superes. ${baseUrl()}?repte=${g.seed}&r=${rulesStr(r)}&p=${g.score}&f=${g.max}&de=${encodeURIComponent(name)}`);
+      shareText(L('⚔️ Et repto a {0}! He fet {1} punts (fitxa {2}) amb aquesta partida. Tindràs les mateixes fitxes: a veure si em superes. {3}',GAME,nf(g.score),g.max,`${baseUrl()}?repte=${g.seed}&r=${rulesStr(r)}&p=${g.score}&f=${g.max}&de=${encodeURIComponent(name)}`));
     };
   });
 }
-function startChallenge(c){ newGame({seed:c.seed,rules:c.rules,challenge:c.id}); toast(`⚔️ Repte de ${c.from}: supera ${nf(c.score)} punts`); }
+function startChallenge(c){ newGame({seed:c.seed,rules:c.rules,challenge:c.id}); toast(L('⚔️ Repte de {0}: supera {1} punts',c.from,nf(c.score))); }
 function reptesCard(){
-  const L=store.get('reptes',[]).slice(0,10), last=store.get('history',[])[0];
-  const ago=ts=>{ const m=Math.round((Date.now()-ts)/6e4); return m<60?`fa ${m} min`:m<1440?`fa ${Math.round(m/60)} h`:`fa ${Math.round(m/1440)} dies`; };
-  const row=c=>c.dir==='out'?`<div class="rrow"><span>📤</span><span class="n">Has reptat amb ${nf(c.score)} punts<br><span class="small">${ago(c.ts)}</span></span></div>`:
-    `<div class="rrow ${c.status==='won'?'me':''}"><span>📥</span><span class="n">De ${esc(c.from)} · ${nf(c.score)} punts<br><span class="small">${c.status==='pending'?'Pendent de jugar':c.status==='won'?`Guanyat amb ${nf(c.mine)} ✓`:c.status==='lost'?`Perdut amb ${nf(c.mine)}`:'Empat'}</span></span>
-      <button data-play="${c.id}">${c.status==='pending'?'Jugar':'Tornar-hi'}</button></div>`;
-  return `<div class="kcard"><div class="khead">⚔️ Reptes ${TAG}</div>
-    <p class="small">Desafia algú amb la mateixa partida: les mateixes fitxes, en el mateix ordre. Qui faci més punts, guanya. Acceptar un repte és gratis.</p>
-    ${L.map(row).join('')}
-    <button class="gold" id="chLast">${last?`⚔️ Repta amb la teva última partida (${nf(last.score)})`:'⚔️ Acaba una partida per reptar algú'}</button></div>`;
+  const LG=store.get('reptes',[]).slice(0,10), last=store.get('history',[])[0];
+  const ago=ts=>{ const m=Math.round((Date.now()-ts)/6e4); return m<60?L('fa {0} min',m):m<1440?L('fa {0} h',Math.round(m/60)):L('fa {0} dies',Math.round(m/1440)); };
+  const row=c=>c.dir==='out'?`<div class="rrow"><span>📤</span><span class="n">${L('Has reptat amb {0} punts',nf(c.score))}<br><span class="small">${ago(c.ts)}</span></span></div>`:
+    `<div class="rrow ${c.status==='won'?'me':''}"><span>📥</span><span class="n">${L('De {0} · {1} punts',esc(c.from),nf(c.score))}<br><span class="small">${c.status==='pending'?L('Pendent de jugar'):c.status==='won'?L('Guanyat amb {0} ✓',nf(c.mine)):c.status==='lost'?L('Perdut amb {0}',nf(c.mine)):L('Empat')}</span></span>
+      <button data-play="${c.id}">${c.status==='pending'?L('Jugar'):L('Tornar-hi')}</button></div>`;
+  return `<div class="kcard"><div class="khead">⚔️ ${L('Reptes')} ${TAG}</div>
+    <p class="small">${L('Desafia algú amb la mateixa partida: les mateixes fitxes, en el mateix ordre. Qui faci més punts, guanya. Acceptar un repte és gratis.')}</p>
+    ${LG.map(row).join('')}
+    <button class="gold" id="chLast">${last?L('⚔️ Repta amb la teva última partida ({0})',nf(last.score)):L('⚔️ Acaba una partida per reptar algú')}</button></div>`;
 }
 function bindReptes(el){
   const b=el.querySelector('#chLast'); if(b) b.onclick=()=>sendChallenge(store.get('history',[])[0]);
@@ -1467,11 +1546,135 @@ let PENDING_CH=null;
 (function(){ try{
   const q=new URLSearchParams(location.search); if(!q.get('repte')) return;
   const rules=rulesParse(q.get('r')); if(!rules) return;
-  const c={id:'r'+Date.now(),dir:'in',seed:q.get('repte').slice(0,16),rules,score:+q.get('p')||0,max:+q.get('f')||0,from:(q.get('de')||'Algú').slice(0,20),status:'pending',ts:Date.now()};
-  const L=store.get('reptes',[]); const same=L.find(x=>x.dir==='in'&&x.seed===c.seed&&x.from===c.from);
-  if(!same){ L.unshift(c); store.set('reptes',L.slice(0,50)); }
+  const c={id:'r'+Date.now(),dir:'in',seed:q.get('repte').slice(0,16),rules,score:+q.get('p')||0,max:+q.get('f')||0,from:(q.get('de')||L('Algú')).slice(0,20),status:'pending',ts:Date.now()};
+  const LG=store.get('reptes',[]); const same=LG.find(x=>x.dir==='in'&&x.seed===c.seed&&x.from===c.from);
+  if(!same){ LG.unshift(c); store.set('reptes',LG.slice(0,50)); }
   PENDING_CH=same||c; history.replaceState(null,'',baseUrl());
 }catch(e){} })();
+
+
+/* =====================================================================
+   0.5.0 · Mode nit, so ambient, ordenar arrossegant, portada
+   ===================================================================== */
+/* ---------- Mode nit ---------- */
+function applyTheme(){
+  document.documentElement.dataset.theme=S.night?'nit':'dia';
+  const m=document.querySelector('meta[name=theme-color]'); if(m) m.content=S.night?'#2a2822':'#f3ead8';
+}
+
+/* ---------- So ambient (com a Melodia: sorolls de fons generats aquí) ---------- */
+const AMBS=[['cap','Cap'],['mar','Mar'],['pluja','Pluja'],['nit','Nit d’estiu'],['bosc','Bosc']];
+const AMB={src:null,key:null,cache:{}};
+function ambBuffer(k){
+  if(AMB.cache[k]) return AMB.cache[k];
+  const ctx=AU.ctx, sr=ctx.sampleRate, secs=k==='mar'?2/.11:20, n=Math.floor(sr*secs), x=Math.floor(.3*sr);
+  const raw=new Float32Array(n+x), R=seeded('amb'+k);
+  const lpA=fc=>1-Math.exp(-2*Math.PI*fc/sr);
+  let last=0, lp=0, lp2=0; const aL=lpA(k==='mar'?650:k==='nit'?280:k==='bosc'?420:1500);
+  for(let pass=0;pass<2;pass++) for(let i=0;i<n+x;i++){        // dues passades: el filtre entra estable
+    const w=R()*2-1, t=i/sr;
+    if(k==='pluja'){ lp+=aL*(w-lp); const hp=w-lp; if(pass) raw[i]=hp*.5*.03*(1+.4*Math.sin(2*Math.PI*.05*t)); continue; }
+    last=(last+.02*w)/1.02; lp+=aL*(last*3.5-lp); if(!pass) continue;
+    if(k==='mar') raw[i]=lp*(.07+.055*Math.sin(2*Math.PI*.11*t));
+    else if(k==='nit'){ const a=Math.sin(2*Math.PI*30*t)>0?1:0, g=Math.sin(2*Math.PI*.9*t)>0?1:0; raw[i]=lp*.02+Math.sin(2*Math.PI*4400*t)*a*g*.012; }
+    else if(k==='bosc'){ lp2+=lpA(.3)*(Math.abs(lp)-lp2); raw[i]=lp*(.035+.025*Math.sin(2*Math.PI*.07*t)); }
+  }
+  if(k==='bosc'){ // ocells: piulades curtes
+    for(let c=0;c<16;c++){ const t0=R()*(secs-1), f0=2400+R()*1800, up=R()<.5, len=.07+R()*.1, rep=1+Math.floor(R()*3);
+      for(let r=0;r<rep;r++){ const s0=Math.floor((t0+r*(len+.05))*sr), L=Math.floor(len*sr);
+        let ph=0; for(let j=0;j<L&&s0+j<n+x;j++){ const p=j/L, f=f0*(up?1+.35*p:1.35-.35*p); ph+=2*Math.PI*f/sr; raw[s0+j]+=Math.sin(ph)*Math.sin(Math.PI*p)*.035; } } }
+  }
+  for(let i=0;i<x;i++){ const w=i/x; raw[i]=raw[i]*w+raw[n+i]*(1-w); } // fondre els extrems perquè el bucle no salti
+  const b=ctx.createBuffer(1,n,sr); b.getChannelData(0).set(raw.subarray(0,n));
+  return AMB.cache[k]=b;
+}
+function startAmbient(){
+  if(!AU.ctx) return;
+  if(S.amb==='cap'){ stopAmbient(); return; }
+  if(AMB.src&&AMB.key===S.amb){ applyVolumes(); return; }
+  stopAmbient();
+  try{ const s=AU.ctx.createBufferSource(); s.buffer=ambBuffer(S.amb); s.loop=true; s.connect(AU.ambG); s.start(); AMB.src=s; AMB.key=S.amb; applyVolumes(); }catch(e){}
+}
+function stopAmbient(){ try{ if(AMB.src) AMB.src.stop(); }catch(e){} AMB.src=null; AMB.key=null; }
+
+/* ---------- Ordenar arrossegant amb el dit (mantenir premut, o des de ⋮⋮) ---------- */
+let DRAGGING=false;
+function sortable(box,sel,onDone,handleSel){
+  if(!box) return;
+  box.querySelectorAll(sel).forEach(item=>{
+    item.addEventListener('pointerdown',e=>{
+      if(e.button>0) return;
+      const fromHandle=!!(handleSel&&e.target.closest(handleSel));
+      const btn=e.target.closest('button'); if(!fromHandle&&btn&&btn!==item) return; // els botons de dins (↑ ↓ ✕) no arrosseguen
+      let x0=e.clientX,y0=e.clientY,active=false;
+      const timer=fromHandle?null:setTimeout(()=>start(),330);
+      function start(){ active=true; DRAGGING=true; item.classList.add('drag'); try{ item.setPointerCapture(e.pointerId); }catch(_){} if(navigator.vibrate) try{navigator.vibrate(12);}catch(_){} }
+      if(fromHandle){ e.preventDefault(); start(); }
+      const mv=ev=>{
+        if(!active){ if(Math.hypot(ev.clientX-x0,ev.clientY-y0)>8) stop(false); return; }
+        ev.preventDefault();
+        item.style.transform=`translate(${ev.clientX-x0}px,${ev.clientY-y0}px)`;
+        item.style.visibility='hidden'; const under=document.elementFromPoint(ev.clientX,ev.clientY); item.style.visibility='';
+        const tgt=under&&under.closest(sel);
+        if(tgt&&tgt!==item&&tgt.parentElement===item.parentElement){
+          const r0=item.getBoundingClientRect(), list=[...item.parentElement.children];
+          if(list.indexOf(tgt)>list.indexOf(item)) tgt.after(item); else tgt.before(item);
+          const r1=item.getBoundingClientRect(); x0+=r1.left-r0.left-(parseFloat((item.style.transform.match(/-?[\d.]+/g)||[0,0])[0])||0)*0; y0+=r1.top-r0.top;
+          item.style.transform=`translate(${ev.clientX-x0}px,${ev.clientY-y0}px)`;
+        }
+      };
+      function stop(done){
+        clearTimeout(timer); document.removeEventListener('pointermove',mv); document.removeEventListener('pointerup',up); document.removeEventListener('pointercancel',up);
+        if(active){ item.style.transform=''; item.classList.remove('drag'); DRAGGING=false; item.dataset.dragged='1'; setTimeout(()=>{ delete item.dataset.dragged; },80);
+          if(done) onDone([...item.parentElement.querySelectorAll(sel)]); }
+      }
+      const up=()=>stop(true);
+      document.addEventListener('pointermove',mv,{passive:false}); document.addEventListener('pointerup',up); document.addEventListener('pointercancel',up);
+    });
+    item.addEventListener('contextmenu',e=>e.preventDefault());
+  });
+}
+
+/* ---------- Portada (com la de Melodia: mosaic que entra girant, medalló i «Jugar») ---------- */
+function showSplash(){
+  const sp=$('#splash'); if(!sp) return;
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // quadrats de Fibonacci (1, 1, 2, 3, 5, 8…) que fan l'espiral daurada
+  const N=11, F=[1,1]; while(F.length<N) F.push(F[F.length-1]+F[F.length-2]);
+  const sq=[]; let x0=0,y0=0,x1=1,y1=1; sq.push({x:0,y:0,s:1,d:'up'});
+  const dirs=['right','down','left','up'];
+  for(let k=1;k<N;k++){ const s=F[k], d=dirs[(k-1)%4]; let q;
+    if(d==='right'){ q={x:x1,y:y0}; x1+=s; } else if(d==='down'){ q={x:x0,y:y1}; y1+=s; }
+    else if(d==='left'){ q={x:x0-s,y:y0}; x0-=s; } else { q={x:x0,y:y0-s}; y0-=s; }
+    sq.push(Object.assign(q,{s,d})); }
+  // en vertical: intercanviem x i y
+  // el rectangle daurat sencer, en vertical i centrat (es veuen tots els quadrats)
+  const W=innerWidth, H=innerHeight, swap=(x1-x0)>(y1-y0), bw=swap?y1-y0:x1-x0, bh=swap?x1-x0:y1-y0, sc=Math.min(W/bw,H/bh);
+  const ox=(W-bw*sc)/2, oy=(H-bh*sc)/2;
+  const P=(x,y)=>swap?[ox+(y-y0)*sc, oy+(x-x0)*sc]:[ox+(x-x0)*sc, oy+(y-y0)*sc];
+  let html='', path='';
+  sq.forEach((q,k)=>{
+    const [a,b]=P(q.x,q.y), side=q.s*sc, col=PAL[Math.min(k,PAL.length-1)][0];
+    html+=`<div class="spsq" style="left:${a}px;top:${b}px;width:${side}px;height:${side}px;background:${col};transition-delay:${(reduce?0:k*110)}ms"><span style="font-size:${Math.max(10,side*.28)}px">${F[k]}</span></div>`;
+    // quart de cercle de l'espiral dins de cada quadrat
+    const C={up:[[q.x,q.y+q.s],[q.x+q.s,q.y]],right:[[q.x,q.y],[q.x+q.s,q.y+q.s]],down:[[q.x+q.s,q.y],[q.x,q.y+q.s]],left:[[q.x+q.s,q.y+q.s],[q.x,q.y]]}[q.d];
+    const [p0,p1]=[P(...C[0]),P(...C[1])];
+    path+=(k?'':`M${p0[0].toFixed(1)},${p0[1].toFixed(1)}`)+`A${side.toFixed(1)},${side.toFixed(1)} 0 0 ${swap?0:1} ${p1[0].toFixed(1)},${p1[1].toFixed(1)}`;
+  });
+  $('#spBg').innerHTML=html;
+  const svg=$('#spSpiral'); svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML=`<path d="${path}" fill="none" stroke="#f3d27a" stroke-width="3" stroke-linecap="round"/>`;
+  const pth=svg.querySelector('path'), len=pth.getTotalLength?pth.getTotalLength():3000;
+  pth.style.strokeDasharray=len; pth.style.strokeDashoffset=reduce?0:len;
+  $('#spVer').textContent=`${GAME} ${VERSION}`;
+  $('#spName').textContent=GAME;
+  sp.classList.add('on');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ sp.classList.add('go'); pth.style.transition=reduce?'':'stroke-dashoffset 1.6s ease-in-out .25s'; pth.style.strokeDashoffset=0; }));
+  const play=$('#spPlay');
+  const close=()=>{ if(sp.classList.contains('out')) return; sp.classList.add('out'); setTimeout(()=>{ sp.classList.remove('on','go','out'); },620); };
+  play.onclick=close;
+  play.focus({preventScroll:true});
+}
 
 /* ================= CONTROLS ================= */
 const KEYS={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right',W:'up',S:'down',A:'left',D:'right'};
@@ -1489,7 +1692,7 @@ function unlock(){
     ctx.resume();
     try{ const b=ctx.createBuffer(1,1,22050), s=ctx.createBufferSource(); s.buffer=b; s.connect(ctx.destination); s.start(0); }catch(e){}
   }
-  startMusic();
+  startMusic(); startAmbient();
   if(!speechUnlocked){ speechUnlocked=true; try{ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); }catch(e){} }
 }
 ['touchend','pointerup','click','keydown'].forEach(ev=>document.addEventListener(ev,unlock,true));
@@ -1504,14 +1707,13 @@ gameEl.addEventListener('pointerup',e=>{
   move(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));
 });
 gameEl.addEventListener('pointercancel',()=>{sx=sy=null;});
-document.addEventListener('touchmove',e=>{if(!e.target.closest('.card'))e.preventDefault();},{passive:false});
+document.addEventListener('touchmove',e=>{if(DRAGGING||!e.target.closest('.card'))e.preventDefault();},{passive:false});
 window.addEventListener('resize',()=>G&&layout(false));
 
-$('#btnNew').onclick=()=>{ if(G.over||G.moves<3||confirm('Començar una partida nova?')) newGame(); };
+$('#btnNew').onclick=()=>{ if(G.over||G.moves<3||confirm(L('Començar una partida nova?'))) newGame(); };
 $('#btnAgain').onclick=()=>{closePanels();newGame();};
 $('#btnSet').onclick=()=>{syncSettingsUI();renderHistory();$('#setPanel').classList.add('on');};
 $('#btnClose').onclick=closePanels;
-$('#btnMusic').onclick=()=>setSetting('music',!S.music);
 $('#setPanel').addEventListener('click',e=>{if(e.target.id==='setPanel')closePanels();});
 function closePanels(){document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('on'));}
 
@@ -1519,12 +1721,19 @@ function syncSettingsUI(){
   document.querySelectorAll('.seg').forEach(seg=>seg.querySelectorAll('button').forEach(b=>
     b.classList.toggle('on',String(S[seg.dataset.key])===b.dataset.v)));
   document.querySelectorAll('select[data-key],input[data-key]').forEach(s=>s.value=String(S[s.dataset.key]));
-  $('#btnMusic').classList.toggle('off',!S.music);
+  $('#ambChips').innerHTML=AMBS.map(([k,n])=>`<button data-amb="${k}" class="${S.amb===k?'on':''}">${typeof L==='function'?L(n):n}</button>`).join('');
+  $('#ambChips').querySelectorAll('button').forEach(b=>b.onclick=()=>setSetting('amb',b.dataset.amb));
+  const unl=store.get('bestTile',0)>=377;
+  document.querySelectorAll('[data-key="startHigh"] button').forEach(b=>b.disabled=!unl);
+  $('#shNote').textContent=unl?L('Comences amb un 144 al tauler.'):L('Es desbloqueja quan arribes al 377. Llavors pots començar amb un 144.');
 }
 function setSetting(k,v){
   const restart=(k==='size'||k==='bag')&&S[k]!==v;
   S[k]=v; store.set('settings',S); syncSettingsUI();
   if(k==='music'){ if(v) startMusic(); else stopMusic(); }
+  if(k==='night') applyTheme();
+  if(k==='amb'||k==='ambVol'){ ensureAudio(); startAmbient(); }
+  if(k==='lang'&&typeof applyLang==='function') applyLang();
   applyVolumes();
   if(restart) newGame(); else if(G&&!G.over&&!AUDIO_KEYS.includes(k)){ G.settings=summary(); save(); }
 }
@@ -1539,7 +1748,9 @@ $('#btnDefaults').onclick=()=>{
   AUDIO_KEYS.forEach(k=>keep[k]=S[k]);
   S=Object.assign({},DEFAULTS,keep); store.set('settings',S); syncSettingsUI(); if(restart) newGame();
 };
-$('#fxPick').innerHTML=Object.keys(EFFECTS).map(v=>`<option value="${v}">${v} · ${FXNAMES[v]}</option>`).join('');
+function fillFxPick(){ const s=$('#fxPick'), cur=s.value;
+  s.innerHTML=Object.keys(EFFECTS).map(v=>`<option value="${v}">${v} · ${L(FXNAMES[v])}</option>`).join(''); if(cur) s.value=cur; }
+fillFxPick();
 $('#btnFx').onclick=()=>{
   const v=Number($('#fxPick').value); closePanels(); ensureAudio();
   setTimeout(()=>{ milestone(v,fxW/2,fxH/2); chime(v); praise(v,praiseDelay(v)); },150);
@@ -1547,20 +1758,20 @@ $('#btnFx').onclick=()=>{
 
 function renderHistory(){
   const h=store.get('history',[]);
-  if(!h.length){$('#histSummary').textContent='Encara no hi ha cap partida acabada.';$('#histTable').innerHTML='';return;}
+  if(!h.length){$('#histSummary').textContent=L('Encara no hi ha cap partida acabada.');$('#histTable').innerHTML='';return;}
   const avg=f=>Math.round(h.reduce((a,x)=>a+f(x),0)/h.length);
   const maxes={}; h.forEach(x=>maxes[x.max]=(maxes[x.max]||0)+1);
-  $('#histSummary').innerHTML=`${h.length} partides · mitjana: <b>${avg(x=>x.moves)}</b> mov., <b>${fmt(avg(x=>x.secs)*1000)}</b>, ${avg(x=>x.score)} punts<br>`+
-    'Fitxa més alta: '+Object.keys(maxes).sort((a,b)=>b-a).map(k=>`${k} ×${maxes[k]}`).join(', ');
-  $('#histTable').innerHTML='<table><tr><th>Data</th><th>Mov.</th><th>Temps</th><th>Màx.</th><th>Punts</th></tr>'+
+  $('#histSummary').innerHTML=L('{0} partides · mitjana: <b>{1}</b> mov., <b>{2}</b>, {3} punts',h.length,avg(x=>x.moves),fmt(avg(x=>x.secs)*1000),avg(x=>x.score))+'<br>'+
+    L('Fitxa més alta')+': '+Object.keys(maxes).sort((a,b)=>b-a).map(k=>`${k} ×${maxes[k]}`).join(', ');
+  $('#histTable').innerHTML='<table><tr>'+['Data','Mov.','Temps','Màx.','Punts'].map(x=>`<th>${L(x)}</th>`).join('')+'</tr>'+
     h.slice(0,15).map(x=>`<tr title="${x.set}"><td>${x.d.slice(5)}</td><td>${x.moves}</td><td>${fmt(x.secs*1000)}</td><td>${x.max}</td><td>${x.score}</td></tr>`).join('')+'</table>';
 }
 $('#btnCopy').onclick=()=>{
   const h=store.get('history',[]);
   const txt='data\tmoviments\tsegons\tfitxa_max\tpunts\tajustos\n'+h.map(x=>[x.d,x.moves,x.secs,x.max,x.score,x.set].join('\t')).join('\n');
-  try{navigator.clipboard.writeText(txt).then(()=>alert('Copiat ('+h.length+' partides).'),()=>prompt('Copia:',txt));}catch(e){prompt('Copia:',txt);}
+  try{navigator.clipboard.writeText(txt).then(()=>alert(L('Copiat ({0} partides).',h.length)),()=>prompt(L('Copia:'),txt));}catch(e){prompt(L('Copia:'),txt);}
 };
-$('#btnClear').onclick=()=>{if(confirm('Esborrar l\'historial de partides de prova?')){store.set('history',[]);renderHistory();}};
+$('#btnClear').onclick=()=>{if(confirm(L("Esborrar l'historial de partides de prova?"))){store.set('history',[]);renderHistory();}};
 
 /* ================= PROVES (apartat 1.7) ================= */
 function runTests(){
@@ -1610,15 +1821,34 @@ function runTests(){
 }
 $('#btnTests').onclick=()=>{
   const t=runTests();
-  $('#testOut').innerHTML=`<div class="${t.pass===t.total?'pass':'fail'}"><b>${t.pass}/${t.total} correctes</b></div>`+
+  $('#testOut').innerHTML=`<div class="${t.pass===t.total?'pass':'fail'}"><b>${L('{0}/{1} correctes',t.pass,t.total)}</b></div>`+
     t.results.map(x=>`<div class="${x.pass?'pass':'fail'}">${x.pass?'✓':'✗'} ${x.name}${x.info?` <span class="small">(${x.info})</span>`:''}</div>`).join('');
 };
 window.fibTests=runTests;
 
+/* ================= IDIOMA: textes fixos i redibuix ================= */
+function applyLang(){
+  document.documentElement.lang=curLang();
+  document.title=`${GAME} · ${L('prototip')}`;
+  document.querySelectorAll('[data-i18n]').forEach(e=>{
+    const tn=[...e.childNodes].find(n=>n.nodeType===3&&n.nodeValue.trim()); if(!tn) return;
+    const m=tn.nodeValue.match(/^(\s*)[\s\S]*?(\s*)$/); tn.nodeValue=m[1]+L(e.getAttribute('data-i18n'))+m[2]; });
+  document.querySelectorAll('[data-i18n-title]').forEach(e=>e.title=L(e.getAttribute('data-i18n-title')));
+  document.querySelectorAll('[data-i18n-aria]').forEach(e=>e.setAttribute('aria-label',L(e.getAttribute('data-i18n-aria'))));
+  fillFxPick(); syncSettingsUI();
+  if(G){ updateHud(); const sd=$('#nextTile .seed'); if(sd) sd.title=L('Fitxa alta'); }
+  if($('#hub').classList.contains('on')) hubTab(hubCur);
+  if($('#setPanel').classList.contains('on')) renderHistory();
+  if($('#overPanel').classList.contains('on')) renderOver();
+}
+
 /* ================= INICI ================= */
+applyTheme();
 document.querySelectorAll('.ver').forEach(e=>e.textContent=VERSION);
 syncSettingsUI();
 if(PENDING_CH) startChallenge(PENDING_CH); else if(load()) layout(true); else newGame();
+applyLang();
+showSplash();
 if(location.hash==='#proves'){ $('#btnSet').click(); $('#btnTests').click(); }
 </script>
 </body>
