@@ -89,12 +89,95 @@ td:first-child,th:first-child{text-align:left}
 .pass{color:var(--ok)} .fail{color:var(--bad)}
 .over-tile{width:72px;height:72px;margin:8px auto}
 .center{text-align:center}
+/* ===== Estadístiques, classificació i Plus ===== */
+:root{--jade:#7cc4a6;--jade2:#3a9a7a;--hi:#4a4230;--card2:#2f2c25}
+.hub{align-items:stretch;padding:0}
+.hubcard{max-width:520px;max-height:none;height:100%;border-radius:0;border:0;padding:0;display:flex;flex-direction:column;margin:0 auto}
+.hubhead{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:4px;flex:1;overflow-x:auto}
+.tabs button{border:0;background:transparent;padding:7px 7px;border-radius:12px;white-space:nowrap;color:var(--muted);font-weight:600;font-size:13.5px}
+.hubhead .icon{width:34px;height:34px;flex-shrink:0}
+.tabs button.on{background:var(--hi);color:var(--ink)}
+#hubBody{flex:1;overflow-y:auto;padding:12px 14px 40px;-webkit-overflow-scrolling:touch}
+.kcard{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px}
+.khead{font-weight:700;font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.knote{font-size:12px;color:var(--muted);margin-top:8px}
+.kgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:var(--panel);border-radius:12px;padding:8px 4px;text-align:center}
+.kpi b{display:block;font-size:20px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.kpi span{font-size:11px;color:var(--muted)} .kpi i{display:block;font-style:normal;font-size:11px;color:var(--muted)}
+.plus-tag{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:6px;background:linear-gradient(#f2c14e,#d69a2e);
+  color:#3a2a05;font-size:11px;font-weight:900;letter-spacing:1px;vertical-align:middle;font-style:normal}
+.seg2{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.seg2 button{padding:6px 12px;font-size:14px}
+.seg2 button.on{background:var(--ok);color:#1e2414;font-weight:700;border-color:var(--ok)}
+.banner{background:var(--hi);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+.tips{margin:0;padding-left:18px;font-size:14px;line-height:1.45}
+.hb{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px}
+.hb .l{width:92px;flex-shrink:0;color:var(--ink)} .hb .t{width:84px;flex-shrink:0;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.hb .bar{flex:1;height:12px;border-radius:6px;background:var(--panel);overflow:hidden}
+.hb .bar div{height:100%;border-radius:6px}
+svg.chart{width:100%;height:auto;display:block}
+svg.chart text{fill:var(--muted);font-size:10px;font-family:inherit}
+.heat{display:grid;gap:4px;margin:6px auto;max-width:220px}
+.heat div{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#1e2414}
+.heats{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;font-size:12px;color:var(--muted)}
+.cal{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px}
+.cal div{aspect-ratio:1;border-radius:3px}
+.legend{display:flex;gap:4px;align-items:center;justify-content:flex-end;font-size:11px;color:var(--muted);margin-top:6px;flex-wrap:wrap}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.compass{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:240px;margin:0 auto;text-align:center}
+.compass div{border-radius:12px;padding:8px 2px;font-size:12px;color:var(--muted)}
+.compass b{display:block;font-size:18px;color:var(--ink)}
+table.kt{font-size:13px} table.kt td,table.kt th{padding:6px 3px}
+.rec{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.rec:last-child{border-bottom:0} .rec b{font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chips button{padding:6px 11px;font-size:14px}
+.chips button.on{background:var(--hi);border-color:var(--gold);font-weight:700}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:8px 0 4px}
+.podium>div{flex:1;max-width:110px;text-align:center;font-size:12px}
+.podium .nm{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.podium .blk{border-radius:10px 10px 0 0;color:#fff;font-weight:900;font-size:22px;display:grid;place-items:center;margin-top:4px}
+.rrow{display:flex;gap:10px;align-items:center;padding:8px 6px;border-bottom:1px solid var(--line);font-size:14px}
+.rrow:last-child{border-bottom:0} .rrow .p{width:26px;text-align:center;color:var(--muted)} .rrow .n{flex:1}
+.rrow .v{font-variant-numeric:tabular-nums}
+.rrow.me{background:var(--hi);border-radius:10px;font-weight:800}
+.gold{background:var(--gold);color:#2a1e05;border:0;font-weight:800;font-size:17px;width:100%;padding:13px;margin-top:10px}
+.offer{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:14px;margin:8px 0;cursor:pointer;width:100%;text-align:left}
+.offer.best{background:var(--hi);border:2px solid var(--gold)}
+.offer .pr{font-weight:800;font-size:17px;white-space:nowrap}
+.offer small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.offer .tag{color:var(--gold);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
+.feat{list-style:none;padding:0;margin:6px 0}
+.feat li{padding:5px 0;display:flex;gap:8px;align-items:center}
+.sheetwrap{align-items:flex-end;padding:0;z-index:20}
+.sheet{max-width:520px;border-radius:20px 20px 0 0;max-height:88vh;padding:18px 16px 24px}
+.sheet input,.sheet textarea{width:100%;font:inherit;background:var(--soil);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:9px;margin:4px 0 10px}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.tgrid button{border-radius:14px;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px}
+.tgrid button span{font-size:24px}
+.ord{list-style:none;padding:0;margin:8px 0}
+.ord li{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 8px;margin:6px 0;position:relative}
+.ord li.drag{z-index:2;box-shadow:0 6px 16px rgba(0,0,0,.5);border-color:var(--gold)}
+.ord .hd{touch-action:none;cursor:grab;padding:6px 4px;font-size:18px;color:var(--muted);user-select:none}
+.ord .nm{flex:1} .ord .nm small{display:block;color:var(--gold);font-size:11px}
+.ord button{padding:4px 9px}
+.duel{display:flex;justify-content:center;align-items:center;gap:14px;margin:10px 0}
+.av{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#1e2414}
+.week{display:flex;justify-content:space-between;margin:10px 0;text-align:center;font-size:12px;color:var(--muted)}
+.week b{display:block;font-size:18px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#efe6d2;color:#2a2822;padding:10px 16px;border-radius:12px;
+  font-size:14px;z-index:40;opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center}
+#toast.on{opacity:1}
 </style>
 </head>
 <body>
 <div id="app">
   <header>
     <h1>DayNacci<small>prototip <span class="ver"></span></small></h1>
+    <button class="icon" id="btnHub" title="Estadístiques i classificació" aria-label="Estadístiques i classificació">🏆</button>
     <button class="icon" id="btnMusic" title="Música" aria-label="Música">♪</button>
     <button class="icon" id="btnNew" title="Partida nova" aria-label="Partida nova">↻</button>
     <button class="icon" id="btnSet" title="Ajustos de prova" aria-label="Ajustos de prova">⚙</button>
@@ -155,20 +238,33 @@ td:first-child,th:first-child{text-align:left}
   </div>
 </div>
 
+<!-- Estadístiques, classificació i Plus -->
+<div class="overlay hub" id="hub">
+  <div class="card hubcard">
+    <div class="hubhead">
+      <div class="tabs"><button data-tab="stats">📊 Estadístiques</button><button data-tab="rank">🏆 Classificació</button><button data-tab="plus">⭐ Plus</button></div>
+      <button class="icon" id="hubClose" aria-label="Tanca">✕</button>
+    </div>
+    <div id="hubBody"></div>
+  </div>
+</div>
+<div class="overlay sheetwrap" id="sheet"><div class="card sheet" id="sheetBody"></div></div>
+<div id="toast"></div>
+
 <!-- Final de partida -->
 <div class="overlay" id="overPanel">
   <div class="card center">
     <h2>El jardí ja no té lloc</h2>
     <div class="over-tile" id="overTile"></div>
     <div id="overText"></div>
-    <div class="btns" style="justify-content:center"><button id="btnAgain">Torna a jugar</button></div>
+    <div class="btns" style="justify-content:center"><button id="btnOverStats">🏆 Estadístiques</button><button id="btnAgain">Torna a jugar</button></div>
   </div>
 </div>
 
 <script>
 "use strict";
 /* Versió 0.X.Y (vegeu CHANGELOG.md): 0 fins al llançament · X canvi important · Y retoc */
-const VERSION='0.2.3';
+const VERSION='0.3.0';
 /* ================= MOTOR (sense DOM) ================= */
 const SERIES=[1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368,75025,121393,196418,317811,514229];
 const IDX=new Map(SERIES.map((v,i)=>[v,i]));
@@ -244,9 +340,10 @@ function makeBag(size,rnd){
 /* ================= ESTAT I AJUSTOS ================= */
 const DEFAULTS={allow11:true,size:'4x4',threshold:34,odds:20,below:4,bag:6,sound:true,music:true,musicVol:50,voice:'big'};
 const AUDIO_KEYS=['sound','music','musicVol','voice'];
+const MEM={}; // si el navegador no deixa desar (mode privat), es guarda en memòria mentre la pàgina és oberta
 const store={
-  get(k,d){try{const s=localStorage.getItem('fib.'+k);return s==null?d:JSON.parse(s);}catch(e){return d;}},
-  set(k,v){try{localStorage.setItem('fib.'+k,JSON.stringify(v));}catch(e){}}
+  get(k,d){try{const s=localStorage.getItem('fib.'+k);return s==null?d:JSON.parse(s);}catch(e){return k in MEM?JSON.parse(MEM[k]):d;}},
+  set(k,v){MEM[k]=JSON.stringify(v);try{localStorage.setItem('fib.'+k,MEM[k]);}catch(e){}}
 };
 let S=Object.assign({},DEFAULTS,store.get('settings',{}));
 if(!/^\d+x\d+$/.test(S.size)) S.size=S.n===5?'5x5':'4x4'; delete S.n;
@@ -266,7 +363,7 @@ function genNext(){
 function newGame(){
   const {rows,cols}=dims(S.size);
   G={size:S.size,rows,cols,grid:Array.from({length:rows},()=>Array(cols).fill(null)),bag:[],score:0,moves:0,elapsed:0,last:0,over:false,
-     peak:2,settings:summary()};
+     peak:2,settings:summary(),st:newSt(rows,cols)};
   const count=Math.round(rows*cols*9/16); // 9 al 4x4
   const vals=[3]; while(vals.length<count) vals.push(drawLow());
   const cells=[]; for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)cells.push([r,c]);
@@ -275,17 +372,22 @@ function newGame(){
   G.next=genNext();
   layout(true); save();
 }
+/* Dades de cada partida per a les estadístiques */
+function newSt(rows,cols){ const now=new Date();
+  return {t0:now.toISOString(),dirs:{up:0,down:0,left:0,right:0},merges:{},mergeHeat:Array(rows*cols).fill(0),
+    spawnHeat:Array(rows*cols).fill(0),miles:[],curve:[],empty:[],highs:0,shakes:0,multi:0}; }
 function summary(){return `${S.size} · 1+1 ${S.allow11?'sí':'no'} · alta ${S.threshold||'mai'}${S.threshold?` 1/${S.odds} -${S.below}`:''} · bossa ${S.bag}`;}
 function save(){
   if(!G) return;
   store.set('game',{size:G.size,rows:G.rows,cols:G.cols,grid:G.grid.map(r=>r.map(t=>t?t.v:0)),bag:G.bag,score:G.score,moves:G.moves,
-    elapsed:G.elapsed,over:G.over,next:G.next,peak:G.peak,settings:G.settings});
+    elapsed:G.elapsed,over:G.over,next:G.next,peak:G.peak,settings:G.settings,st:G.st,prevBest:G.prevBest,prevBestTile:G.prevBestTile});
 }
 function load(){
   const g=store.get('game',null);
   if(!g||g.over||g.size!==S.size) return false;
   G=Object.assign({},g,{last:0,grid:g.grid.map(r=>r.map(v=>v?mk(v):null))});
   if(!G.peak) G.peak=maxOf(G.grid);
+  if(!G.st) G.st=newSt(G.rows,G.cols);
   return true;
 }
 
@@ -294,7 +396,7 @@ const VEC={up:[-1,0],down:[1,0],left:[0,-1],right:[0,1]};
 function move(dir){
   if(!G||G.over) return;
   const res=applyMove(G.grid,dir,S.allow11);
-  if(!res.moved.length){ shake(); return; }
+  if(!res.moved.length){ shake(); if(G.st) G.st.shakes++; return; }
   const now=Date.now();
   if(G.moves>0) G.elapsed+=Math.min(now-G.last,30000);
   G.last=now; G.moves++;
@@ -303,6 +405,12 @@ function move(dir){
   const line=res.lines[k], [r,c]=line[line.length-1];
   const t=mk(G.next.v); t.spawnFrom=dir; res.grid[r][c]=t;
   G.grid=res.grid; G.score+=res.points;
+  // estadístiques
+  const st=G.st; st.dirs[dir]++; st.spawnHeat[r*G.cols+c]++; if(G.next.high) st.highs++;
+  if(res.merges.length>1) st.multi++;
+  res.merges.forEach(m=>{ st.merges[m.tile.v]=(st.merges[m.tile.v]||0)+1;
+    for(let rr=0;rr<G.rows;rr++)for(let cc=0;cc<G.cols;cc++) if(res.grid[rr][cc]===m.tile) st.mergeHeat[rr*G.cols+cc]++; });
+  if(G.moves%10===0){ st.curve.push(G.score); st.empty.push(res.grid.flat().filter(x=>!x).length); }
   G.next=genNext();
   render(res.merges);
   if(res.points) bumpScore(res.points);
@@ -310,27 +418,34 @@ function move(dir){
     const top=res.merges.reduce((a,m)=>m.tile.v>a.tile.v?m:a);
     const v=top.tile.v; let delay=0;
     if(v>G.peak){ // número nou de la sèrie en aquesta partida
-      G.peak=v; const [cx,cy]=tileCenter(top.tile.id);
+      G.peak=v; const [cx,cy]=tileCenter(top.tile.id); G.st.miles.push([v,G.moves,Math.round(G.elapsed/1000)]);
       milestone(v,cx,cy); chime(v);
       delay=praiseDelay(v); // l'elogi arriba quan l'efecte ja s'apaga
     } else playNotes(v);
     praise(v,delay);
   }
+  liveRecords();
   if(!anyMove(G.grid,S.allow11)) endGame();
   save();
+}
+/* La fitxa rècord i la millor puntuació s'actualitzen en directe (de totes les partides, també la que jugues) */
+function liveRecords(){
+  if(G.prevBest==null){ G.prevBest=store.get('best',0); G.prevBestTile=store.get('bestTile',0); }
+  const m=maxOf(G.grid);
+  if(m>store.get('bestTile',0)) store.set('bestTile',m);
+  if(G.score>store.get('best',0)) store.set('best',G.score);
 }
 function endGame(){
   G.over=true;
   const max=maxOf(G.grid);
-  const best=store.get('best',0), bestTile=store.get('bestTile',0);
-  const recScore=G.score>best, recTile=max>bestTile;
-  if(recScore) store.set('best',G.score);
-  if(recTile) store.set('bestTile',max);
+  // els rècords es comparen amb els d'abans d'aquesta partida (liveRecords ja els ha anat desant)
+  const recScore=G.score>(G.prevBest??store.get('best',0)), recTile=max>(G.prevBestTile??store.get('bestTile',0));
+  liveRecords();
   store.set('games',store.get('games',0)+1);
   const h=store.get('history',[]);
-  h.unshift({d:new Date().toISOString().slice(0,16).replace('T',' '),moves:G.moves,secs:Math.round(G.elapsed/1000),
-    max,score:G.score,set:G.settings});
-  store.set('history',h.slice(0,100));
+  h.unshift({ts:Date.now(),d:new Date().toISOString().slice(0,16).replace('T',' '),moves:G.moves,secs:Math.round(G.elapsed/1000),
+    max,score:G.score,set:G.settings,size:G.size,st:Object.assign({},G.st,{end:G.grid.map(r=>r.map(t=>t?t.v:0))})});
+  store.set('history',h.slice(0,300));
   setTimeout(()=>{
     $('#overPanel').classList.add('on');
     paintDisc($('#overTile'),max);
@@ -427,7 +542,7 @@ function render(merges){
 function updateHud(){
   $('#score').textContent=G.score;
   $('#best').textContent=Math.max(store.get('best',0),G.score);
-  const bt=store.get('bestTile',0); $('#bestTile').textContent=bt||'–';
+  const bt=Math.max(store.get('bestTile',0),maxOf(G.grid)); $('#bestTile').textContent=bt||'–';
   $('#stMoves').textContent=G.moves;
   $('#stMax').textContent=maxOf(G.grid)||'–';
   tick();
@@ -754,10 +869,496 @@ function milestone(v,x,y){
   try{ EFFECTS[k](x,y); }catch(e){}
 }
 
+
+/* =====================================================================
+   ESTADÍSTIQUES · CLASSIFICACIÓ · PLUS  (simulat, com al prototip de Melodia)
+   ===================================================================== */
+const GAME=((($('h1')||{}).firstChild||{}).textContent||'Joc').trim();
+function seeded(str){ let h=1779033703^str.length; for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19;}
+  return ()=>{h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);h^=h>>>16;return (h>>>0)/4294967296;}; }
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nf=n=>Math.round(n).toLocaleString('ca-ES');
+const pct=x=>Math.round(x*100)+'%';
+const TAG='<span class="plus-tag">PLUS</span>';
+let toastT=0;
+function toast(t){ const e=$('#toast'); e.textContent=t; e.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>e.classList.remove('on'),2600); }
+function openSheet(html,bind){ $('#sheetBody').innerHTML=html; $('#sheet').classList.add('on'); if(bind) bind($('#sheetBody')); }
+function closeSheet(){ $('#sheet').classList.remove('on'); }
+$('#sheet').addEventListener('click',e=>{ if(e.target.id==='sheet') closeSheet(); });
+async function shareText(text){
+  try{ if(navigator.share){ await navigator.share({text}); return; } }catch(e){ return; }
+  try{ await navigator.clipboard.writeText(text); toast('Enllaç copiat: enganxa\'l al grup.'); }catch(e){ prompt('Copia aquest text:',text); }
+}
+const baseUrl=()=>location.href.split(/[?#]/)[0];
+
+/* ---------- Plus ---------- */
+const PLUS_FEATS=[['🏆','Crear lligues per a la teva gent'],['📊','Estadístiques completes: més de 40 dades i gràfics']];
+const plusGet=()=>Object.assign({on:false,plan:null,since:0,cancel:false,pass:0},store.get('plus',{}));
+const plusSet=p=>{ store.set('plus',p); };
+const isPlus=()=>{ const p=plusGet(); return p.on||Date.now()<p.pass; };
+function plusStart(plan){ const p=plusGet(); plusSet(Object.assign(p,{on:true,plan,since:Date.now(),cancel:false})); }
+function renewDate(p){ const d=new Date(p.since); if(p.plan==='regal'){ d.setFullYear(d.getFullYear()+1); return d; }
+  const step=p.plan==='mes'?1:12; while(d<=new Date()) d.setMonth(d.getMonth()+step); return d; }
+const MONTHS=['de gener','de febrer','de març','d’abril','de maig','de juny','de juliol','d’agost','de setembre','d’octubre','de novembre','de desembre'];
+const longDate=d=>`${d.getDate()} ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
+const featList=()=>`<ul class="feat">${PLUS_FEATS.map(([e,t])=>`<li><span>${e}</span><span style="flex:1">${t}</span>${isPlus()?'<b style="color:var(--jade)">✓</b>':''}</li>`).join('')}</ul>`;
+function askPlus(kind,then){
+  const st=kind==='stats';
+  openSheet(`<div class="center" style="font-size:40px">${st?'📊':'🏆'}</div>
+    <h2 class="center">${st?'Les estadístiques completes són de Plus':`Crear lligues és de ${GAME} Plus`}</h2>
+    <p class="small center">${st?'Evolució de la puntuació, mapes de calor, fins on arribes, quan i com jugues, rècords i molt més.':
+      'Amb Plus pots crear totes les lligues que vulguis i convidar-hi la teva gent. Els convidats hi entren gratis.'}</p>
+    <div class="banner"><b>⭐ ${GAME} Plus inclou</b>${featList()}</div>
+    <button class="gold" id="apGo">Activar Plus (prototip, gratis)</button>
+    <div class="btns" style="justify-content:center"><button id="apPrices">Veure preus</button><button id="apNo" style="border:0;background:none">Ara no</button></div>`,b=>{
+    b.querySelector('#apGo').onclick=()=>{ plusStart('any'); closeSheet(); toast('Plus activat (simulat)'); if(then) then(); };
+    b.querySelector('#apPrices').onclick=()=>{ closeSheet(); hubTab('plus'); };
+    b.querySelector('#apNo').onclick=closeSheet;
+  });
+}
+function renderPlus(){
+  const p=plusGet(), el=$('#hubBody'), pass=Date.now()<p.pass;
+  if(!p.on){
+    el.innerHTML=`<h2>⭐ ${GAME} Plus</h2><p class="small">Sense anuncis i sense monedes. Preus amb IVA inclòs.</p>
+      ${pass?`<div class="banner">✓ Passi del dia actiu fins a les ${new Date(p.pass).toLocaleTimeString('ca-ES',{hour:'2-digit',minute:'2-digit'})}.</div>`:''}
+      <div class="banner"><b>⭐ ${GAME} Plus inclou</b>${featList()}</div>
+      <button class="offer" data-o="pass"><span><b>Passi del dia</b><small>Plus durant 24 hores · sense renovació</small></span><span class="pr">0,99 €</span></button>
+      <button class="offer best" data-o="any"><span><span class="tag">Millor preu</span><b style="display:block">Plus anual</b><small>Surt a 2,50 € al mes</small></span><span class="pr">29,99 €</span></button>
+      <details><summary class="small" style="padding:8px 0;cursor:pointer">Veure més opcions</summary>
+        <button class="offer" data-o="mes"><span><b>Plus mensual</b></span><span class="pr">4,99 €/mes</span></button>
+        <button class="offer" data-o="regal"><span><b>🎁 Regalar Plus a algú</b><small>Un any sencer per a un familiar</small></span><span class="pr">29,99 €</span></button>
+      </details>
+      <p class="small">El Plus mensual i l’anual es renoven automàticament i es poden cancel·lar en qualsevol moment. El passi del dia no es renova.</p>
+      <p class="small"><b>Prototip: no es fa cap cobrament.</b></p>
+      <div class="btns"><button id="plRestore">Restaurar compres</button></div>`;
+    el.querySelectorAll('.offer').forEach(o=>o.onclick=()=>{
+      const k=o.dataset.o;
+      if(k==='pass'){ plusSet(Object.assign(p,{pass:Date.now()+864e5})); toast('Passi del dia activat (simulat)'); }
+      else if(k==='regal'){ giftSheet(); return; }
+      else { plusStart(k); toast('Plus activat (simulat)'); }
+      renderPlus();
+    });
+    el.querySelector('#plRestore').onclick=()=>toast('Compres restaurades (simulat)');
+    return;
+  }
+  const rd=renewDate(p), plan=p.plan==='mes'?'Plus mensual · 4,99 €/mes':p.plan==='regal'?'Plus de regal':'Plus anual · 29,99 €';
+  el.innerHTML=`<h2>⭐ La teva subscripció ${TAG}</h2>
+    <div class="kcard">
+      <div class="rec"><span>${GAME} Plus</span><b style="color:var(--jade)">✓ Actiu</b></div>
+      <div class="rec"><span>Pla</span><b>${plan}</b></div>
+      <div class="rec"><span>${p.plan==='regal'||p.cancel?'Actiu fins al':'Propera renovació'}</span><b>${longDate(rd)}</b></div>
+    </div>
+    <div class="banner"><b>Inclou</b>${featList()}</div>
+    ${p.plan==='regal'?'<p class="small">És un regal: no es renova ni es cobra res.</p>':
+      p.cancel?`<p class="small">Has cancel·lat el pla: no es renovarà. Fins al ${longDate(rd)} continues tenint Plus.</p><div class="btns"><button id="plReact">Reactivar la renovació</button></div>`:
+      '<div class="btns"><button id="plCancel">Cancel·lar el pla</button></div>'}
+    <div class="btns"><button id="plGift">🎁 Regalar Plus a algú</button></div>
+    <p class="small">Prototip: a l’app de veritat la cancel·lació es fa a l’App Store o a Google Play.</p>
+    <div class="btns"><button id="plOff">Prototip: tornar a la versió gratuïta</button></div>`;
+  const on=(id,f)=>{ const b=el.querySelector(id); if(b) b.onclick=f; };
+  on('#plReact',()=>{ plusSet(Object.assign(p,{cancel:false})); toast('Renovació reactivada (simulat)'); renderPlus(); });
+  on('#plCancel',()=>openSheet(`<h2>Cancel·lar ${GAME} Plus?</h2>
+      <p>No es tornarà a cobrar. Continuaràs tenint Plus fins al ${longDate(rd)}; després tornaràs a la versió gratuïta.</p>
+      <p class="small">No perds res: les partides, els rècords i les estadístiques es queden. Les lligues que has creat continuen, però no en podràs crear de noves.</p>
+      <div class="btns"><button id="cKeep">Mantenir Plus</button><button id="cYes">Sí, cancel·lar el pla</button></div>`,b=>{
+      b.querySelector('#cKeep').onclick=closeSheet;
+      b.querySelector('#cYes').onclick=()=>{ plusSet(Object.assign(p,{cancel:true})); closeSheet(); toast(`Pla cancel·lat (simulat). Tens Plus fins al ${longDate(rd)}.`); renderPlus(); };
+    }));
+  on('#plGift',giftSheet);
+  on('#plOff',()=>{ plusSet(Object.assign(p,{on:false,plan:null,cancel:false,pass:0})); toast('Tornes a la versió gratuïta (prototip)'); renderPlus(); });
+}
+function giftSheet(){
+  openSheet(`<h2>🎁 Regala ${GAME} Plus</h2>
+    <p class="small">Un any de Plus: lligues pròpies i estadístiques completes. Li enviaràs un enllaç i el regal quedarà activat al seu mòbil.</p>
+    <label class="small">De part de</label><input id="gFrom" maxlength="30" placeholder="El teu nom">
+    <label class="small">Missatge</label><textarea id="gMsg" maxlength="140" rows="3">Perquè juguis cada dia una estona. Una abraçada!</textarea>
+    <button class="gold" id="gPay">Pagar 29,99 € i enviar</button>
+    <div class="btns" style="justify-content:center"><button id="gNo" style="border:0;background:none">Ara no</button></div>`,b=>{
+    b.querySelector('#gNo').onclick=closeSheet;
+    b.querySelector('#gPay').onclick=()=>{
+      const de=b.querySelector('#gFrom').value.trim(), msg=b.querySelector('#gMsg').value.trim();
+      closeSheet(); toast('Regal pagat (simulat)');
+      shareText(`T’he regalat un any de ${GAME} Plus, un joc de fitxes que creixen en espiral. Obre l’enllaç per activar-lo: ${baseUrl()}?regal=1&de=${encodeURIComponent(de)}&msg=${encodeURIComponent(msg)}`);
+    };
+  });
+}
+
+/* ---------- Dades de les partides (o d'exemple) ---------- */
+const gameTs=g=>g.ts||Date.parse((g.d||'').replace(' ','T')+'Z')||Date.now();
+let SAMPLE=null;
+function sampleGames(){
+  if(SAMPLE) return SAMPLE;
+  const R=seeded('estadistiques-mostra'), out=[], now=new Date(); now.setHours(0,0,0,0);
+  const hours=[8,9,10,11,13,16,17,18,19,21,22,23];
+  for(let d=120;d>=0;d--){
+    if(R()<.3) continue;
+    const prog=1-d/120, n=1+Math.floor(R()*4);
+    for(let k=0;k<n;k++){
+      const size=R()<.8?'4x4':R()<.5?'4x5':'5x5', {rows,cols}=dims(size), cells=rows*cols;
+      const mi=Math.max(5,Math.min(15,Math.round(8+prog*2.4+(R()+R()+R()-1.5)*1.6+(cells>16?1:0))));
+      const max=SERIES[mi], score=Math.round(max*(4.2+R()*2.6)+R()*150);
+      const moves=Math.round(score/(7+R()*3))+25, secs=Math.round(moves*(1.05+R()*.8));
+      const w=[1.3+R()*.3,.7+R()*.3,1.2+R()*.3,.8+R()*.3], ws=w.reduce((a,b)=>a+b), dirs={};
+      ['up','down','left','right'].forEach((k2,i)=>dirs[k2]=Math.round(moves*w[i]/ws));
+      const merges={}; for(let i=2;i<=mi;i++) merges[SERIES[i]]=Math.max(1,Math.round(moves*.55*Math.pow(.62,i-2)*(.8+R()*.4)));
+      const mergeHeat=[],spawnHeat=[];
+      for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+        const edge=(r===0||c===0)?1.8:(r===rows-1||c===cols-1)?1.1:.6;
+        mergeHeat.push(Math.round(moves*.05*edge*(.6+R()*.8)));
+        spawnHeat.push((r===rows-1||c===cols-1||r===0||c===0)?Math.round(moves/(2*(rows+cols))*(r===rows-1||c===cols-1?1.6:.5)*(.7+R()*.6)):0);
+      }
+      const miles=[]; let mv=0; for(let i=2;i<=mi;i++){ mv+=Math.round(moves/(mi)*(.6+R()*.5)); miles.push([SERIES[i],Math.min(mv,moves),Math.round(Math.min(mv,moves)*secs/moves)]); }
+      const curve=[],empty=[]; for(let m=10;m<=moves;m+=10){ const f=m/moves; curve.push(Math.round(score*Math.pow(f,1.25))); empty.push(Math.max(0,Math.round((cells*.44)*(1-f*.8)+(R()-.5)*2))); }
+      const t=new Date(now.getTime()-d*864e5); t.setHours(hours[Math.floor(R()*hours.length)],Math.floor(R()*60));
+      out.push({ts:t.getTime(),moves,secs,max,score,size,st:{dirs,merges,mergeHeat,spawnHeat,miles,curve,empty,
+        highs:max>=34?Math.round(moves/20*R()):0,shakes:Math.floor(R()*5),multi:Math.round(moves*.05*R())}});
+    }
+  }
+  return SAMPLE=out;
+}
+
+/* ---------- Gràfics (SVG i HTML) ---------- */
+const tileColor=v=>PAL[Math.min(IDX.get(v)??0,PAL.length-1)][0];
+function hbar(label,frac,text,color){ return `<div class="hb"><span class="l">${label}</span><span class="bar"><div style="width:${Math.max(0,Math.min(1,frac))*100}%;background:${color}"></div></span><span class="t">${text}</span></div>`; }
+function columns(vals,labels,colors,h=120,fmt=v=>v){
+  const W=320,n=vals.length,mx=Math.max(1,...vals),bw=W/n;
+  return `<svg class="chart" viewBox="0 0 ${W} ${h+30}">${vals.map((v,i)=>{ const bh=Math.round(v/mx*(h-14)), x=i*bw+bw*.15, w=bw*.7;
+    return `<rect x="${x}" y="${h-bh}" width="${w}" height="${bh}" rx="4" fill="${colors[i]||colors[0]}"/>
+      <text x="${x+w/2}" y="${h-bh-3}" text-anchor="middle">${v?fmt(v):''}</text>
+      <text x="${x+w/2}" y="${h+14}" text-anchor="middle">${labels[i]}</text>`; }).join('')}</svg>`;
+}
+function lineChart(series,{h=150,yLabel=v=>nf(v),xL='',xR='',dots=null,best=null,y0=0}={}){
+  const W=320,L=34,T=14,B=h-20, all=series.flatMap(s=>s.pts).filter(v=>v!=null);
+  if(!all.length) return '';
+  const mx=Math.max(...all,...(dots||[]).map(d=>d.v)), mn=Math.min(y0,...all), n=Math.max(...series.map(s=>s.pts.length));
+  const X=i=>L+(n<=1?0:i*(W-L-8)/(n-1)), Y=v=>T+(B-T)*(1-(v-mn)/((mx-mn)||1));
+  let g=''; for(let k=0;k<=2;k++){ const v=mn+(mx-mn)*k/2, y=Y(v); g+=`<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="#4d483d" stroke-dasharray="3 4"/><text x="${L-4}" y="${y+3}" text-anchor="end">${yLabel(v)}</text>`; }
+  const paths=series.map(s=>{ let d='',pen=false; s.pts.forEach((v,i)=>{ if(v==null){pen=false;return;} d+=`${pen?'L':'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`; pen=true; });
+    return `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w||2.2}" stroke-linejoin="round" stroke-linecap="round"/>`; }).join('');
+  const dt=dots?dots.map((d,i)=>`<circle cx="${X(i)}" cy="${Y(d.v)}" r="3.4" fill="${d.c}"/>`).join(''):'';
+  const bs=best!=null?`<circle cx="${X(best.i)}" cy="${Y(best.v)}" r="7" fill="none" stroke="#e8c35a" stroke-width="2"/><text x="${Math.min(W-14,Math.max(L+14,X(best.i)))}" y="${Y(best.v)-10}" text-anchor="middle" style="fill:#e8c35a;font-weight:700">${nf(best.v)}</text>`:'';
+  return `<svg class="chart" viewBox="0 0 ${W} ${h}">${g}${dt}${paths}${bs}<text x="${L}" y="${h-4}">${xL}</text><text x="${W}" y="${h-4}" text-anchor="end">${xR}</text></svg>`;
+}
+function heatGrid(vals,rows,cols,color){
+  const mx=Math.max(1,...vals), tot=vals.reduce((a,b)=>a+b,0)||1;
+  return `<div class="heat" style="grid-template-columns:repeat(${cols},1fr)">${vals.map(v=>{ const a=v/mx;
+    return `<div style="background:${color};opacity:${(.12+.88*a).toFixed(2)}">${v?Math.round(v/tot*100)+'%':''}</div>`; }).join('')}</div>`;
+}
+const card=(title,body,note)=>`<div class="kcard"><div class="khead">${title}</div>${body}${note?`<div class="knote">${note}</div>`:''}</div>`;
+const kpi=(l,v,sub)=>`<div class="kpi"><b>${v}</b><span>${l}</span>${sub?`<i>${sub}</i>`:''}</div>`;
+const dur=s=>s>=3600?`${Math.floor(s/3600)} h ${Math.round(s%3600/60)} min`:s>=60?`${Math.round(s/60)} min`:`${s} s`;
+const DOW=['Dl','Dt','Dc','Dj','Dv','Ds','Dg'], DOWL=['dilluns','dimarts','dimecres','dijous','divendres','dissabte','diumenge'];
+const dow=ts=>(new Date(ts).getDay()+6)%7;
+const dayKey=ts=>{ const d=new Date(ts); return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; };
+const PARTS=[['Matí',6,12],['Migdia',12,15],['Tarda',15,20],['Nit',20,30]];
+const partOf=ts=>{ let h=new Date(ts).getHours(); if(h<6) h+=24; return PARTS.findIndex(p=>h>=p[1]&&h<p[2]); };
+function streaks(games){
+  const days=[...new Set(games.map(g=>{ const d=new Date(gameTs(g)); d.setHours(0,0,0,0); return d.getTime(); }))].sort((a,b)=>a-b);
+  let best=0,run=0,prev=null; days.forEach(d=>{ run=prev!=null&&Math.round((d-prev)/864e5)===1?run+1:1; best=Math.max(best,run); prev=d; });
+  const today=new Date(); today.setHours(0,0,0,0); const last=days[days.length-1];
+  const cur=last!=null&&(today-last)/864e5<=1?run:0;
+  return {cur,best,days};
+}
+
+/* ---------- Pantalla d'estadístiques ---------- */
+let statPeriod='all';
+function renderStats(){
+  const el=$('#hubBody'), real=store.get('history',[]);
+  const played=Math.max(store.get('games',0),real.length);
+  const bestTile=Math.max(store.get('bestTile',0),G?maxOf(G.grid):0), best=Math.max(store.get('best',0),G?G.score:0);
+  let h=card('📊 Resum',`<div class="kgrid3">${kpi('Partides jugades',nf(played))}${kpi('Fitxa més alta',bestTile||'–')}${kpi('Puntuació màxima',nf(best))}</div>`,
+    played?'':'Encara no has acabat cap partida. La fitxa més alta i la puntuació també compten la partida que jugues ara.');
+  if(!isPlus()){
+    h+=`<div class="kcard"><div class="khead">Estadístiques completes ${TAG}</div>
+      <ul class="feat">
+        <li>📈 Evolució de la puntuació, partida a partida</li><li>🌻 Fins on arribes: el 89, el 144, el 233…</li>
+        <li>🔥 Mapes de calor: on fas les combinacions i per on entren les fitxes</li><li>🧭 Cap on llisques més</li>
+        <li>📅 Activitat de cada dia, ratxes i quan jugues</li><li>🏅 Rècords i molt més: més de 40 dades i gràfics</li></ul>
+      <button class="gold" id="stGo">Veure totes les estadístiques</button></div>`;
+    el.innerHTML=h; el.querySelector('#stGo').onclick=()=>askPlus('stats',renderStats); return;
+  }
+  const sample=real.length<5, all=(sample?sampleGames():real.slice()).sort((a,b)=>gameTs(a)-gameTs(b));
+  const lim=statPeriod==='7'?7:statPeriod==='30'?30:0, cut=lim?Date.now()-lim*864e5:0;
+  const gs=all.filter(g=>gameTs(g)>=cut);
+  h+=`<div class="seg2">${[['7','7 dies'],['30','30 dies'],['all','Sempre']].map(([k,l])=>`<button data-p="${k}" class="${statPeriod===k?'on':''}">${l}</button>`).join('')}</div>`;
+  if(sample) h+=`<div class="banner">Dades d’exemple: quan hagis acabat 5 partides, hi sortiran les teves.</div>`;
+  if(!gs.length){ el.innerHTML=h+`<p class="small">No hi ha partides en aquest període.</p>`; bindStats(el); return; }
+  const n=gs.length, sum=f=>gs.reduce((a,g)=>a+(f(g)||0),0), avg=f=>sum(f)/n, S2=g=>g.st||{};
+  const sk=streaks(all);
+  // 1. Xifres
+  h+=card(`🔢 Les teves xifres ${TAG}`,`<div class="kgrid3">${kpi('Partides',nf(n))}${kpi('Temps jugat',dur(sum(g=>g.secs)))}${kpi('Punts totals',nf(sum(g=>g.score)))}
+    ${kpi('Mitjana de punts',nf(avg(g=>g.score)))}${kpi('Moviments per partida',nf(avg(g=>g.moves)))}${kpi('Ratxa actual',sk.cur+' dies','Millor: '+sk.best)}</div>`);
+  // 2. Consells
+  const tips=[];
+  if(n>=15){ const a=gs.slice(0,10).reduce((s,g)=>s+g.score,0)/10, b=gs.slice(-10).reduce((s,g)=>s+g.score,0)/10;
+    tips.push(b>a?`Fas un ${Math.round((b/a-1)*100)}% més punts que a les teves 10 primeres partides.`:'Les últimes partides t’han anat una mica pitjor que les primeres. Respira i torna-hi!'); }
+  const dc=Array(7).fill(0); gs.forEach(g=>dc[dow(gameTs(g))]++); tips.push(`El dia que més jugues és el ${DOWL[dc.indexOf(Math.max(...dc))]}.`);
+  const pa=PARTS.map((p,i)=>{ const x=gs.filter(g=>partOf(gameTs(g))===i); return {i,n:x.length,a:x.length?x.reduce((s,g)=>s+g.score,0)/x.length:0}; }).filter(x=>x.n>=3).sort((a,b)=>b.a-a.a);
+  if(pa.length) tips.push(`On fas més punts és ${['al matí','al migdia','a la tarda','a la nit'][pa[0].i]}: ${nf(pa[0].a)} de mitjana.`);
+  const goal=[...SERIES].reverse().find(v=>v>=21&&gs.filter(g=>g.max>=v).length/n>=.25);
+  if(goal) tips.push(`En el ${pct(gs.filter(g=>g.max>=goal).length/n)} de les partides arribes al ${goal}. El següent repte: el ${SERIES[IDX.get(goal)+1]}.`);
+  const dsum={up:0,down:0,left:0,right:0}; gs.forEach(g=>{ const d=S2(g).dirs||{}; for(const k in dsum) dsum[k]+=d[k]||0; });
+  const dtot=Object.values(dsum).reduce((a,b)=>a+b,0)||1, dname={up:'amunt',down:'avall',left:'a l’esquerra',right:'a la dreta'};
+  const fav=Object.keys(dsum).sort((a,b)=>dsum[b]-dsum[a])[0];
+  if(dtot>1) tips.push(`Llisques sobretot ${dname[fav]} (${pct(dsum[fav]/dtot)} dels moviments).`);
+  h+=card('💡 Coses que hem vist',`<ul class="tips">${tips.map(t=>`<li>${t}</li>`).join('')}</ul>`);
+  // 3. Evolució
+  const last=gs.slice(-40), ma=last.map((g,i)=>{ const w=last.slice(Math.max(0,i-4),i+1); return w.reduce((a,x)=>a+x.score,0)/w.length; });
+  const bi=last.reduce((b,g,i)=>g.score>last[b].score?i:b,0);
+  h+=card('📈 Evolució de la puntuació',last.length<2?'<p class="small">Calen almenys 2 partides.</p>':
+    lineChart([{pts:ma,color:'#efe6d2',w:2}],{dots:last.map(g=>({v:g.score,c:tileColor(g.max)})),best:{i:bi,v:last[bi].score},xL:'més antiga',xR:'més recent'})+
+    `<div class="legend"><span>Cada punt és una partida, del color de la seva fitxa més alta · línia: mitjana de 5</span></div>`,
+    last.length<2?'':`Les últimes ${last.length} partides. Mitjana al principi: ${nf(ma[Math.min(4,ma.length-1)])} · ara: ${nf(ma[ma.length-1])}.`);
+  // 4. Distribució de punts
+  const mxS=Math.max(...gs.map(g=>g.score)), step=Math.max(100,Math.ceil(mxS/8/100)*100), bins=Array(Math.ceil((mxS+1)/step)).fill(0);
+  gs.forEach(g=>bins[Math.min(bins.length-1,Math.floor(g.score/step))]++);
+  h+=card('📊 Quants punts fas',columns(bins,bins.map((_,i)=>i*step>=1000?(i*step/1000).toFixed(1).replace('.0','')+'k':i*step),bins.map(()=>'#7cc4a6')),`Histograma de punts per partida (trams de ${nf(step)}).`);
+  // 5. Fitxa més alta per partida
+  const maxVals=SERIES.filter(v=>gs.some(g=>g.max===v)), mc=maxVals.map(v=>gs.filter(g=>g.max===v).length);
+  h+=card('🌻 Fitxa més alta de cada partida',columns(mc,maxVals,maxVals.map(tileColor),110),`La més habitual: el ${maxVals[mc.indexOf(Math.max(...mc))]}.`);
+  // 6. Fins on arribes
+  const top=Math.max(...gs.map(g=>g.max)), steps=SERIES.filter(v=>v>=21&&v<=SERIES[Math.min(IDX.get(top)+1,SERIES.length-1)]);
+  h+=card('🪜 Fins on arribes',steps.map(v=>{ const reach=gs.filter(g=>g.max>=v), mv=reach.map(g=>((S2(g).miles||[]).find(m=>m[0]===v)||[])[1]).filter(Boolean);
+    return hbar(`al ${v}`,reach.length/n,`${pct(reach.length/n)}${mv.length?` · mov. ${Math.round(mv.reduce((a,b)=>a+b,0)/mv.length)}`:''}`,tileColor(v)); }).join(''),
+    'Percentatge de partides que hi arriben · moviment mitjà en què hi arribes per primer cop.');
+  // 7. Durada
+  const db=[[0,60,'<1'],[60,120,'1–2'],[120,180,'2–3'],[180,300,'3–5'],[300,480,'5–8'],[480,720,'8–12'],[720,1e9,'12+']], dcn=db.map(([a,b])=>gs.filter(g=>g.secs>=a&&g.secs<b).length);
+  const longest=gs.reduce((b,g)=>g.secs>b.secs?g:b);
+  h+=card('⏱ Quant duren les partides',columns(dcn,db.map(x=>x[2]),db.map(()=>'#c98f32'),100)+
+    `<div class="kgrid3">${kpi('Durada mitjana',dur(Math.round(avg(g=>g.secs))))}${kpi('Moviments / minut',(sum(g=>g.moves)/Math.max(1,sum(g=>g.secs))*60).toFixed(0))}${kpi('Punts / minut',nf(sum(g=>g.score)/Math.max(1,sum(g=>g.secs))*60))}</div>`,
+    `Minuts per partida. La més llarga: ${dur(longest.secs)} (${nf(longest.moves)} moviments).`);
+  // 8. Mapes de calor (mida més jugada)
+  const sizes={}; gs.forEach(g=>sizes[g.size||'4x4']=(sizes[g.size||'4x4']||0)+1);
+  const msz=Object.keys(sizes).sort((a,b)=>sizes[b]-sizes[a])[0], {rows:hr,cols:hc}=dims(msz), cellsN=hr*hc;
+  const mh=Array(cellsN).fill(0), sh=Array(cellsN).fill(0);
+  gs.filter(g=>(g.size||'4x4')===msz).forEach(g=>{ const s3=S2(g); (s3.mergeHeat||[]).forEach((v,i)=>{ if(i<cellsN) mh[i]+=v; }); (s3.spawnHeat||[]).forEach((v,i)=>{ if(i<cellsN) sh[i]+=v; }); });
+  h+=card('🔥 Mapes de calor',`<div class="heats"><div>On fas les combinacions${heatGrid(mh,hr,hc,'#e8ae2c')}</div><div>Per on entren les fitxes noves${heatGrid(sh,hr,hc,'#7cc4a6')}</div></div>`,
+    `Tauler ${msz.replace('x','×')} (${sizes[msz]} partides). Com més intens, més vegades.`);
+  // 9. Direccions
+  const dmx=Math.max(1,...Object.values(dsum)), dp=k=>dtot>1?pct(dsum[k]/dtot):'–', dbg=k=>`background:rgba(124,196,166,${(.15+.7*dsum[k]/dmx).toFixed(2)})`;
+  h+=card('🧭 Cap on llisques',`<div class="compass"><div></div><div style="${dbg('up')}">↑<b>${dp('up')}</b></div><div></div>
+    <div style="${dbg('left')}">←<b>${dp('left')}</b></div><div><b>${nf(dtot)}</b>mov.</div><div style="${dbg('right')}">→<b>${dp('right')}</b></div>
+    <div></div><div style="${dbg('down')}">↓<b>${dp('down')}</b></div><div></div></div>`,'Molts jugadors deixen una vora quieta i fan créixer les fitxes en un racó.');
+  // 10. Combinacions per número
+  const mt={}; gs.forEach(g=>{ const m=S2(g).merges||{}; for(const k in m) mt[k]=(mt[k]||0)+m[k]; });
+  const mk2=Object.keys(mt).map(Number).sort((a,b)=>a-b);
+  if(mk2.length) h+=card('🔗 Combinacions per número',columns(mk2.map(k=>mt[k]),mk2,mk2.map(tileColor),110,v=>v>=1000?(v/1000).toFixed(1)+'k':v),
+    `${nf(Object.values(mt).reduce((a,b)=>a+b,0))} combinacions en total · ${nf(sum(g=>Object.values(S2(g).merges||{}).reduce((a,b)=>a+b,0))/n)} per partida.`);
+  // 11. La partida, pas a pas
+  const L2=Math.min(30,Math.max(0,...gs.map(g=>(S2(g).curve||[]).length)));
+  if(L2>=2){
+    const ac=[],ae=[]; for(let i=0;i<L2;i++){ const c=gs.map(g=>(S2(g).curve||[])[i]).filter(v=>v!=null), e=gs.map(g=>(S2(g).empty||[])[i]).filter(v=>v!=null);
+      ac.push(c.length>=Math.max(1,n*.15)?c.reduce((a,b)=>a+b,0)/c.length:null); ae.push(e.length>=Math.max(1,n*.15)?e.reduce((a,b)=>a+b,0)/e.length:null); }
+    const mxE=Math.max(1,...ae.filter(v=>v!=null)), mxC=Math.max(1,...ac.filter(v=>v!=null)), scale=mxC/mxE;
+    h+=card('🎢 La partida, pas a pas',lineChart([{pts:ac,color:'#e8c35a'},{pts:ae.map(v=>v==null?null:v*scale),color:'#7cc4a6'}],{xL:'mov. 10',xR:`mov. ${L2*10}`})+
+      `<div class="legend"><i style="background:#e8c35a"></i>punts acumulats <i style="background:#7cc4a6;margin-left:8px"></i>caselles lliures (fins a ${mxE.toFixed(0)})</div>`,
+      'Mitjana de les partides cada 10 moviments. Quan la línia verda baixa, el tauler s’omple.');
+  }
+  // 12. Activitat (15 setmanes)
+  const perDay={}; all.forEach(g=>{ const k=dayKey(gameTs(g)); perDay[k]=(perDay[k]||0)+1; });
+  const today=new Date(); today.setHours(0,0,0,0); const start=new Date(today); start.setDate(start.getDate()-dow(today.getTime())-14*7);
+  const shade=c=>!c?'#00000040':c===1?'#2f5a4b':c===2?'#3a9a7a':c===3?'#5fb391':'#9fd6c4';
+  let cal='',wk=0,bestW=0; for(let i=0;i<105;i++){ const d=new Date(start); d.setDate(start.getDate()+i); const c=d>today?-1:(perDay[dayKey(d.getTime())]||0);
+    cal+=`<div style="background:${c<0?'transparent':shade(c)}" title="${d.toLocaleDateString('ca-ES')}: ${Math.max(0,c)}"></div>`; wk+=Math.max(0,c); if(i%7===6){ bestW=Math.max(bestW,wk); wk=0; } }
+  h+=card('📅 Activitat',`<div class="cal">${cal}</div><div class="legend">Menys <i style="background:${shade(0)}"></i><i style="background:${shade(1)}"></i><i style="background:${shade(2)}"></i><i style="background:${shade(3)}"></i><i style="background:${shade(4)}"></i> Més</div>
+    <div class="kgrid3" style="margin-top:8px">${kpi('Dies que has jugat',sk.days.length)}${kpi('Màxim en un dia',Math.max(0,...Object.values(perDay)))}${kpi('Millor setmana',bestW+' part.')}</div>`,
+    'Les últimes 15 setmanes. Cada quadre és un dia.');
+  // 13. Quan jugues
+  const mxd=Math.max(...dc);
+  h+=card('🕰 Quan jugues',columns(dc,DOW,dc.map(v=>v===mxd?'#e8c35a':'#3a9a7a'),100)+
+    PARTS.map((p,i)=>{ const x=gs.filter(g=>partOf(gameTs(g))===i); return hbar(p[0],x.length/n,`${x.length} · ${x.length?nf(x.reduce((a,g)=>a+g.score,0)/x.length):'–'} p.`,'#7fa3d9'); }).join(''),
+    'A les franges: partides · punts de mitjana.');
+  // 14. Com jugues
+  const withHigh=gs.filter(g=>(S2(g).highs||0)>0).length, multi=sum(g=>S2(g).multi||0), sh2=sum(g=>S2(g).shakes||0);
+  const mergesTot=sum(g=>Object.values(S2(g).merges||{}).reduce((a,b)=>a+b,0)), movesTot=Math.max(1,sum(g=>g.moves));
+  h+=card('🧩 Com jugues',hbar('Amb llavor daurada',withHigh/n,pct(withHigh/n),'#e8c35a')+hbar('Dobles combinacions',multi/movesTot*8,`${(multi/n).toFixed(1)} / part.`,'#c4673f')+
+    hbar('Combinacions / mov.',mergesTot/movesTot,(mergesTot/movesTot).toFixed(2),'#7cc4a6')+
+    `<div class="kgrid3" style="margin-top:8px">${kpi('Llavors per partida',(sum(g=>S2(g).highs||0)/n).toFixed(1))}${kpi('Moviments en fals',(sh2/n).toFixed(1),'per partida')}${kpi('Punts / moviment',(sum(g=>g.score)/movesTot).toFixed(1))}</div>`,
+    'Dobles combinacions: moviments en què s’ajunten dues parelles o més. Moviments en fals: quan el tauler no es pot moure cap a on llisques.');
+  // 15. Per mida de tauler
+  h+=card('📐 Per mida de tauler',`<table class="kt"><tr><th>Tauler</th><th>Partides</th><th>Mitjana</th><th>Millor</th><th>Fitxa</th></tr>${
+    Object.keys(sizes).sort().map(sz=>{ const x=gs.filter(g=>(g.size||'4x4')===sz); return `<tr><td>${sz.replace('x','×')}</td><td>${x.length}</td><td>${nf(x.reduce((a,g)=>a+g.score,0)/x.length)}</td><td>${nf(Math.max(...x.map(g=>g.score)))}</td><td>${Math.max(...x.map(g=>g.max))}</td></tr>`; }).join('')}</table>`);
+  // 16. Rècords
+  const bS=gs.reduce((b,g)=>g.score>b.score?g:b), bM=gs.reduce((b,g)=>g.moves>b.moves?g:b);
+  const f89=gs.map(g=>((S2(g).miles||[]).find(m=>m[0]===89)||[])[1]).filter(Boolean);
+  const mostMerges=Math.max(...gs.map(g=>Object.values(S2(g).merges||{}).reduce((a,b)=>a+b,0)));
+  const rec=(e,l,v)=>`<div class="rec"><span>${e} ${l}</span><b>${v}</b></div>`;
+  h+=card('🏅 Rècords',rec('🏆','Millor puntuació',nf(bS.score))+rec('🌻','Fitxa més alta',Math.max(...gs.map(g=>g.max)))+
+    rec('⚡','Més ràpid fins al 89',f89.length?Math.min(...f89)+' mov.':'–')+rec('🐢','Partida més llarga',nf(bM.moves)+' mov.')+
+    rec('⌛','Més temps en una partida',dur(longest.secs))+rec('🔗','Més combinacions en una partida',nf(mostMerges))+
+    rec('🔥','Millor ratxa',sk.best+' dies')+rec('📅','Més partides en un dia',Math.max(0,...Object.values(perDay))));
+  el.innerHTML=h; bindStats(el);
+}
+function bindStats(el){ el.querySelectorAll('.seg2 button').forEach(b=>b.onclick=()=>{ statPeriod=b.dataset.p; renderStats(); }); }
+
+/* ---------- Lligues i classificació ---------- */
+const OPEN={comarca:['🏘️','Comarca'],catalunya:['📍','Catalunya'],espanya:['🗺️','Espanya'],global:['🌍','Global']};
+const LTYPES={
+  familia:['👨‍👩‍👧','Família','La meva família','Família Puig',['Mama','Avi','Laia','Marc']],
+  amics:['🥂','Amics','Els amics','La colla del dijous',['Jordi','Mercè','Toni','Rosa','Pere']],
+  escola:['🎒','Escola','Famílies de l’escola','Classe de 3r B',['Aina','Biel','Martina','Pau','Oriol','Júlia']],
+  parella:['💞','Parella','Tu i jo','Tu i jo',['Lidia']],
+  feina:['☕','Feina','Companys de feina','L’equip del matí',['Sílvia','David','Carme','Raül']],
+  casal:['🏡','Casal o club','El casal','Casal de la gent gran',['Montse','Ramon','Lola','Josep','Teresa','Quim']],
+  altra:['⭐','Una altra','La meva lliga','Posa-li un nom',['Anna','Xavi','Rita']],
+};
+const FAKE=['Rosa del Montseny','GiraSol_77','Pinyol','LaFigaFresca','Avi Quim','Espiral','Llavoreta','Núria R.','Txema','MolsaVerda','Safrà','Pere Pinya'];
+const lgGet=()=>store.get('leagues',[{id:'comarca',pub:true},{id:'global',pub:true}]);
+const lgSet=l=>store.set('leagues',l);
+const lgInfo=l=>l.pub?{e:OPEN[l.id][0],name:OPEN[l.id][1]}:{e:LTYPES[l.type][0],name:l.name||LTYPES[l.type][2],tname:LTYPES[l.type][1]};
+let rankPeriod='dia';
+const PNOTE={dia:'Millor puntuació d’avui. Dades d’exemple.',setmana:'Millor puntuació d’aquesta setmana. Dades d’exemple.',mes:'Millor puntuació d’aquest mes. Dades d’exemple.'};
+function periodStart(per){ const d=new Date(); d.setHours(0,0,0,0); if(per==='setmana') d.setDate(d.getDate()-dow(d.getTime())); if(per==='mes') d.setDate(1); return d.getTime(); }
+function myBest(per){ const st=periodStart(per), gs=store.get('history',[]).filter(g=>gameTs(g)>=st);
+  return gs.length?{v:Math.max(...gs.map(g=>g.score)),days:new Set(gs.map(g=>dayKey(gameTs(g)))).size}:null; }
+const RANGE={dia:[500,4200],setmana:[1400,6500],mes:[2400,9000]};
+const pkey=per=>per+new Date(periodStart(per)).toDateString();
+function renderRank(){
+  const el=$('#hubBody'), L=lgGet(); let sel=store.get('leagueSel',null); if(!L.find(l=>l.id===sel)) sel=L[0]&&L[0].id;
+  let h=`<div class="seg2">${[['dia','Diari'],['setmana','Setmanal'],['mes','Mensual']].map(([k,l])=>`<button data-p="${k}" class="${rankPeriod===k?'on':''}">${l}</button>`).join('')}</div>
+    <div class="chips">${L.map(l=>{ const i=lgInfo(l); return `<button data-l="${esc(l.id)}" class="${l.id===sel?'on':''}">${i.e} ${esc(i.name)}</button>`; }).join('')}
+    <button id="lgAdd">＋ Afegir</button>${L.length>1?'<button id="lgOrd">⇅ Ordenar</button>':''}</div>`;
+  const l=L.find(x=>x.id===sel);
+  if(!l) h+=card('🏆 Encara no tens cap lliga','<p class="small">Crea’n una per a la teva gent o afegeix una classificació oberta.</p><button class="gold" id="lgAdd2">＋ Afegir una lliga</button>');
+  else if(l.pub) h+=openLeague(l);
+  else if(l.type==='parella') h+=duelLeague(l);
+  else h+=ownLeague(l);
+  if(!L.some(x=>!x.pub)) h+=`<div class="kcard"><div class="khead">Juga amb la teva gent ${TAG}</div><p class="small">Crea una lliga i envia l’enllaç pel grup: família, amics, la parella…</p>
+    <div class="chips">${['familia','amics','escola','parella'].map(t=>`<button data-new="${t}">${LTYPES[t][0]} ${LTYPES[t][1]}</button>`).join('')}</div></div>`;
+  el.innerHTML=h;
+  el.querySelectorAll('.seg2 button').forEach(b=>b.onclick=()=>{ rankPeriod=b.dataset.p; renderRank(); });
+  el.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{ store.set('leagueSel',b.dataset.l); renderRank(); });
+  el.querySelectorAll('[data-new]').forEach(b=>b.onclick=()=>createLeague(b.dataset.new));
+  ['#lgAdd','#lgAdd2'].forEach(id=>{ const b=el.querySelector(id); if(b) b.onclick=addSheet; });
+  const o=el.querySelector('#lgOrd'); if(o) o.onclick=orderSheet;
+  const inv=el.querySelector('#lgInvite'); if(inv) inv.onclick=()=>invite(l);
+}
+function openLeague(l){
+  const R=seeded(l.id+pkey(rankPeriod)), [a,b]=RANGE[rankPeriod];
+  const rows=FAKE.map(nm=>({nm,v:Math.round((a+R()*(b-a))/5)*5})); const me=myBest(rankPeriod);
+  rows.push({nm:'Tu',v:me?me.v:null,me:true}); rows.sort((x,y)=>(y.v??-1)-(x.v??-1));
+  const pod=[[1,'#b8bcc4',70],[0,'#e3ae3b',96],[2,'#c98b5a',54]].map(([i,c,hh])=>{ const r=rows[i]; return `<div><div class="nm">${esc(r.nm)}</div><div>${r.v!=null?nf(r.v):'–'}</div><div class="blk" style="background:${c};height:${hh}px">${i+1}</div></div>`; }).join('');
+  return `<div class="kcard"><div class="khead">${lgInfo(l).e} ${lgInfo(l).name}</div><div class="podium">${pod}</div><div class="knote">${PNOTE[rankPeriod]}${me?'':' Encara no has acabat cap partida en aquest període.'}</div></div>
+    <div class="kcard">${rows.slice(3).map((r,i)=>`<div class="rrow ${r.me?'me':''}"><span class="p">${r.v==null?'–':i+4}</span><span class="n">${esc(r.nm)}</span><span class="v">${r.v!=null?nf(r.v):'Encara no has jugat'}</span></div>`).join('')}</div>`;
+}
+function ownLeague(l){
+  const t=LTYPES[l.type], R=seeded((l.name||'')+l.type+pkey(rankPeriod)), [a,b]=RANGE[rankPeriod], me=myBest(rankPeriod);
+  const rows=t[4].map((nm,i)=>({nm,v:(rankPeriod==='dia'&&i===t[4].length-1&&t[4].length>2)?null:Math.round((a+R()*(b-a))/5)*5,days:1+Math.floor(R()*(rankPeriod==='setmana'?6:25))}));
+  rows.push({nm:'Tu',v:me?me.v:null,days:me?me.days:0,me:true}); rows.sort((x,y)=>(y.v??-1)-(x.v??-1));
+  return `<div class="kcard"><div class="khead"><span style="font-size:30px">${t[0]}</span><span>${esc(lgInfo(l).name)}<br><span class="small">${t[1]} · ${rows.length} membres</span></span></div>
+    ${rows.map((r,i)=>`<div class="rrow ${r.me?'me':''}"><span class="p">${r.v==null?'–':i===0?'🥇':i+1}</span><span class="n">${esc(r.nm)}</span><span class="v">${r.v==null?(r.me?'Encara no has jugat':'Encara no ha jugat'):nf(r.v)+(rankPeriod!=='dia'?` · ${r.days} dies`:'')}</span></div>`).join('')}
+    <div class="knote">${PNOTE[rankPeriod]}</div><button class="gold" id="lgInvite">Convidar a la lliga</button></div>`;
+}
+function duelLeague(l){
+  const who=LTYPES.parella[4][0], R=seeded((l.name||'')+'duel'+pkey(rankPeriod));
+  let body='';
+  if(rankPeriod==='dia'){
+    const her=Math.round((800+R()*3200)/5)*5, me=myBest('dia');
+    body=`<div class="duel"><div class="center"><div class="av" style="background:#7cc4a6">Tu</div>${me?nf(me.v):'–'}</div><b>vs</b><div class="center"><div class="av" style="background:#e88b6a">${who[0]}</div>${nf(her)}</div></div>
+      <p class="center"><b>${!me?`${who} ja ha jugat. Et toca!`:me.v>her?`Avui guanyes per ${nf(me.v-her)} punts`:me.v<her?`Avui guanya ${who} per ${nf(her-me.v)} punts`:'Empat exacte!'}</b></p>`;
+  }else if(rankPeriod==='setmana'){
+    const st=periodStart('setmana'), hist=store.get('history',[]), today=dow(Date.now()); let mine=0,hers=0;
+    const cells=DOW.map((d,i)=>{ if(i>today) return `<div>${d}<b>·</b></div>`;
+      const day=st+i*864e5, ms=hist.filter(g=>gameTs(g)>=day&&gameTs(g)<day+864e5).map(g=>g.score), my=ms.length?Math.max(...ms):null, her=Math.round(800+seeded((l.name||'')+'d'+day)()*3200);
+      if(i===today&&my==null) return `<div>${d}<b>?</b></div>`;
+      const w=my!=null&&my>her; if(w) mine++; else hers++; return `<div>${d}<b style="color:${w?'#e8c35a':'#e88b6a'}">${w?'★':'●'}</b></div>`; }).join('');
+    body=`<div class="week">${cells}</div><p class="center"><b>${mine>hers?'Vas guanyant la setmana':mine<hers?`Aquesta setmana va per davant ${who}`:'Setmana empatada'}</b></p>
+      <div class="legend" style="justify-content:center">★ dies que guanyes · ● dies que guanya ${who}</div>`;
+  }else{
+    const a=8+Math.floor(R()*8), b=8+Math.floor(R()*8);
+    body=`<div class="duel"><div class="center"><div class="av" style="background:#7cc4a6">Tu</div>${a} dies</div><b>vs</b><div class="center"><div class="av" style="background:#e88b6a">${who[0]}</div>${b} dies</div></div>
+      <p class="center"><b>${a>b?'Vas guanyant el mes':a<b?`Aquest mes va per davant ${who}`:'Mes empatat'}</b></p>`;
+  }
+  return `<div class="kcard"><div class="khead"><span style="font-size:30px">💞</span><span>${esc(lgInfo(l).name)}<br><span class="small">Duel diari</span></span></div>${body}
+    <div class="knote">Dades d’exemple.</div><button class="gold" id="lgInvite">Enviar-li l’enllaç</button></div>`;
+}
+function invite(l){
+  const nm=lgInfo(l).name, link=`${baseUrl()}?lliga=${encodeURIComponent(nm)}&tipus=${l.type}`;
+  shareText(l.type==='parella'?`Juguem cada dia a ${GAME}? Guanya qui fa més punts. La nostra lliga: «${nm}» ${link}`:
+    `Uneix-te a la lliga «${nm}» de ${GAME}: cada dia, a veure qui fa més punts. ${link}`);
+}
+function addSheet(){
+  const L=lgGet();
+  openSheet(`<h2>Afegir una lliga</h2><p class="small">Pots estar a tantes lligues com vulguis i ordenar-les al teu gust.</p>
+    <div class="khead">Amb la teva gent ${TAG}</div>
+    ${isPlus()?'':'<p class="small">Crear una lliga és de Plus. Les lligues obertes i unir-te a una lliga on t’han convidat són gratis.</p>'}
+    <div class="tgrid">${Object.entries(LTYPES).map(([k,t])=>`<button data-t="${k}"><span>${t[0]}</span>${t[1]}</button>`).join('')}</div>
+    <div class="khead" style="margin-top:12px">Obertes a tothom</div>
+    ${Object.entries(OPEN).map(([k,[e,nm]])=>`<div class="rrow"><span>${e}</span><span class="n">${nm}</span>${L.some(l=>l.id===k)?'<span class="small">✓ Ja hi és</span>':`<button data-o="${k}">＋ Afegir</button>`}</div>`).join('')}
+    <div class="btns" style="justify-content:flex-end"><button id="asClose">Tancar</button></div>`,b=>{
+    b.querySelector('#asClose').onclick=closeSheet;
+    b.querySelectorAll('[data-o]').forEach(x=>x.onclick=()=>{ const L2=lgGet(); L2.push({id:x.dataset.o,pub:true}); lgSet(L2); store.set('leagueSel',x.dataset.o); closeSheet(); renderRank(); });
+    b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{ closeSheet(); createLeague(x.dataset.t); });
+  });
+}
+function createLeague(type){
+  if(!isPlus()){ askPlus('leagues',()=>createLeague(type)); return; }
+  const t=LTYPES[type];
+  openSheet(`<div class="center" style="font-size:40px">${t[0]}</div><h2 class="center">Nova lliga · ${t[1]}</h2>
+    <p class="small">${type==='parella'?'Un duel cada dia amb la mateixa persona: guanya qui fa més punts.':'Cada dia, a veure qui fa més punts. Sense comptes ni contrasenyes: només un enllaç per al grup.'}</p>
+    <label class="small">Nom de la lliga</label><input id="nlName" maxlength="30" placeholder="${esc(t[3])}">
+    <button class="gold" id="nlGo">Crear i convidar</button>
+    <div class="btns" style="justify-content:center"><button id="nlBack" style="border:0;background:none">Enrere</button></div>`,b=>{
+    b.querySelector('#nlBack').onclick=()=>{ closeSheet(); addSheet(); };
+    b.querySelector('#nlGo').onclick=()=>{
+      const name=b.querySelector('#nlName').value.trim()||t[2], l={id:'own'+Date.now(),type,name}, L=lgGet(); L.push(l); lgSet(L); store.set('leagueSel',l.id);
+      closeSheet(); toast(`Lliga creada: ${name}`); renderRank(); invite(l);
+    };
+  });
+}
+function orderSheet(){
+  const draw=()=>{ const L=lgGet();
+    return `<h2>Les teves lligues</h2><p class="small">Arrossega-les amb el dit (des de ⋮⋮) o fes servir les fletxes. La primera és la que veuràs en obrir la classificació.</p>
+      <ul class="ord">${L.map((l,i)=>{ const inf=lgInfo(l); return `<li><span class="hd">⋮⋮ ${inf.e}</span><span class="nm">${esc(inf.name)}${i===0?'<small>Principal</small>':''}</span>
+        <button data-up="${i}" ${i===0?'disabled':''} aria-label="Pujar">↑</button><button data-dn="${i}" ${i===L.length-1?'disabled':''} aria-label="Baixar">↓</button><button data-rm="${i}" aria-label="Treure">✕</button></li>`; }).join('')}</ul>
+      <div class="btns" style="justify-content:flex-end"><button id="ordDone">Fet</button></div>`; };
+  const mv=(from,to)=>{ const L=lgGet(); to=Math.max(0,Math.min(L.length-1,to)); const [x]=L.splice(from,1); L.splice(to,0,x); lgSet(L); };
+  const bind=b=>{
+    b.querySelector('#ordDone').onclick=()=>{ closeSheet(); renderRank(); };
+    b.querySelectorAll('[data-up]').forEach(x=>x.onclick=()=>{ mv(+x.dataset.up,+x.dataset.up-1); openSheet(draw(),bind); });
+    b.querySelectorAll('[data-dn]').forEach(x=>x.onclick=()=>{ mv(+x.dataset.dn,+x.dataset.dn+1); openSheet(draw(),bind); });
+    b.querySelectorAll('[data-rm]').forEach(x=>x.onclick=()=>{ const L=lgGet(), [r]=L.splice(+x.dataset.rm,1); lgSet(L); toast(`Has tret «${lgInfo(r).name}»`); openSheet(draw(),bind); });
+    // arrossegar amb el dit
+    b.querySelectorAll('.ord .hd').forEach(hd=>hd.addEventListener('pointerdown',e=>{
+      const li=hd.parentElement, ul=li.parentElement, from=[...ul.children].indexOf(li); let y0=e.clientY;
+      try{ hd.setPointerCapture(e.pointerId); }catch(err){} li.classList.add('drag'); e.preventDefault();
+      const onMove=ev=>{ let dy=ev.clientY-y0; const hgt=li.offsetHeight+6;
+        if(dy>hgt/2&&li.nextElementSibling){ ul.insertBefore(li.nextElementSibling,li); y0+=hgt; dy-=hgt; }
+        else if(dy<-hgt/2&&li.previousElementSibling){ ul.insertBefore(li,li.previousElementSibling); y0-=hgt; dy+=hgt; }
+        li.style.transform=`translateY(${dy}px)`; };
+      const onUp=()=>{ hd.removeEventListener('pointermove',onMove); hd.removeEventListener('pointerup',onUp); hd.removeEventListener('pointercancel',onUp);
+        const to=[...ul.children].indexOf(li); li.style.transform=''; li.classList.remove('drag'); if(to!==from) mv(from,to); openSheet(draw(),bind); };
+      hd.addEventListener('pointermove',onMove); hd.addEventListener('pointerup',onUp); hd.addEventListener('pointercancel',onUp);
+    }));
+  };
+  openSheet(draw(),bind);
+}
+
+/* ---------- Pantalla (pestanyes) ---------- */
+let hubCur='stats';
+function hubTab(t){ hubCur=t; document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  $('#hubBody').scrollTop=0; (t==='stats'?renderStats:t==='rank'?renderRank:renderPlus)(); }
+function openHub(t){ $('#hub').classList.add('on'); hubTab(t||hubCur); }
+$('#btnHub').onclick=()=>openHub();
+$('#btnOverStats').onclick=()=>{ closePanels(); openHub('stats'); };
+$('#hubClose').onclick=()=>$('#hub').classList.remove('on');
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>hubTab(b.dataset.tab));
+
+/* Enllaços d'invitació i de regal */
+(function(){ try{
+  const q=new URLSearchParams(location.search); let changed=false;
+  if(q.get('lliga')){ const name=q.get('lliga').slice(0,30), type=LTYPES[q.get('tipus')]?q.get('tipus'):'altra', L=lgGet();
+    let l=L.find(x=>!x.pub&&x.name===name&&x.type===type); if(!l){ l={id:'own'+Date.now(),type,name,joined:true}; L.push(l); lgSet(L); }
+    store.set('leagueSel',l.id); changed=true; setTimeout(()=>{ openHub('rank'); toast(`T’has unit a la lliga «${name}»`); },300); }
+  if(q.get('regal')){ const p=plusGet(); plusSet(Object.assign(p,{on:true,plan:'regal',since:Date.now(),cancel:false})); changed=true;
+    const de=q.get('de'); setTimeout(()=>{ openHub('plus'); toast(`🎁 Regal activat: un any de Plus${de?' de part de '+de.slice(0,30):''}`); },300); }
+  if(changed) history.replaceState(null,'',baseUrl());
+}catch(e){} })();
+
 /* ================= CONTROLS ================= */
 const KEYS={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right',W:'up',S:'down',A:'left',D:'right'};
 document.addEventListener('keydown',e=>{
-  if(document.querySelector('.overlay.on')) { if(e.key==='Escape') closePanels(); return; }
+  if(document.querySelector('.overlay.on')) { if(e.key==='Escape'){ if($('#sheet').classList.contains('on')) closeSheet(); else closePanels(); } return; }
   const d=KEYS[e.key]; if(d){e.preventDefault();move(d);}
 });
 // El navegador només deixa sonar l'àudio després d'un gest de l'usuari. Al mòbil, el «pointerdown» del dit
