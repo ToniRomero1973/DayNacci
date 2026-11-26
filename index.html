@@ -94,7 +94,7 @@ td:first-child,th:first-child{text-align:left}
 <body>
 <div id="app">
   <header>
-    <h1>DayNacci<small>prototip</small></h1>
+    <h1>DayNacci<small>prototip <span class="ver"></span></small></h1>
     <button class="icon" id="btnMusic" title="Música" aria-label="Música">♪</button>
     <button class="icon" id="btnNew" title="Partida nova" aria-label="Partida nova">↻</button>
     <button class="icon" id="btnSet" title="Ajustos de prova" aria-label="Ajustos de prova">⚙</button>
@@ -151,7 +151,7 @@ td:first-child,th:first-child{text-align:left}
     <div class="btns"><button id="btnTests">Executa les proves</button></div>
     <div id="testOut"></div>
 
-    <div class="btns" style="justify-content:flex-end"><button id="btnClose">Tanca</button></div>
+    <div class="btns" style="justify-content:space-between;align-items:center"><span class="small">Versió <span class="ver"></span></span><button id="btnClose">Tanca</button></div>
   </div>
 </div>
 
@@ -167,6 +167,8 @@ td:first-child,th:first-child{text-align:left}
 
 <script>
 "use strict";
+/* Versió 0.X.Y (vegeu CHANGELOG.md): 0 fins al llançament · X canvi important · Y retoc */
+const VERSION='0.2.2';
 /* ================= MOTOR (sense DOM) ================= */
 const SERIES=[1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368,75025,121393,196418,317811,514229];
 const IDX=new Map(SERIES.map((v,i)=>[v,i]));
@@ -894,6 +896,7 @@ $('#btnTests').onclick=()=>{
 window.fibTests=runTests;
 
 /* ================= INICI ================= */
+document.querySelectorAll('.ver').forEach(e=>e.textContent=VERSION);
 syncSettingsUI();
 if(load()) layout(true); else newGame();
 if(location.hash==='#proves'){ $('#btnSet').click(); $('#btnTests').click(); }
