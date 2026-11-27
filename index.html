@@ -390,6 +390,18 @@ input[type=range]{accent-color:var(--gold);height:3px}
 #tut #tutArrow{color:var(--gold);flex-shrink:0}#tut #tutArrow svg{width:40px;height:40px;display:block}
 .adbtn{background:var(--gold);color:#2a1e05;box-shadow:none;border-radius:999px}.adbtn small{opacity:.8}
 .leftbox{border-width:1px}
+/* partides d'avui, a Configuració */
+.gamescard{background:var(--soil);border-radius:24px;padding:16px 18px 12px;margin-bottom:12px}
+.gamescard .gl-top{display:flex;align-items:flex-end;gap:12px;margin-bottom:14px}
+.gamescard .gl-top b{font-size:48px;font-weight:800;line-height:1;color:var(--goldT);font-variant-numeric:tabular-nums}
+.gamescard .gl-top span{font-size:13px;color:var(--muted);padding-bottom:4px}
+.gamescard .gl-line{font-size:15px;font-weight:600}
+.glad{display:flex;flex-direction:column;align-items:center;width:100%;border:0;border-radius:999px;padding:12px 16px;background:var(--gold);color:#2a1e05;font-weight:700;font-size:16px}
+.glad span{display:inline-flex;align-items:center;gap:6px}.glad small{font-weight:400;font-size:11px;opacity:.8}
+.glad:disabled{background:var(--line);color:var(--muted);font-size:13px;font-weight:400;cursor:default}
+.glpass{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;margin-top:8px;border-radius:999px;padding:12px 16px;background:none;text-align:left}
+.glpass b{display:block;font-size:16px}.glpass small{display:block;font-size:11px;color:var(--muted)}.glpass .pr{font-weight:800;font-size:16px}
+.gamescard .gl-note{font-size:11px;color:var(--muted);margin-top:8px}
 @media (prefers-reduced-motion: reduce){
   .tile{transition:none!important}.disc.merge,.disc.sprout,.tuthint,.seed,#board.shake{animation:none!important}
   #reveal,#reveal .rn,#reveal .rv,.sw i,.sw i::after{transition:none!important}
@@ -424,6 +436,7 @@ input[type=range]{accent-color:var(--gold);height:3px}
 
     <div class="spage on" data-sec="home">
       <button class="acrow" id="setAcct"></button>
+      <div class="gamescard" id="setGames"></div>
       <button class="navrow" data-go="sound"><span class="nt" data-i18n="So">So</span><span class="ns" id="nsSound"></span><span class="ch" data-ico="chevron"></span></button>
       <button class="navrow" data-go="game"><span class="nt" data-i18n="Partida">Partida</span><span class="ch" data-ico="chevron"></span></button>
       <button class="navrow" data-go="look"><span class="nt" data-i18n="Aspecte i idioma">Aspecte i idioma</span><span class="ch" data-ico="chevron"></span></button>
@@ -524,7 +537,7 @@ input[type=range]{accent-color:var(--gold);height:3px}
 <script>
 "use strict";
 /* Versió 0.X.Y (vegeu CHANGELOG.md): 0 fins al llançament · X canvi important · Y retoc */
-const VERSION='0.11.0';
+const VERSION='0.11.1';
 /* ================= MOTOR (sense DOM) ================= */
 const SERIES=(()=>{ const s=[1,2]; while(s[s.length-1]<Number.MAX_SAFE_INTEGER/2) s.push(s[s.length-1]+s[s.length-2]); return s; })(); // fins a ~4·10^15: cap fitxa es queda sense parella
 const IDX=new Map(SERIES.map((v,i)=>[v,i]));
@@ -866,6 +879,7 @@ function updateHud(){
   $('#best').textContent=Math.max(store.get('best',0),G.score);
   const bt=Math.max(store.get('bestTile',0),maxOf(G.grid)); $('#bestTile').textContent=bt||'–';
   try{ $('#quota').innerHTML=quotaShow()?quotaText():''; }catch(e){}
+  try{ paintGames(); }catch(e){}
   tick();
 }
 function fmt(ms){const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
@@ -2604,7 +2618,24 @@ paintAcct();
 $('#setPanel').addEventListener('click',e=>{if(e.target.id==='setPanel')closePanels();});
 function closePanels(){document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('on'));}
 
+/* El comptador de partides d'avui i els dos botons: mirar un anunci (+1 partida) i el passi del dia (24 h sense límit) */
+function paintGames(){
+  const el=$('#setGames'); if(!el) return;
+  const p=plusGet(), d=daily();
+  if(p.on||Date.now()<p.pass){
+    const t=p.on?L('♾️ Partides il·limitades amb Plus'):L('♾️ Passi del dia: sense límit fins a les {0}',new Date(p.pass).toLocaleTimeString(LOC(),{hour:'2-digit',minute:'2-digit'}));
+    el.innerHTML=`<div class="gl-line">${plainHead(t)}</div>`; return;
+  }
+  const left=Math.max(0,FREE_GAMES+d.videos-d.played), ads=MAX_VIDEOS-d.videos;
+  el.innerHTML=`<div class="gl-top"><b id="glLeft">${left}</b><span>${L('partides que et queden avui')}</span></div>
+    <button class="glad" id="glAd" ${ads>0?'':'disabled'}>${ads>0?`<span>${ico('play',20)} ${L('Mira un anunci')}</span><small>${L('+1 partida · en pots mirar {0} més avui',ads-1)}</small>`:L('Ja has mirat els {0} anuncis d’avui.',MAX_VIDEOS)}</button>
+    <button class="glpass" id="glPass"><span><b>${L('Passi del dia')}</b><small>${L('Juga sense límit durant 24 hores · sense renovació')}</small></span><span class="pr">${eur(.99)}</span></button>
+    <div class="gl-note">${L('Prototip: no es fa cap cobrament.')}</div>`;
+  const ad=$('#glAd'); if(ad&&ads>0) ad.onclick=videoSheet;
+  $('#glPass').onclick=()=>{ plusSet(Object.assign(plusGet(),{pass:Date.now()+864e5})); toast(L('Passi del dia activat (simulat): jugues sense límit 24 hores')); updateHud(); };
+}
 function syncSettingsUI(){
+  try{ paintGames(); }catch(e){}
   document.querySelectorAll('.seg').forEach(seg=>seg.querySelectorAll('button').forEach(b=>
     b.classList.toggle('on',String(S[seg.dataset.key])===b.dataset.v)));
   document.querySelectorAll('select[data-key],input[data-key]').forEach(s=>s.value=String(S[s.dataset.key]));
